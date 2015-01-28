@@ -1,6 +1,4 @@
 # StageBloc API V1
-**It's your data, we're just giving it a good home**
-
 Use the StageBloc API to develop custom, standalone integrations with StageBloc.
 
 ### Under Development
