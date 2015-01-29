@@ -20,7 +20,9 @@ All dates returned are in `GMT / UTC (+0000)` unless otherwise specified. The fo
 
 Responses are returned as `JSON`. To receive a `JSONP` response, include a `GET` parameter named `jsonp` specifying the name of your callback method.
 
-Often times, large objects will be returned with just their ID instead of the whole object if they are nested within the main response. To have these objects expanded, just pass a `GET` parameter named `expand` with the comma separated string of the keys you want to expand. For instance, passing expand=user would then return the JSON for an entire user as opposed to just the ID of that user.
+Often times, large objects will be returned with just their ID instead of the whole object if they are nested within the main response. To have these objects expanded, just pass a `GET` parameter named `expand` with the comma separated string of the keys you want to expand. For instance, passing `expand=user` would then return the JSON for an entire user as opposed to just the ID of that user.
+
+There are a lot of different model objects represented in the API. If you pass `expand=kind` with your requests, each object type will have a unique `kind` key in the JSON with a value of the object that the JSON structure represents. This can be useful for knowing what type of object to parse that JSON into if you're using native objects in your language as opposed to just arrays.
 
 The general structure of a success response can be seen below.  The `data` key will contain the actual response data whereas the `metadata` key will contain informational content about the request.  
 
