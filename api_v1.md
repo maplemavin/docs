@@ -206,7 +206,8 @@ Updates an account by its ID. Only admins of the account can use this endpoint.
 
 ## /{accountId}/follow
 `POST /account/{accountId}/follow`  
-This endpoint allows a user to follow an account. **Note:** If the `tier` the user is trying to follow is a paid tier, that functionality is not possible through the API.
+This endpoint allows a user to follow an account.  
+**Note:** If the `tier` the user is trying to follow is a paid tier, that functionality is not possible through the API.
 
 `DELETE /account/{accountId}/follow`  
 This will have a user unfollow an account regardless of the tier they are on
@@ -301,7 +302,8 @@ These endpoints revolved around the application requests are being made on behal
 
 ## /push/token
 `[POST] /application/push/token`  
-Allows an application to give StageBloc a push notification for a user so that they can be messaged via push notifications from the StageBloc backend. **Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
+Allows an application to give StageBloc a push notification for a user so that they can be messaged via push notifications from the StageBloc backend.  
+**Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
 
 ### POST Parameters
 
@@ -1544,9 +1546,48 @@ custom\_field\_data
 # Comments
 Comments can be made on almost all types of content in StageBloc.
 
+## /comment
+`POST /account/{accountId}/{contentType}/{contentId}/comment`  
+This endpoint will create a comment on a piece of content. The user must be a fan of the account the content belongs to.  
+**Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
+
+### POST Parameters
+
+`text` _(required)_  
+
+	the text of the comment
+
+`reply_to_id`  
+
+	if this is a reply to another comment, this would be the ID of the original comment
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "id": 6,
+	        "text": "This is my awesome comment!",
+	        "user": 204,
+	        "created": "2013-02-27 19:51:46",
+	        "account": 1,
+	        "reply_to": 0,
+	        "reply_count": 0,
+	        "short_url": "http:\/\/stgb.dev\/c\/b\/7",
+	        "in_moderation": false,
+	        "content": {
+	            "id": 7724,
+	            "content_type": "blog"
+	        }
+	    }
+	}
+
 ## /comments
 `GET /account/{accountId}/{contentType}/{contentId}/comments`  
-Retrieves comments for a particular piece of content on StageBloc. `contentType` can be one of audio, blog, photo, status, video, event, or store.
+Retrieves comments for a particular piece of content on StageBloc.  
+**Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
 
 ### GET Parameters
 
