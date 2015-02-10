@@ -154,6 +154,22 @@ include\_admin\_accounts
 # Accounts
 These endpoints revolve around StageBloc accounts and their data. An account can have any number of admins, and all content on StageBloc is tied to an account.
 
+## /account
+`[POST]`  
+Creates a new account and makes the currently authenticated user an admin for that account
+
+### POST Parameters
+
+`name` _(required)_  
+`stagebloc_url` _(required)_  
+
+	the URL of the account on StageBloc (i.e. stagebloc.com/stagebloc_url)
+
+`description`  
+`image`
+
+	an image file to use for the account's image
+
 ## /account/{accountId}
 `[GET]`  
 Gets an account's information from its ID.
@@ -185,6 +201,44 @@ Updates an account by its ID. Only admins of the account can use this endpoint.
             "photo": {
                 <see structure for a photo response>
             }
+        }
+    }
+
+## /{accountId}/follow
+`POST /account/{accountId}/follow`  
+This endpoint allows a user to follow an account.  
+**Note:** If the `tier` the user is trying to follow is a paid tier, that functionality is not possible through the API.
+
+`DELETE /account/{accountId}/follow`  
+This will have a user unfollow an account regardless of the tier they are on
+
+### POST Parameters
+
+`tier` _(required)_  
+
+	the tier the user wants to follow this account on
+
+	must be either 1, 2, or 3
+
+`expiration`  
+
+	an expiration date to use for this membership
+
+	must be a valid datetime string
+
+	by default the system will determine a time to use for the expiration based on the tier's settings, but you can use this to override that
+
+### Example Response
+
+    {
+        "metadata": {
+            "http_code": 200
+        },
+        "data": {
+            "user": { ... see the structure for a user object in /user endpoints ... },
+            "account": {
+					... see the structure for an account object in /account endpoints ...
+				}
         }
     }
 
@@ -242,6 +296,31 @@ child\_account\_types
 child_accounts
 
 	An array of account objects (see account listing endpoint for structure). It will also add a `child_account_type` key to each account specifying the type it is
+
+# Applications
+These endpoints revolved around the application requests are being made on behalf of.
+
+## /push/token
+`[POST] /application/push/token`  
+Allows an application to give StageBloc a push notification for a user so that they can be messaged via push notifications from the StageBloc backend.  
+**Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
+
+### POST Parameters
+
+`token` _(required)_  
+
+	the push notification token for this user
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "message": "Token successfully saved!"
+	    }
+	}
 
 # Users
 These endpoints revolve around StageBloc users and their data. A user on StageBloc can be an admin for any number of accounts, and their login is tied to their email address. A user can also be a fan of any number of accounts. These endpoints allow for management of both admin and fan relationships between users and their accounts.
@@ -1467,9 +1546,48 @@ custom\_field\_data
 # Comments
 Comments can be made on almost all types of content in StageBloc.
 
+## /comment
+`POST /account/{accountId}/{contentType}/{contentId}/comment`  
+This endpoint will create a comment on a piece of content. The user must be a fan of the account the content belongs to.  
+**Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
+
+### POST Parameters
+
+`text` _(required)_  
+
+	the text of the comment
+
+`reply_to_id`  
+
+	if this is a reply to another comment, this would be the ID of the original comment
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "id": 6,
+	        "text": "This is my awesome comment!",
+	        "user": 204,
+	        "created": "2013-02-27 19:51:46",
+	        "account": 1,
+	        "reply_to": 0,
+	        "reply_count": 0,
+	        "short_url": "http:\/\/stgb.dev\/c\/b\/7",
+	        "in_moderation": false,
+	        "content": {
+	            "id": 7724,
+	            "content_type": "blog"
+	        }
+	    }
+	}
+
 ## /comments
 `GET /account/{accountId}/{contentType}/{contentId}/comments`  
-Retrieves comments for a particular piece of content on StageBloc. `contentType` can be one of audio, blog, photo, status, video, event, or store.
+Retrieves comments for a particular piece of content on StageBloc.  
+**Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
 
 ### GET Parameters
 
