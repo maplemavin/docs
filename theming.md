@@ -4278,7 +4278,7 @@ Next, when the user submits the form, you'll want to capture it with JavaScript 
         e.preventDefault();
         pm({target: window.frames.sbnav, type: 'sbInlineEditContestParticipation', data: {
                 participate: true,
-				response: $(this).find('#response').val(),
+                response: $(this).find('#response').val(),
                 contestId: 1
             }
         });
