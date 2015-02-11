@@ -4237,7 +4237,7 @@ The available keys for passing are `name`, `email`, and `emailListId`. As such, 
 
 Next, when the user submits the form, you'll want to capture it with JavaScript similar to the following:
 
-    $('form#show-newsletter').on('submit', function (e) {
+    $('form#emailForm').on('submit', function (e) {
         e.preventDefault();
         pm({target: window.frames.sbnav, type: 'sbInlineEmailListSignup', data: {
                 name: $(this).find('[name="name"]').val(),
@@ -4252,6 +4252,43 @@ Next, when the user submits the form, you'll want to capture it with JavaScript 
 Finally, you should add a binding to your theme's JavaScript. You can use this callback to handle the data returned from SBNav.
 
     pm.bind('sbInlineEmailListSignup', function(data) {
+        // data will be a JavaScript object representing success or failure
+    });
+
+## Contest Entry
+This allows users to enter in to contests you are running through your account.  
+**Note:** Right now contests are limited to the events area in the StageBloc backend.
+
+**Step One**
+
+First, you'll need some sort way of having users enter their information. For instance, you could do:
+
+    <form id="contestEntryForm">
+        <input type="text" name="response" id="response" />
+        <input type="submit" value="Enter Contest" />
+    </form>
+
+The available keys for passing are `response`, `contestId`, and `participate`. Participate is simply a boolean flag for whether the user is entering or removing themselves from the contest. The response field is optional and only applies if the contest itself has a prompt set up.
+
+**Step Two**
+
+Next, when the user submits the form, you'll want to capture it with JavaScript similar to the following:
+
+    $('form#contestEntryForm').on('submit', function (e) {
+        e.preventDefault();
+        pm({target: window.frames.sbnav, type: 'sbInlineEditContestParticipation', data: {
+                participate: true,
+				response: $(this).find('#response').val(),
+                contestId: 1
+            }
+        });
+    });
+
+**Step Three**
+
+Finally, you should add a binding to your theme's JavaScript. You can use this callback to handle the data returned from SBNav.
+
+    pm.bind('sbInlineEditContestParticipation', function(data) {
         // data will be a JavaScript object representing success or failure
     });
 
