@@ -481,7 +481,7 @@ The description of the Fan Club as a whole (as opposed to any tier)
 Whether or not to have the moderation queue on for this Fan Club.
 
 `tier_info` _(required)_  
-An array structured similar to the return data for each array in the response below used to setup each tier. If one of the tier keys is missing from this array, that tier will be removed from the Fan Club. The `membership_length` parameter is a value in seconds that must match either zero, one month, three months, six months, or a year.
+An array structured similar to the return data for each array in the response below used to setup each tier. If one of the tier keys is missing from this array, that tier will be removed from the Fan Club. Instead of the two returned membership values, pass a `membership_length` parameter as a value in seconds that must match either zero, one month, three months, six months, or a year using number of seconds in a day (86,400) multiplied by the days in that interval (months are assumed to be 30 days in length).
 
 ### Example Response
 
@@ -500,7 +500,8 @@ An array structured similar to the return data for each array in the response be
                     "description": "",
                     "price": 0,
                     "discount": 0,
-                    "membership_length": 0,
+                    "membership_length_interval": 1,
+                    "membership_length_unit": "once",
                     "renewal_price": null,
                     "can_submit_content": false
                 },
@@ -509,7 +510,8 @@ An array structured similar to the return data for each array in the response be
                     "description": "",
                     "price": 10,
                     "discount": 0,
-                    "membership_length": 7776000,
+                    "membership_length_interval": 3,
+                    "membership_length_unit": "month",
                     "renewal_price": null,
                     "can_submit_content": true
                 },
@@ -518,7 +520,8 @@ An array structured similar to the return data for each array in the response be
                     "description": "You get a T-Shirt with this tier!",
                     "price": 50,
                     "discount": 10,
-                    "membership_length": 31557600,
+                    "membership_length_interval": 1,
+                    "membership_length_unit": "year",
                     "renewal_price": 10,
                     "can_submit_content": true
                 }
@@ -535,9 +538,12 @@ An array structured similar to the return data for each array in the response be
 
 ### Response Explanation
 
-membership_length
+membership\_length\_interval
+membership\_length\_unit
 
-    a value in seconds that must match either zero, one month, three months, six months, or a year
+    together these represent how long the membership lasts
+
+    the unit can be "once", "year", or "month"
 
 discount
 
