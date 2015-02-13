@@ -538,8 +538,7 @@ An array structured similar to the return data for each array in the response be
 
 ### Response Explanation
 
-membership\_length\_interval  
-membership\_length\_unit
+membership\_length\_interval and membership\_length\_unit
 
     together these represent how long the membership lasts
 
