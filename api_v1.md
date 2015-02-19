@@ -604,7 +604,7 @@ exclusive
 		"metadata": {
 			"http_code":200
 		},
-		"data": {
+		"data": [{
 			"id": 773,
 			"title": "The Best Track ever",
 			"duration": 123,
@@ -622,6 +622,7 @@ exclusive
 			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.stagebloc.dev\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
 			"sticky": false,
 			"exclusive": false,
+			"private": false,
 			"in_moderation": false,
 			"custom_field_data": [ ],
 			"is_fan_content": false,
@@ -630,7 +631,7 @@ exclusive
 			"user": 8,
 			"edit_url": "https:\/\/stagebloc.dev\/demo\/admin\/audio\/edit\/773",
 			"user_has_liked": false
-		}
+		}]
 	}
 
 ### Response Explanation
@@ -748,6 +749,14 @@ audio
 custom\_field\_data
 
 	if you have custom data set on events for your account, the slugs will show up as keys here with their values
+
+## /playlist/{playlistId}
+`[GET] /account/{accountId}/audio/playlist/{playlistId}`  
+This endpoint can be used to get an individual audio playlist.
+
+### Example Response
+
+See the response for `/audio/playlists`, it will be structured the same except that it won't be in an array.
 
 # Photos
 These endpoints revolve around the ability to upload and view photos on StageBloc. Photos consist of both individual images as well as those images being organized into various photo albums.
