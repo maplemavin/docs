@@ -578,8 +578,53 @@ offset
 These endpoints revolve around the ability to upload and stream audio through StageBloc. Audio consists of both individual tracks and those tracks being organized into various playlists.
 
 ## /audio
+`[GET] /account/{accountId}/audio`  
+This endpoint can used to list all the audio for a certain account.
+
 `[POST] /account/{accountId}/audio`  
 This endpoint can be used to create a single audio track for an account. It currently only allows actual uploads as opposed to also allowing SoundCloud or other third party source URLs.
+
+### GET Parameters
+
+playlist_id
+
+	an audio playlist ID to limit the audio results to
+
+	accepted values are an ID of any playlist that belongs to the same account
+
+	defaults to none
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 50
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+order_by
+
+    how to order the returned items
+
+    accepted values are `created`, `modified`, and `recordedDate`
+
+    defaults to `created`
+
+direction
+
+    what direction to order the returned items
+
+    accepted values are `ASC` and `DESC`
+
+    defaults to `DESC`
 
 ### POST Parameters
 
