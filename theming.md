@@ -3026,6 +3026,9 @@ EventUrl
 EventShortUrl  
 :   a short URL for the event
 
+EventMapUrl  
+:   a URL to an embeddable map for the event
+
 EventLocation  
 :   a string constructed based on the information available for the location. if in the USA, it will return "city, state", otherwise it will return "city, state, country"
 
