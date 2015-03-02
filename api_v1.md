@@ -811,6 +811,28 @@ See the response for `/audio/playlists`, it will be structured the same except t
 # Photos
 These endpoints revolve around the ability to upload and view photos on StageBloc. Photos consist of both individual images as well as those images being organized into various photo albums.
 
+## /photo
+`[POST] /account/{accountId}/photo`  
+Uploads a photo to an account.
+
+### POST Parameters
+
+`photo` _(required)_  
+The photo file itself
+
+`title`  _(required)_
+The title to use for the photo
+
+`description`  
+A longer description of the photo
+
+`fan_content`  
+If the photo is being posted by an admin as a fan photo, this can be set to `true`
+
+### Example Response
+
+See the endpoint for listing an individual photo for the response structure
+
 ## /photos
 `[GET] /account/{accountId}/photos`  
 Lists photos from an account.
@@ -1460,6 +1482,7 @@ The latitude of the user posting the status to tie a location to it
 The longitude of the user posting the status to tie a location to it
 
 ### Examples Response
+
 See the response for listing a single status post
 
 ## /status/{statusId}
