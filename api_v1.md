@@ -1444,6 +1444,24 @@ An optional carrier that this was shipped with for use with the `tracking_number
 # Statuses
 Statuses on StageBloc are shorter text updates that account's are able to schedule and post to both StageBloc itself and their connected social networks.
 
+## /status
+`[POST] /account/{accountId}/status/{statusId}`  
+This endpoint can be used to post a status to StageBloc.
+
+### POST Parameters
+
+`text` _(required)_  
+The text of the status to post
+
+`latitude`  
+The latitude of the user posting the status to tie a location to it
+
+`longitude`  
+The longitude of the user posting the status to tie a location to it
+
+### Examples Response
+See the response for listing a single status post
+
 ## /status/{statusId}
 `[GET] /account/{accountId}/status/{statusId}`  
 This endpoint can be used to get a single status post on StageBloc.
