@@ -820,7 +820,7 @@ Uploads a photo to an account.
 `photo` _(required)_  
 The photo file itself
 
-`title`  _(required)_
+`title` _(required)_  
 The title to use for the photo
 
 `description`  
