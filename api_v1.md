@@ -552,6 +552,46 @@ allowed\_content\_sections
 
     the types of content fans are able to submit to this Fan Club
 
+## /fanclub/dashboard
+`GET /account/{accountId}/fanclub/dashboard`  
+This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the StageBloc backend)
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "kind": "fan_club_dashboard",
+	        "totals": {
+	            "fans": 27,
+	            "likes": 17,
+	            "comments": 78,
+	            "posts": 21,
+	            "gender": {
+	                "male": 10,
+	                "female": 17,
+	                "unknown": 0
+	            },
+	            "tiers": {
+	                "1": {
+	                    "name": "Free Tier",
+	                    "fans": 10
+	                },
+	                "2": {
+	                    "name": "Basic Tier",
+	                    "fans": 5
+	                },
+	                "3": {
+	                    "name": "Premium Tier",
+	                    "fans": 12
+	                }
+	            }
+	        }
+	    }
+	}
+
 ## /fanclubs/{type}
 `GET /account/fanclubs/{type}`  
 This endpoint retrieves a listing of Fan Clubs on StageBloc. The accepted values for `type` are `following`, `featured`, or `recent` with `featured` being the default. Note that for `featured` Fan Clubs, `limit` and `offset` are ignored as it will return all featured Fan Clubs at the time.
@@ -1071,34 +1111,42 @@ This endpoint is used to get stats and data regarding commerce and sales (very s
 
 When dealing with monetary values, the currency will be USD.
 
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "total_revenue": 3959.27,
-            "total_orders": 204,
-            "average_order_price": 19.41,
-            "countries": {
-                "CAN": {
-                    "name": "Canada",
-                    "total_orders": 8,
-                    "total_revenue": 225.99
-                },
-                "GBR": {
-                    "name": "United Kingdom",
-                    "total_orders": 3,
-                    "total_revenue": 27.01
-                },
-                "USA": {
-                    "name": "United States of America",
-                    "total_orders": 116,
-                    "total_revenue": 2836.79
-                },
-                ...
-            }
-        }
-    }
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "kind": "store_dashboard",
+	        "totals": {
+	            "revenue": 4054.27,
+	            "shipping_handling": 1252.82,
+	            "tax": 60.82,
+	            "orders": 211
+	        },
+	        "revenue": {
+	            "fan_club": 843.90,
+	            "store": 3090.05
+	        },
+	        "averages": {
+	            "order_price": 19.21,
+	            "fan_value": 137.54
+	        },
+	        "top_buyers": [{
+	            "user": {
+                	... see the structure for a user object in /user endpoints ...
+	            },
+	            "amount_spent": 2731.59
+	        }],
+	        "countries": {
+	            "USA": {
+	                "name": "United States of America",
+	                "total_orders": 131,
+	                "total_revenue": 3158.57
+	            },
+	            ...
+	        }
+	    }
+	}
 
 ## /store/items
 `[GET] /account/{accountId}/store/items`  
