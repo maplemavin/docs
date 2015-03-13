@@ -4258,6 +4258,42 @@ Finally, you should add a binding to your theme's JavaScript. You can use this c
         // data will be a JavaScript object representing success or failure
     });
 
+## Event RSVP
+This allows users to change their RSVP status for an event
+
+**Step One**
+
+First, you'll need some sort way of having users change their status. For instance, you could do:
+
+    <button type="button" data-rsvp="yes" class="js-rsvp-button {if:UserEventAttendingStatus status="yes"}btn-s-active{/if:UserEventAttendingStatus}">Attending</button>
+
+    <button type="button" data-rsvp="maybe" class="js-rsvp-button {if:UserEventAttendingStatus status="maybe"}btn-s-active{/if:UserEventAttendingStatus}">Maybe attending</button>
+
+    <button type="button" data-rsvp="no" class="js-rsvp-button {if:UserEventAttendingStatus status="no"}btn-s-active{/if:UserEventAttendingStatus}">Not attending</button>
+
+The available options to pass are "yes", "no", and "maybe".
+
+**Step Two**
+
+Next, when the user clicks the button, you'll want to pass along that information with JavaScript similar to the following:
+
+    $('.js-rsvp-button').on('click', function (e) {
+        e.preventDefault();
+        pm({target: window.frames.sbnav, type: 'sbInlineEventRSVP', data: {
+                eventId: 1,
+                status: $(this).attr('data-rsvp')
+            }
+        });
+    });
+
+**Step Three**
+
+Finally, you should add a binding to your theme's JavaScript. You can use this callback to handle the data returned from SBNav.
+
+    pm.bind('sbInlineEventRSVP', function(data) {
+        // data will be a JavaScript object representing success or failure
+    });
+
 ## Contest Entry
 This allows users to enter in to contests you are running through your account.  
 **Note:** Right now contests are limited to the events area in the StageBloc backend.
