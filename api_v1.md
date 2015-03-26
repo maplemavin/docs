@@ -1515,7 +1515,7 @@ An optional carrier that this was shipped with for use with the `tracking_number
 Statuses on StageBloc are shorter text updates that account's are able to schedule and post to both StageBloc itself and their connected social networks.
 
 ## /status
-`[POST] /account/{accountId}/status/{statusId}`  
+`[POST] /account/{accountId}/status`  
 This endpoint can be used to post a status to StageBloc.
 
 ### POST Parameters
