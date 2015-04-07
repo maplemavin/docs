@@ -170,6 +170,28 @@ Creates a new account and makes the currently authenticated user an admin for th
 
 	an image file to use for the account's image
 
+## /accounts
+`[GET]`  
+Gets a listing of various types of accounts for a user
+
+### GET Parameters
+
+`order_by`  
+
+	what to order the accounts by (possible values include "created", "modified", and "accountName")
+
+`admin`  
+
+	whether or not to include accounts the user is an admin of (defaults to true)
+
+`following`  
+
+	whether or not to include accounts the user is follow (defaults to true)
+
+### Example Response
+
+An array of accounts (see `/account` endpoint for structure)
+
 ## /account/{accountId}
 `[GET]`  
 Gets an account's information from its ID.
