@@ -222,9 +222,21 @@ Updates an account by its ID. Only admins of the account can use this endpoint.
             "verified": true,
             "photo": {
                 <see structure for a photo response>
-            }
+            },
+            "user_is_admin": true,
+            "user_role": "read_only"
         }
     }
+
+### Response Explanation
+
+`user_is_admin`
+
+	whether or not the user is an admin in some capacity for this account
+
+`user_role`
+
+	if the user is an admin, this will be what type of admin they are ("owner", "editor", "author", "read_only", or "fan_club_moderator")
 
 ## /{accountId}/follow
 `POST /account/{accountId}/follow`  
