@@ -280,6 +280,48 @@ This will have a user unfollow an account regardless of the tier they are on
 `[GET] /account/{accountId}/content`  
 Gets an activity stream of recent content from the account.
 
+## /fans
+`[GET] /account/{accountId}/fans`  
+Gets a list of fans for the account.
+
+### GET Parameters
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 50
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+order_by
+
+    how to order the returned results
+
+    accepted values are "created", "name", "email", and "username"
+
+    defaults to "created"
+
+direction
+
+    which order to return the results in
+
+    accepted values are ASC or DESC
+
+    defaults to DESC
+
+### Example Response
+
+This will be a listing of user objects, so check out the user endpoints for the structure
+
 ## /children/{type}
 `[GET] /account/{accountId}/children/{type}`  
 Gets the children accounts of a parent account. The `{type}` is optional and omitting it will return children accounts of all types. Otherwise, simply take the type of children accounts you are looking for, replace the spaces with dashes, and use that as the `{type}`.
