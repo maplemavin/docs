@@ -535,6 +535,24 @@ Gets a user by their user ID
 
 See the response for `/users/me`, it will be structured the same.
 
+## /content/updates
+`GET /users/{userId}/content/updates`  
+This returns a listing of content that this user has created across any account they are a part of. Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
+
+### GET Parameters
+
+`filter` _(required)_  
+A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video. 
+
+## /content/likes
+`GET /users/{userId}/content/likes`  
+This returns a listing of content that this user has liked across StageBloc.  Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
+
+### GET Parameters
+
+`filter` _(required)_  
+A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video.
+
 # Fan Clubs
 Users on StageBloc can join Fan Clubs associated with accounts. By default an account doesn’t have a Fan Club set up, but creating one adds extra functionality such as having three different membership tiers and requiring payment for joining the Fan Club.
 
