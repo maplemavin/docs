@@ -694,7 +694,7 @@ A link that opens a modal and allows a user to sign up for StageBloc and follow 
 
 `text`
 
-    the text to be put inside the <a> tag
+    the text to be put inside the tag
 
     accepted values are any string (HTML included)
 
@@ -702,7 +702,7 @@ A link that opens a modal and allows a user to sign up for StageBloc and follow 
 
 `closeTag`
 
-    whether or not to close the <a> tag
+    whether or not to close the tag
     
     accepted values are true or false
     
@@ -729,7 +729,7 @@ A link that opens a modal and allows a user to log in to their StageBloc profile
 
 `text`
 
-    the text to be put inside the HTML element
+    the text to be put inside the tag
 
     accepted values are any string (HTML included)
 
@@ -737,7 +737,7 @@ A link that opens a modal and allows a user to log in to their StageBloc profile
 
 `closeTag`
 
-    whether or not to close the <a> tag
+    whether or not to close the tag
     
     accepted values are true or false
     
