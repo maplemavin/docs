@@ -1051,6 +1051,7 @@ Creates a link that, when clicked, will open the user's cart
     defaults to none
 
 ## Functionality
+
 ### {LikeLink}
 A link that likes a specific piece of content
 
@@ -1144,6 +1145,38 @@ A link that deletes a specific piece of content (if the user is authorized)
     accepted values are {ContentType-Audio}, {ContentType-Blog}, {ContentType-Events}, {ContentType-Photos}, {ContentType-Statuses}, {ContentType-Videos}, {ContentType-Store}
 
     defaults to whatever the current item is in the Theming Engine
+
+## Linking
+There are a few tools available to linking to various parts within your site and outside of your site. For general site navigation it is recommended to use `{module:Navigation}`.
+
+### {Link}
+A variable that allows for linking to various functionality, pages on your hosted site, and pages on StageBloc (i.e. `{Link to="page"}`)
+
+`to`
+
+    where you want to link to
+
+    available options include:
+        TOS - StageBloc's Terms of Service
+        PrivacyPolicy - StageBloc's privacy policy
+        Contact - StageBloc's contact page
+        StageBloc - Our homepage
+        ForgotPassword - StageBloc's forgot password page
+        Signup - StageBloc's sign up page
+        ConnectTwitter - A link that will OAuth connect a user's Twitter to StageBloc
+        ConnectFacebook - A link that will OAuth connect a user's Facebook to StageBloc
+        ConnectInstagram - A link that will OAuth connect a user's Instagram to StageBloc
+        DisconnectTwitter
+        DisconnectFacebook
+        DisconnectInstagram
+        CurrentPage - A link to the current page the user is on
+
+### {RedirectTo}
+A variable that can be used for redirecting a page to server else server side
+
+`url`
+
+    the URL to redirect to
 
 ## About
 ### page:About
@@ -3491,7 +3524,7 @@ would change to
 
 `sku`
 
-	a SKU to auto-select in the cart
+    a SKU to auto-select in the cart
 
 `text`
 
