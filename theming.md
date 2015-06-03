@@ -4128,6 +4128,39 @@ When a request such as the above is made, SBNav will act accordingly given the d
         // data.type will be the action it came from (i.e. 'advancedFunctionalityType')
     });
 
+## Search
+Searching for your content within StageBloc is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `stagebloc.com/<account_url>/_search`
+
+    $('.js-search').click(function() {
+        $.ajax({
+            method: 'POST',
+            type: 'json',
+            data: {
+                q: '<query string here>',
+                offset: 0,
+                limit: 50
+            },
+            url: '_search',
+            success: function(data) {
+
+            }
+        });
+    });
+
+The structure of the returned data will be:
+
+    {
+        "metadata": {
+            "offset": 0,
+            "limit": 50,
+            "total": 56
+        },
+        "data": [{
+            "content": { ... will be an array representation of an object the same way the API structures it ... },
+            "score": 2.1433315
+        }]
+    }
+
 ## Custom Fields
 Custom Fields is a feature that allows you to attach extra pieces of information to content within StageBloc that we don't natively support. For instance, if you wanted to be able to mark events as sold out, something we won't natively support, then you could create a custom field to add a boolean flag to events marking whether or not they are sold out.
 
