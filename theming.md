@@ -681,6 +681,47 @@ A link that opens a modal and allow the user to view content and comment on it
 
     defaults to whatever the current item is in the Theming Engine
 
+### {ContestEntryModalLink}
+A link that opens a modal and allows a user to enter a contest
+
+`contestId`
+
+    the ID of the contest
+
+    accepted values are any contest ID that belongs to the account
+
+`tag`
+
+    the HTML element to be used for the signup action
+
+    accepted values are any HTML element
+
+    defaults to "a"
+
+`text`
+
+    the text to be put inside the tag
+
+    accepted values are any string (HTML included)
+
+    defaults to "Enter Contest"
+
+`closeTag`
+
+    whether or not to close the tag
+    
+    accepted values are true or false
+    
+    defaults to true
+
+`class`
+
+    the class to assign to the <a> tag
+    
+    accepted values are any string
+    
+    defaults to none
+
 ### {SignupLink}
 A link that opens a modal and allows a user to sign up for StageBloc and follow your account
 
