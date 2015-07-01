@@ -681,20 +681,34 @@ A link that opens a modal and allow the user to view content and comment on it
 
     defaults to whatever the current item is in the Theming Engine
 
-### {SignupLink}
-A link that opens a modal and allows a user to sign up for StageBloc and follow your account
+### {ContestEntryModalLink}
+A link that opens a modal and allows a user to enter a contest
+
+`contestId`
+
+    the ID of the contest
+
+    accepted values are any contest ID that belongs to the account
+
+`tag`
+
+    the HTML element to be used for the signup action
+
+    accepted values are any HTML element
+
+    defaults to "a"
 
 `text`
 
-    the text to be put inside the <a> tag
+    the text to be put inside the tag
 
     accepted values are any string (HTML included)
 
-    defaults to "Sign Up"
+    defaults to "Enter Contest"
 
 `closeTag`
 
-    whether or not to close the <a> tag
+    whether or not to close the tag
     
     accepted values are true or false
     
@@ -703,6 +717,76 @@ A link that opens a modal and allows a user to sign up for StageBloc and follow 
 `class`
 
     the class to assign to the <a> tag
+    
+    accepted values are any string
+    
+    defaults to none
+
+### {SignupLink}
+A link that opens a modal and allows a user to sign up for StageBloc and follow your account
+
+`tag`
+
+    the HTML element to be used for the signup action
+
+    accepted values are any HTML element
+
+    defaults to "a"
+
+`text`
+
+    the text to be put inside the tag
+
+    accepted values are any string (HTML included)
+
+    defaults to "Sign Up"
+
+`closeTag`
+
+    whether or not to close the tag
+    
+    accepted values are true or false
+    
+    defaults to true
+
+`class`
+
+    the class to assign to the <a> tag
+    
+    accepted values are any string
+    
+    defaults to none
+
+### {LoginLink}
+A link that opens a modal and allows a user to log in to their StageBloc profile
+
+`tag`
+
+    the HTML element to be used for the login action
+
+    accepted values are any HTML element
+
+    defaults to "a"
+
+`text`
+
+    the text to be put inside the tag
+
+    accepted values are any string (HTML included)
+
+    defaults to "Login"
+
+`closeTag`
+
+    whether or not to close the tag
+    
+    accepted values are true or false
+    
+    defaults to true
+
+`class`
+
+    the class to assign to the HTML element
     
     accepted values are any string
     
@@ -1008,6 +1092,7 @@ Creates a link that, when clicked, will open the user's cart
     defaults to none
 
 ## Functionality
+
 ### {LikeLink}
 A link that likes a specific piece of content
 
@@ -1101,6 +1186,38 @@ A link that deletes a specific piece of content (if the user is authorized)
     accepted values are {ContentType-Audio}, {ContentType-Blog}, {ContentType-Events}, {ContentType-Photos}, {ContentType-Statuses}, {ContentType-Videos}, {ContentType-Store}
 
     defaults to whatever the current item is in the Theming Engine
+
+## Linking
+There are a few tools available to linking to various parts within your site and outside of your site. For general site navigation it is recommended to use `{module:Navigation}`.
+
+### {Link}
+A variable that allows for linking to various functionality, pages on your hosted site, and pages on StageBloc (i.e. `{Link to="page"}`)
+
+`to`
+
+    where you want to link to
+
+    available options include:
+        TOS - StageBloc's Terms of Service
+        PrivacyPolicy - StageBloc's privacy policy
+        Contact - StageBloc's contact page
+        StageBloc - Our homepage
+        ForgotPassword - StageBloc's forgot password page
+        Signup - StageBloc's sign up page
+        ConnectTwitter - A link that will OAuth connect a user's Twitter to StageBloc
+        ConnectFacebook - A link that will OAuth connect a user's Facebook to StageBloc
+        ConnectInstagram - A link that will OAuth connect a user's Instagram to StageBloc
+        DisconnectTwitter
+        DisconnectFacebook
+        DisconnectInstagram
+        CurrentPage - A link to the current page the user is on
+
+### {RedirectTo}
+A variable that can be used for redirecting a page to server else server side
+
+`url`
+
+    the URL to redirect to
 
 ## About
 ### page:About
@@ -3448,7 +3565,7 @@ would change to
 
 `sku`
 
-	a SKU to auto-select in the cart
+    a SKU to auto-select in the cart
 
 `text`
 
@@ -4051,6 +4168,39 @@ When a request such as the above is made, SBNav will act accordingly given the d
         // This binding will handle generic errors (i.e. if SBNav receives a 500 or anything for any reason)
         // data.type will be the action it came from (i.e. 'advancedFunctionalityType')
     });
+
+## Search
+Searching for your content within StageBloc is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `stagebloc.com/<account_url>/_search`
+
+    $('.js-search').click(function() {
+        $.ajax({
+            method: 'POST',
+            type: 'json',
+            data: {
+                q: '<query string here>',
+                offset: 0,
+                limit: 50
+            },
+            url: '_search',
+            success: function(data) {
+
+            }
+        });
+    });
+
+The structure of the returned data will be:
+
+    {
+        "metadata": {
+            "offset": 0,
+            "limit": 50,
+            "total": 56
+        },
+        "data": [{
+            "content": { ... will be an array representation of an object the same way the API structures it ... },
+            "score": 2.1433315
+        }]
+    }
 
 ## Custom Fields
 Custom Fields is a feature that allows you to attach extra pieces of information to content within StageBloc that we don't natively support. For instance, if you wanted to be able to mark events as sold out, something we won't natively support, then you could create a custom field to add a boolean flag to events marking whether or not they are sold out.
