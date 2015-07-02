@@ -2450,7 +2450,7 @@ Creates a link that, when clicked, will download the audio track (unless it requ
     
 `if:AudioPlaylistHasReleaseDate`
 
-    check to see if the audio playlist has a recorded date or not
+    check to see if the audio playlist has a release date or not
     
 `if:AudioPlaylistHasThumbnail`
 
