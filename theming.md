@@ -2448,9 +2448,9 @@ Creates a link that, when clicked, will download the audio track (unless it requ
 
     check to see if the audio playlist has a label or not
     
-`if:AudioPlaylistHasRecordedDate`
+`if:AudioPlaylistHasReleaseDate`
 
-    check to see if the audio playlist has a recorded date or not
+    check to see if the audio playlist has a release date or not
     
 `if:AudioPlaylistHasThumbnail`
 
