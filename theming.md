@@ -4174,12 +4174,13 @@ Searching for your content within StageBloc is possible with JavaScript in your 
 
     $('.js-search').click(function() {
         $.ajax({
-            method: 'POST',
-            type: 'json',
+            type: 'post',
+            dataType: 'json',
             data: {
                 q: '<query string here>',
                 offset: 0,
-                limit: 50
+                limit: 50,
+                filter: `<comma separated string of content types here>`
             },
             url: '_search',
             success: function(data) {
