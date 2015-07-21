@@ -1353,7 +1353,7 @@ This module will list all of the links to various content sections that the acco
     
 `blogCategoryNavigation`
 
-    whether or not to show the subnvagiation for blog categories as opposed to the global nav
+    whether or not to show the subnavigation for blog categories as opposed to the global nav
     
     accepted values are true and false
     
@@ -1361,7 +1361,7 @@ This module will list all of the links to various content sections that the acco
     
 `storeCategoryNavigation`
 
-    whether or not to show the subnvagiation for store categories as opposed to the global nav
+    whether or not to show the subnavigation for store categories as opposed to the global nav
     
     accepted values are true and false
     
