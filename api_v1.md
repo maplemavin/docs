@@ -1518,10 +1518,12 @@ offset
                     "object": { <store object> }
                 },
                 "shipping": {
-                    "provider": "USPS",
                     "method": "USPS Priority Mail",
+                },
+                "shipment": {
+                    "id": 12,
                     "shipped": null,
-                    "tracking_number": null
+                    "tracking_number": "HS2334JFGS0"
                 }
             }, {
                 "id": 2969,
