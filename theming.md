@@ -7,7 +7,7 @@ If you learn better by diving into things, we have a bunch of example themes we'
 
 ### General Information
 In general, a theme consists of defining the pages that make sense for your website and filling them with data. Each `{page}` represents a separate URL on the site. The data within each `{page}` is built using any combination of `{module}`s and `{block}`s.
-P
+
 It is easiest to think of `{module}`s as `for` loops that loop through various data from your StageBloc account. Within a `{module}` a `{block}` can be used to represent a "model" of the data by exposing various pieces of information about that data.
 
 StageBloc also then has various `{if}` statements and other helpful variables to make themes as customizable as possible.
@@ -1957,9 +1957,6 @@ BlogPostShortExcerptCleaned
 
 BlogPostShortExcerptStripped  
 :   first 400 characters of blog post with all html tags stripped
-
-BlogPostRelatedContentTag  
-:   the tag associated with this blog post for related content
 
 BlogPostPhotoUrl  
 :   the URL of the first `<img>` in the blog post (see `if:BlogPostHasPhoto`)
@@ -4385,7 +4382,7 @@ First, you'll need some sort way of having users enter their information. For in
         <input type="submit" value="Subscribe to email list" />
     </form>
 
-The available keys for passing are `name`, `email`, and `emailListId`. As such, you'll also need to have made a generic email list in the StageBloc backend so that you can use the list's ID here.
+The available keys for passing are `name`, `email`, `emailListId`, and `country` (two digit code). As such, you'll also need to have made a generic email list in the StageBloc backend so that you can use the list's ID here (required). A birthday can also be passed through with the input `name` being `birthday[month]`, `birthday[day]`, and `birthday[year]`
 
 **Step Two**
 
