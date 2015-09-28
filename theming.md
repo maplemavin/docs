@@ -33,7 +33,7 @@ The general structure of a theme is simply repeating chunks of code with the fol
 
 #### Some tips...
 
-* Use semicolons in JavaScript. As mentioned above, do compress / minify your JavaScript before we upload it to our CDN so this will help ensure less issues occur.
+* Use semicolons in JavaScript. As mentioned above, we do compress / minify your JavaScript before we upload it to our CDN so this will help ensure fewer issues occur.
 
 * Remember to keep metadata in mind. For instance, when people share links to Facebook, you have control over the information Facebook pulls from the page. Check out this [obligatory StackOverflow post](http://stackoverflow.com/a/7623986/115629) for more info. Some useful links to get you started...
     - [Google Rich Snippets - Events](https://support.google.com/webmasters/answer/164506?hl=en)
@@ -50,7 +50,7 @@ For the PHP version, head over to our [Local Theme Dev](https://github.com/stage
 Please feel free to open issues and/or submit pull requests if you find ways to make it more useful.
 
 ## Submitting Themes
-Once you've built your theme, you can submit it to the StageBloc team for approval to be sold in our marketplace. This can be done via the StageBloc backend for your account. Themes can be priced as whatever amount you see fit (as well as free), and the same percentages apply to themes that apply to any other products sold on StageBloc. Once someone purchases your theme, they'll get the full source code and will be able to install and use it on their account.
+Once you've built your theme, you can submit it to the StageBloc team for approval to be sold in our marketplace. This can be done via the StageBloc backend for your account. Themes can be priced as whatever amount you see fit (as well as free), and the same revenue share percentages apply to themes that apply to any other products sold on StageBloc. Once someone purchases your theme, they'll get the full source code and will be able to install and use it on their account.
 
 # User Interaction
 Understanding and being able to directly communicate with your fan base are among the most important processes in building a brand. At StageBloc, we pride ourselves in creating tools and functionality that make this as easy as possible. As such, we've created a couple of different ways to easily make sure this is the case.
