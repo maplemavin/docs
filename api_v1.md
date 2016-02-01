@@ -1246,7 +1246,7 @@ When dealing with monetary values, the currency will be USD.
 `[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
 
-`POST /account/{accountId}/store/item/create`
+`POST /account/{accountId}/store/items`
 This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
 ### GET Parameters
