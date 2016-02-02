@@ -1246,6 +1246,9 @@ When dealing with monetary values, the currency will be USD.
 `[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
 
+`POST /account/{accountId}/store/items`  
+This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
+
 ### GET Parameters
 
 order_by
@@ -1364,6 +1367,170 @@ offset
             "photos": 0
         }]
     }
+
+### POST Parameters
+
+store\_item _(required)_
+
+    a parent object containing all information to be associated with this store item
+
+store\_item[options] _(required for type set to PHYSICAL or EXPERIENCE)_
+
+    an array of objects representing each option (for a T-shirt each option may represent a size, a color, or a combination of the two, etc)
+
+    each element in this array may contain the following fields:
+
+    `name` _(required)_
+
+        the name to display when there are multiple options under the store item
+
+    `sku`
+
+        an identifier used to distinguish between this option and other options under the same store item
+
+        defaults to an auto-generated alphanumeric SKU
+
+    `upc`
+
+        an identifier used to submit download / sales information to SoundScan or Buzz Angle
+
+    `quantity`
+
+        null for unlimited or a non-negative integer representing how much stock is currently on hand
+
+        defaults to null
+
+    `additional_price`
+
+        a non-negative integer representing the additional price to charge if this option is selected by the user (useful if an XXL t-shirt is more expensive than other variations, for example)
+
+        defaults to no additional price
+
+    `weight` _(required for type set to PHYSICAL)_
+
+        a non-negative decimal number indicating the weight in ounces of this option (used for shipping price calculation)
+
+    `height` _(required for type set to PHYSICAL)_
+
+        a non-negative decimal number indicating the height in inches of this option (used for shipping price calculation)
+
+    `width` _(required for type set to PHYSICAL)_
+
+        a non-negative decimal number indicating the width in inches of this option (used for shipping price calculation)
+
+    `length` _(required for type set to PHYSICAL)_
+
+        a non-negative decimal number indicating the length in inches of this option (used for shipping price calculation)
+
+    `status`
+
+        a string representing the status for this option
+
+        accepted values are NORMAL or DISABLED
+
+        defaults to NORMAL
+
+store\_item[shipping\_price\_handlers] _(required for type set to PHYSICAL)_
+
+    an array of objects representing each shipping price handler to be offered to a user attempting to purchase this item. The object may include additional handling fees and options depending on the type of handler indicated.
+
+    Each element in this array may contain the following fields:
+
+    `name` _(required)_
+
+        a string identifying which Shipping Price Handler to enable, one of: FLAT_RATE, USPS, TOWNSEND, BELLTOWER, RLP, FEDEX, CUSTOM_TABLE, PICK_UP, DELIVERY_AGENT, UPS
+
+    `price`
+
+        a non-negative integer, an additional price on top of the charges indicated by APIs for USPS, UPS, and FEDEX. For FLAT_RATE, this is the amount to charge a user selecting this shipping method.
+
+    `media-mail` _(applies to USPS only)_
+
+        a boolean, true if you want to offer USPS Media Mail pricing for this item
+
+store\_item[type] _(required)_
+
+    a string indicating the type of store item to create
+
+    accepted values are PHYSICAL or EXPERIENCE
+
+store\_item[price] _(required)_
+
+    a decimal number indicating the base price for this store item
+
+store\_item[title] _(required)_
+
+    a string (up to 150 characters) representing the title of the store item
+
+store\_item[description]
+
+    a string representing the description of the store item (HTML supported)
+
+store\_item[category]
+
+    a string representing a category in which to group this store item
+
+store\_item[status]
+
+    a string representing the status of the store item
+
+    accepted values are OKAY or PRIVATE
+
+    defaults to OKAY
+
+store\_item[exclusive]
+
+    a boolean, true if this should only be presented to users who are following the account
+
+    defaults to false
+
+store\_item[featured]
+
+    a boolean, true if this should be considered a featured item
+
+store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
+
+    an integer ID for a fulfiller already configured in StageBloc which is associated with this account
+
+### Example Request
+
+	{
+	    "store_item": {
+	        "price": 10.5,
+	        "sort_order": ,
+	        "title": "Physical Product",
+	        "description": "<p>This is a physical product</p>",
+	        "category": "Cool Things",
+	        "type": "PHYSICAL",
+	        "exclusive": false,
+	        "featured": false,
+	        "options": [
+	            {
+	                "name": "an option",
+	                "sku": "ITM_1_OPT_1",
+	                "upc": "UPC",
+	                "quantity": null,
+	                "status": "NORMAL"
+	            },
+	            {
+	                "name": "minimal option",
+	                "weight": 4.5
+	            }
+	        ],
+	        "shipping_price_handlers": [
+	            {
+	                "name":"USPS",
+	                "price":4.5,
+	                "media-mail":true
+	            },
+	            {
+	                "name":"FLAT_RATE",
+	                "price":5.5
+	            }
+	        ],
+	        "photo_url": "https://21cif.com/tutorials/micro/mm/urls/images/url2.gif"
+	    }
+	}
 
 ### Response Explanation
 
