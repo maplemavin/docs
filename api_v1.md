@@ -1444,7 +1444,7 @@ store\_item[shipping\_price\_handlers] _(required for type set to PHYSICAL)_
 
         a non-negative integer, an additional price on top of the charges indicated by APIs for USPS, UPS, and FEDEX. For FLAT_RATE, this is the amount to charge a user selecting this shipping method.
 
-    `media-mail` _(applies to USPS only)_
+    `media_mail` _(applies to USPS only)_
 
         a boolean, true if you want to offer USPS Media Mail pricing for this item
 
