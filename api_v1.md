@@ -1497,7 +1497,6 @@ store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 	{
 	    "store_item": {
 	        "price": 10.5,
-	        "sort_order": ,
 	        "title": "Physical Product",
 	        "description": "<p>This is a physical product</p>",
 	        "category": "Cool Things",
@@ -1521,7 +1520,7 @@ store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 	            {
 	                "name":"USPS",
 	                "price":4.5,
-	                "media-mail":true
+	                "media_mail":true
 	            },
 	            {
 	                "name":"FLAT_RATE",
