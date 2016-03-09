@@ -951,11 +951,8 @@ Uploads a photo to an account.
 
 ### POST Parameters
 
-`photo` _(optional)_
-The photo file itself, if `photo_url` is not passed this parameter is required
-
-`photo_url` _(optional)_
-A url for a photo, if `photo` is not passed this parameter is required
+`photo` _(required)_  
+The photo file itself
 
 `title` _(required)_  
 The title to use for the photo
@@ -1198,20 +1195,6 @@ video_url
 embed_code
 
 	the embed code of the video to include in HTML
-
-## /albums/{albumId}/photos
-`[POST] /account/{accountId}/photos/album/{albumId}/photos`
-This endpoint can be used to add an existing photo to a photo album.
-
-### POST Parameters
-
-`photo_ids` _(required)_
-
-    an array of photo ids to be added to the album
-
-### Example Response
-
-    See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
 
 # Store and Commerce
 These endpoints revolve around StageBloc store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
@@ -1575,14 +1558,6 @@ photos
     the number of photos this store item has
     
     if you specify to expand the photos key, it will be an array of the photos for this item
-
-album_id
-
-    the ID for the photo album associated with this store item
-
-    only returned if a photo_url is passed and is successfully processed
-
-    this ID can be used to add additional photos for this store item via /photos/albums/{albumId}/photos
 
 ## /store/items/{itemId}
 `[GET] /account/{accountId}/store/items/{itemId}`  
