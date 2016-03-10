@@ -528,7 +528,7 @@ photo
     the width and height are the dimensions of the originally uploaded photo
 
 ## /users/{userId}
-`[GET]`
+`[GET]`  
 Gets a user by their user ID
 
 ### Example Response
@@ -1243,10 +1243,10 @@ When dealing with monetary values, the currency will be USD.
 	}
 
 ## /store/fulfillers
-`[GET] /account/{accountId}/store/fulfillers`
+`[GET] /account/{accountId}/store/fulfillers`  
 This endpoint is use to get a listing of all fulfillers belonging to an account
 
-`[POST] /account/{accountId}/store/fulfillers`
+`[POST] /account/{accountId}/store/fulfillers`  
 This endpoint is used to create a new fulfiller. Many of the data requirements are specific to the type of fulfiller being created.
 
 ### POST Parameters
@@ -1341,7 +1341,7 @@ public_address[region]
 `[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
 
-`[POST] /account/{accountId}/store/items`
+`[POST] /account/{accountId}/store/items`  
 This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
 ### GET Parameters
