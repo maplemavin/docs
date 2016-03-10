@@ -1242,11 +1242,43 @@ When dealing with monetary values, the currency will be USD.
 	    }
 	}
 
+## /store/fulfillers
+`[GET] /account/{accountId}/store/fulfillers`
+This endpoint is use to get a listing of all fulfillers belonging to an account
+
+`[POST] /account/{accountId}/store/fulfillers`
+This endpoint is used to create a new fulfiller. Many of the data requirements are specific to the type of fulfiller being created.
+
+### POST Parameters
+
+name _(required)_
+
+    a name for this fulfiller
+
+type _(required)_
+
+    the type of fulfiller to create, one of: STAGEBLOC, SHIPSTATION, SHIPWORKS, IMPRESS, TOWNSEND, BENCHMARK, RICHARDS_AND_SOUTHERN, DELIVERY_AGENT, AMPLIFIER
+
+external_account_id
+
+external_username
+
+external_password
+
+external_url
+
+international_shipping_agreement
+
+private_address
+
+public_address
+
+
 ## /store/items
 `[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
 
-`POST /account/{accountId}/store/items`  
+`[POST] /account/{accountId}/store/items`
 This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
 ### GET Parameters
