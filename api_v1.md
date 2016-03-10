@@ -528,7 +528,7 @@ photo
     the width and height are the dimensions of the originally uploaded photo
 
 ## /users/{userId}
-`[GET]`
+`[GET]`  
 Gets a user by their user ID
 
 ### Example Response
@@ -1200,7 +1200,7 @@ embed_code
 	the embed code of the video to include in HTML
 
 ## /albums/{albumId}/photos
-`[POST] /account/{accountId}/photos/album/{albumId}/photos`
+`[POST] /account/{accountId}/photos/album/{albumId}/photos`  
 This endpoint can be used to add an existing photo to a photo album.
 
 ### POST Parameters
