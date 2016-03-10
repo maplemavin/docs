@@ -1261,18 +1261,81 @@ type _(required)_
 
 external_account_id
 
+    the account_id for the external service. required if type is one of: IMPRESS, DELIVERY_AGENT, AMPLIFIER
+
 external_username
+
+    the username for the external service. required if type is one of: SHIPSTATION, SHIPWORKS, BENCHMARK, AMPLIFIER
+
+    for AMPLIFIER integrations, the username is the "order source code"
 
 external_password
 
+    the password for the external service. required if type is one of: SHIPSTATION, SHIPWORKS, BENCHMARK
+
 external_url
+
+    the url against which to register sales orders. required if type is IMPRESS
 
 international_shipping_agreement
 
-private_address
+    a plain text string to which the user must agree if they are requesting shipment to a country which does not match the country for this fulfiller's private address
 
-public_address
+private_address[name]
 
+    a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+private_address[street]
+
+    the street address for the fulfiller's private address
+
+private_address[street_two]
+
+    a second street address for the fulfiller's private address
+
+private_address[city]
+
+    the city for the fulfiller's private address
+
+private_address[country]
+
+    the 2 character country code as specified by ISO-3361-alpha 2
+
+private_address[postal_code]
+
+    the postal code appropriate to the country. If country is US then either the 5 digit or 5-4 digit format. If count is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). FOr all other countries please use an appropriate postal code.
+
+private_address[region]
+
+    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For Canadian provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
+
+public_address[name]
+
+    a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+public_address[street]
+
+    see private_address[street] above
+
+public_address[street_two]
+
+    see private_address[street_two] above
+
+public_address[city]
+
+    see private_address[city] above
+
+public_address[country]
+
+    see private_address[country] above
+
+public_address[postal_code]
+
+    see private_address[postal_code] above
+
+public_address[region]
+
+    see private_address[region] above
 
 ## /store/items
 `[GET] /account/{accountId}/store/items`  
