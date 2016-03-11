@@ -1303,7 +1303,7 @@ private_address[country]
 
 private_address[postal_code]
 
-    the postal code appropriate to the country. If country is US then either the 5 digit or 5-4 digit format. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
+    the postal code appropriate to the country. If country is US then either the 5 digit or ZIP+4 digit format (eg: 12345-1234). If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
 
 private_address[region]
 
