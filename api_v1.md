@@ -1303,11 +1303,11 @@ private_address[country]
 
 private_address[postal_code]
 
-    the postal code appropriate to the country. If country is US then either the 5 digit or 5-4 digit format. If count is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). FOr all other countries please use an appropriate postal code.
+    the postal code appropriate to the country. If country is US then either the 5 digit or 5-4 digit format. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
 
 private_address[region]
 
-    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For Canadian provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
+    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
 
 public_address[name]
 
