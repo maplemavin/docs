@@ -1285,11 +1285,11 @@ private_address[name]
 
     a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
 
-private_address[street]
+private_address[street_address]
 
     the street address for the fulfiller's private address
 
-private_address[street_two]
+private_address[street_address_2]
 
     a second street address for the fulfiller's private address
 
@@ -1305,7 +1305,7 @@ private_address[postal_code]
 
     the postal code appropriate to the country. If country is US then either the 5 digit or ZIP+4 digit format (eg: 12345-1234). If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
 
-private_address[region]
+private_address[state]
 
     The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
 
@@ -1313,13 +1313,13 @@ public_address[name]
 
     a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
 
-public_address[street]
+public_address[street_address]
 
-    see private_address[street] above
+    see private_address[street_address] above
 
-public_address[street_two]
+public_address[street_address_2]
 
-    see private_address[street_two] above
+    see private_address[street_address_2] above
 
 public_address[city]
 
@@ -1333,9 +1333,9 @@ public_address[postal_code]
 
     see private_address[postal_code] above
 
-public_address[region]
+public_address[state]
 
-    see private_address[region] above
+    see private_address[state] above
 
 ## /store/items
 `[GET] /account/{accountId}/store/items`  
