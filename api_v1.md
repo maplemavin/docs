@@ -528,7 +528,7 @@ photo
     the width and height are the dimensions of the originally uploaded photo
 
 ## /users/{userId}
-`[GET]`
+`[GET]`  
 Gets a user by their user ID
 
 ### Example Response
@@ -1242,11 +1242,88 @@ When dealing with monetary values, the currency will be USD.
 	    }
 	}
 
+## /store/fulfillers
+`[GET] /account/{accountId}/store/fulfillers`  
+This endpoint is use to get a listing of all fulfillers belonging to an account
+
+`[POST] /account/{accountId}/store/fulfillers`  
+This endpoint is used to create a new fulfiller. Many of the data requirements are specific to the type of fulfiller being created.
+
+### POST Parameters
+
+name _(required)_
+
+    a name for this fulfiller
+
+type _(required)_
+
+    the type of fulfiller to create, one of: STAGEBLOC
+
+international_shipping_agreement
+
+    a plain text string to which the user must agree if they are requesting shipment to a country which does not match the country for this fulfiller's private address
+
+private_address[name]
+
+    a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+private_address[street_address]
+
+    the street address for the fulfiller's private address
+
+private_address[street_address_2]
+
+    a second street address for the fulfiller's private address
+
+private_address[city]
+
+    the city for the fulfiller's private address
+
+private_address[country]
+
+    the 2 character country code as specified by ISO-3361-alpha 2
+
+private_address[postal_code]
+
+    the postal code appropriate to the country. If country is US the 5 digit zip code for the private address. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
+
+private_address[state]
+
+    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
+
+public_address[name]
+
+    a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+public_address[street_address]
+
+    see private_address[street_address] above
+
+public_address[street_address_2]
+
+    see private_address[street_address_2] above
+
+public_address[city]
+
+    see private_address[city] above
+
+public_address[country]
+
+    see private_address[country] above
+
+public_address[postal_code]
+
+    see private_address[postal_code] above
+
+public_address[state]
+
+    see private_address[state] above
+
 ## /store/items
 `[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
 
-`POST /account/{accountId}/store/items`  
+`[POST] /account/{accountId}/store/items`  
 This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
 ### GET Parameters
