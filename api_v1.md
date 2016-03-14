@@ -1257,25 +1257,7 @@ name _(required)_
 
 type _(required)_
 
-    the type of fulfiller to create, one of: STAGEBLOC, SHIPSTATION, SHIPWORKS, IMPRESS, TOWNSEND, BENCHMARK, RICHARDS_AND_SOUTHERN, DELIVERY_AGENT, AMPLIFIER
-
-external_account_id
-
-    the account_id for the external service. required if type is one of: IMPRESS, DELIVERY_AGENT, AMPLIFIER
-
-external_username
-
-    the username for the external service. required if type is one of: SHIPSTATION, SHIPWORKS, BENCHMARK, AMPLIFIER
-
-    for AMPLIFIER integrations, the username is the "order source code"
-
-external_password
-
-    the password for the external service. required if type is one of: SHIPSTATION, SHIPWORKS, BENCHMARK
-
-external_url
-
-    the url against which to register sales orders. required if type is IMPRESS
+    the type of fulfiller to create, one of: STAGEBLOC
 
 international_shipping_agreement
 
