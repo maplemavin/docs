@@ -1207,7 +1207,7 @@ This endpoint can be used to add an existing photo to a photo album.
 
 `photo_ids` _(required)_
 
-    an array of photo ids to be added to the album
+    an array of photo IDs to be added to the album
 
 ### Example Response
 
