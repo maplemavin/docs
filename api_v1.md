@@ -1135,6 +1135,22 @@ This endpoint can be used to get a single photo album from an account.
 ### Example Response
 
 See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
+## /albums/{albumId}/photos
+`[POST] /account/{accountId}/photos/album/{albumId}/photos`  
+This endpoint can be used to add an existing photo to a photo album.
+
+### POST Parameters
+
+`photo_ids` _(required)_
+
+    an array of photo IDs to be added to the album
+
+### Example Response
+
+    See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
+
+# Store and Commerce
+These endpoints revolve around StageBloc store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
 
 # Video
 These endpoints revolve around the ability to upload and stream video through StageBloc. Video consists of both individual videos and those videos being organized into various playlists.
@@ -1198,23 +1214,6 @@ video_url
 embed_code
 
 	the embed code of the video to include in HTML
-
-## /albums/{albumId}/photos
-`[POST] /account/{accountId}/photos/album/{albumId}/photos`  
-This endpoint can be used to add an existing photo to a photo album.
-
-### POST Parameters
-
-`photo_ids` _(required)_
-
-    an array of photo IDs to be added to the album
-
-### Example Response
-
-    See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
-
-# Store and Commerce
-These endpoints revolve around StageBloc store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
 
 ## /store/dashboard
 `[GET] /account/{accountId}/store/dashboard`  
