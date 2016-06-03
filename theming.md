@@ -1621,7 +1621,7 @@ This module lists all content posted by an account. Content is returned by the d
 
     defaults to true
     
-    accepted values are true, false, or always *("always" will always show it, even for non-authorized users)*
+    accepted values are true, false, always *("always" will always show it, even for non-authorized users)*, or a comma-separated list of fan club tier(s) to display.
 
 `sticky`
 
