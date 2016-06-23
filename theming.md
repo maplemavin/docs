@@ -1206,10 +1206,8 @@ A variable that allows for linking to various functionality, pages on your hoste
         Signup - StageBloc's sign up page
         ConnectTwitter - A link that will OAuth connect a user's Twitter to StageBloc
         ConnectFacebook - A link that will OAuth connect a user's Facebook to StageBloc
-        ConnectInstagram - A link that will OAuth connect a user's Instagram to StageBloc
         DisconnectTwitter
         DisconnectFacebook
-        DisconnectInstagram
         CurrentPage - A link to the current page the user is on
 
 ### {RedirectTo}
@@ -4076,10 +4074,6 @@ This users profile image
 `if:UserHasFacebookConnected` *(global, can be used anywhere)*
 
     checks to see if the currently logged in user has Facebook connected
-
-`if:UserHasInstagramConnected` *(global, can be used anywhere)*
-
-    checks to see if the currently logged in user has Instagram connected
 
 `if:UserHasTwitterConnected` *(global, can be used anywhere)*
 
