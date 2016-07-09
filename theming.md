@@ -453,7 +453,7 @@ The following Theme Engine elements are available for general use within a theme
     
 `Link-StageBloc`
 
-    a link to fullscreendirect.com
+    a link to www.fullscreendirect.com
 
 ### Variables With Options
 **jQuery**  
