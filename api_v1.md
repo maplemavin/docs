@@ -126,7 +126,7 @@ code _(required)_
     the request token code received after connecting with the `/oauth2` endpoint
 
     possible values are any string received during the authentication / connection process
-    
+
 include\_admin\_accounts
 
     whether or not to include the authenticated user's admin accounts with the `access_token` in the response
@@ -150,7 +150,7 @@ include\_admin\_accounts
             ]
         }
     }
-    
+
 # Accounts
 These endpoints revolve around Fullscreen Direct accounts and their data. An account can have any number of admins, and all content on Fullscreen Direct is tied to an account.
 
@@ -1629,27 +1629,27 @@ store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 type
 
     the type of store item this is
-    
+
     possible values are "physical", "experience", "digital", or "bundle"
-    
+
 shipping_providers
 
     the available shipping methods for this store item, only shows up for items of type "physical"
-    
+
 options
 
     the various SKUs available for this product and their related data
-    
+
 bundled_items
 
     the store items that are in this bundle, only shows up for items of type "bundle"
-    
+
     other store items, audio tracks, or audio playlists can be bundled and will be listed under their respective section in this array
-    
+
 photos
 
     the number of photos this store item has
-    
+
     if you specify to expand the photos key, it will be an array of the photos for this item
 
 album_id
@@ -1719,33 +1719,33 @@ When dealing with monetary values, the currency will be USD unless otherwise spe
 order_by
 
     how to order the returned items
-    
+
     accepted values are `ordered` and `totalAmount`
-    
+
     defaults to `ordered`
-    
+
 direction
 
     what direction to order the returned items
-    
+
     accepted values are `ASC` and `DESC`
-    
+
     defaults to `DESC`
-    
+
 limit
 
     the number of items to limit the response to
-    
+
     accepted values are any positive number
-    
+
     defaults to 50
-    
+
 offset
 
     how much to offset the returned items by
-    
+
     accepted values are any number greater than or equal to zero
-    
+
     defaults to 0
 
 ### Example Response
@@ -1842,23 +1842,23 @@ offset
             }]
         }]
     }
-    
+
 ### Response Explanation
 
 user
 
     this will be `null` if the order was a guest checkout
-    
+
 transactions
 
     this will list the items in this order
-    
+
 transactions item type
 
     this will list the type of item that was ordered
-    
+
     possible values are "audio", "audio_playlist", "store", "theme", and "fan_club_subscription"
-    
+
 ## /store/orders/{orderId}
 `[POST] /account/{accountId}/store/orders/{orderId}`  
 This endpoint can be used to update various elements about orders.
@@ -1874,11 +1874,11 @@ An optional tracking number for when this item was shipped
 `carrier`  
 An optional carrier that this was shipped with for use with the `tracking_number`
 
-## /store/orders/{orderId}/receipt/resend
+## /{orderId}/receipt/resend
 `[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
 This endpoint can be used to resend a receipt for an order.
 
-## /store/orders/{orderId}/refund
+## /{orderId}/refund
 `[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
 This endpoint can be used to refund an entire order.
 
@@ -1886,25 +1886,25 @@ This endpoint can be used to refund an entire order.
 
 `adjust_stock`  
 
-  Whether or not to adjust the stock
+    whether or not to adjust the stock
 
-  Defaults to `false`
+    defaults to `false`
 
 `alert_user`  
 
-  Whether or not to email the user about this refund
+    whether or not to email the user about this refund
 
-  Defaults to `false`
+    defaults to `false`
 
 `refund_reason`  
 
-  A reasoning code for this refund
+    a reasoning code for this refund
 
-  One of good_will, product_not_received, goods_services_returned_or_refused, correct_taxes, or other
+    one of good_will, product_not_received, goods_services_returned_or_refused, correct_taxes, or other
 
 `refund_reason_text`  
 
-  A reason / description for this refund
+    a reason / description for this refund
 
 # Statuses
 Statuses on Fullscreen Direct are shorter text updates that account's are able to schedule and post to both Fullscreen Direct itself and their connected social networks.
