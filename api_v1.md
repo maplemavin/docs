@@ -1,17 +1,17 @@
-# StageBloc API V1
-Use the StageBloc API to develop custom, standalone integrations with StageBloc.
+# Fullscreen Direct API V1
+Use the Fullscreen Direct API to develop custom, standalone integrations with Fullscreen Direct.
 
 ### Under Development
 The API is actively evolving - please check back here for updates and changes.
 
 ### Fork us on GitHub!
-All of StageBloc's documentation is up on GitHub for you to fork, modify, and improve. Join us over there to request features, add suggestions, and report bugs. What are you waiting for? [Git to it!](https://github.com/stagebloc/docs)
+All of Fullscreen Direct's documentation is up on GitHub for you to fork, modify, and improve. Join us over there to request features, add suggestions, and report bugs. What are you waiting for? [Git to it!](https://github.com/stagebloc/docs)
 
 # General Information
-The root URL of the API is `https://api.stagebloc.com/v1/`. It can generally be assumed that writing endpoints use `POST` requests and reading endpoints use `GET` requests.
+The root URL of the API is `https://api.fullscreendirect.com/v1/`. It can generally be assumed that writing endpoints use `POST` requests and reading endpoints use `GET` requests.
 
 ### Authorization
-Connecting with the StageBloc API uses the OAuth 2.0 standard. You must first [create a StageBloc account](http://stagebloc.com/signup) and then register your application in the StageBloc backend to receive a client ID and secret that will allow users to connect with your application. To do this, click on your account at the top of the page and then "Account Settings" followed by "Developer Center".
+Connecting with the Fullscreen Direct API uses the OAuth 2.0 standard. You must first [create a Fullscreen Direct account](https://www.fullscreendirect.com/signup) and then register your application in the Fullscreen Direct backend to receive a client ID and secret that will allow users to connect with your application. To do this, click on your account at the top of the page and then "Account Settings" followed by "Developer Center".
 
 Requests can be be made with just a `client_id` parameter, but this is restricted to reading (listing) endpoints. In order to make use of any writing (editing) endpoints, an access token (i.e. validated user) must be present.
 
@@ -48,9 +48,9 @@ The general structure of an error response can be seen below.
     }
 
 # Authentication
-StageBloc uses the [OAuth2](http://oauth.net/2/) authentication process to get an access token from a request token. The access token is then used to make all subsequent requests.
+Fullscreen Direct uses the [OAuth2](http://oauth.net/2/) authentication process to get an access token from a request token. The access token is then used to make all subsequent requests.
 
-Access tokens can be revoked on a per-application basis at any point in time by the user in their settings area in the StageBloc backend.
+Access tokens can be revoked on a per-application basis at any point in time by the user in their settings area in the Fullscreen Direct backend.
 
 Depending on the endpoint, differing levels of authentication exist. Some endpoints require that the authenticated user be a fan while other require that they be an admin of the account. For those that require being an admin, some require a specific level of admin privileges, such as an editor or an author. Appropriate error messages will be shown if you try to access an endpoint you don't have access to.
 
@@ -78,7 +78,7 @@ response\_type _(required)_
 
 client\_id _(required)_
 
-    the ID of the application this user is connecting to (applications can be created in the backend of StageBloc)
+    the ID of the application this user is connecting to (applications can be created in the backend of Fullscreen Direct)
 
     possible values are any client ID that matches a registered application
 
@@ -105,7 +105,7 @@ This endpoint is used to get an access token once a request token is received.
 
 client\_id _(required)_
 
-    the ID of the application this user is connecting to (applications can be created in the backend of StageBloc)
+    the ID of the application this user is connecting to (applications can be created in the backend of Fullscreen Direct)
 
     possible values are any client ID that matches a registered application
 
@@ -152,7 +152,7 @@ include\_admin\_accounts
     }
     
 # Accounts
-These endpoints revolve around StageBloc accounts and their data. An account can have any number of admins, and all content on StageBloc is tied to an account.
+These endpoints revolve around Fullscreen Direct accounts and their data. An account can have any number of admins, and all content on Fullscreen Direct is tied to an account.
 
 ## /account
 `[POST]`  
@@ -163,7 +163,7 @@ Creates a new account and makes the currently authenticated user an admin for th
 `name` _(required)_  
 `stagebloc_url` _(required)_  
 
-	the URL of the account on StageBloc (i.e. stagebloc.com/stagebloc_url)
+	the URL of the account on Fullscreen Direct (i.e. www.fullscreendirect.com/fsd_url)
 
 `description`  
 `image`
@@ -378,7 +378,7 @@ These endpoints revolved around the application requests are being made on behal
 
 ## /push/token
 `[POST] /application/push/token`  
-Allows an application to give StageBloc a push notification for a user so that they can be messaged via push notifications from the StageBloc backend.  
+Allows an application to give Fullscreen Direct a push notification for a user so that they can be messaged via push notifications from the Fullscreen Direct backend.  
 **Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
 
 ### POST Parameters
@@ -399,11 +399,11 @@ Allows an application to give StageBloc a push notification for a user so that t
 	}
 
 # Users
-These endpoints revolve around StageBloc users and their data. A user on StageBloc can be an admin for any number of accounts, and their login is tied to their email address. A user can also be a fan of any number of accounts. These endpoints allow for management of both admin and fan relationships between users and their accounts.
+These endpoints revolve around Fullscreen Direct users and their data. A user on Fullscreen Direct can be an admin for any number of accounts, and their login is tied to their email address. A user can also be a fan of any number of accounts. These endpoints allow for management of both admin and fan relationships between users and their accounts.
 
 ## /users
 `[POST]`  
-Creates a new user on StageBloc.
+Creates a new user on Fullscreen Direct.
 
 ### POST Parameters
 
@@ -415,12 +415,12 @@ The email address to use for the user
 `birthday` _(required)_  
 
 `source_account_id`  
-An account ID for an account to follow / join the Fan Club of during signup, this will then send a Fan Club welcome email instead of the generic StageBloc signup email
+An account ID for an account to follow / join the Fan Club of during signup, this will then send a Fan Club welcome email instead of the generic Fullscreen Direct signup email
 
 `name`  
 
 `username`  
-The username for this user, it must be unique across all of StageBloc and only accepts letters, numbers, and underscores.
+The username for this user, it must be unique across all of Fullscreen Direct and only accepts letters, numbers, and underscores.
 
 `gender`  
 Accepts "male" or "female"
@@ -433,7 +433,7 @@ Accepts "male" or "female"
         },
         "data": {
             "id": 8,
-            "url": "https:\/\/stagebloc.dev\/user\/testuser",
+            "url": "https:\/\/www.fullscreendirect.com\/user\/testuser",
             "created": "2009-10-27 14:29:16",
             "name": "Test User",
             "username": "testuser",
@@ -488,7 +488,7 @@ Updates the currently authenticated user's information.
         },
         "data": {
             "id": 8,
-            "url": "https:\/\/stagebloc.dev\/user\/testuser",
+            "url": "https:\/\/www.fullscreendirect.com\/user\/testuser",
             "created": "2009-10-27 14:29:16",
             "name": "Test User",
             "username": "testuser",
@@ -542,11 +542,11 @@ This returns a listing of content that this user has created across any account 
 ### GET Parameters
 
 `filter` _(required)_  
-A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video. 
+A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video.
 
 ## /content/likes
 `GET /users/{userId}/content/likes`  
-This returns a listing of content that this user has liked across StageBloc.  Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
+This returns a listing of content that this user has liked across Fullscreen Direct.  Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
 
 ### GET Parameters
 
@@ -554,7 +554,7 @@ This returns a listing of content that this user has liked across StageBloc.  Ea
 A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video.
 
 # Fan Clubs
-Users on StageBloc can join Fan Clubs associated with accounts. By default an account doesn’t have a Fan Club set up, but creating one adds extra functionality such as having three different membership tiers and requiring payment for joining the Fan Club.
+Users on Fullscreen Direct can join Fan Clubs associated with accounts. By default an account doesn’t have a Fan Club set up, but creating one adds extra functionality such as having three different membership tiers and requiring payment for joining the Fan Club.
 
 ## /fanclub
 `GET /account/{accountId}/fanclub`  
@@ -648,7 +648,7 @@ allowed\_content\_sections
 
 ## /fanclub/dashboard
 `GET /account/{accountId}/fanclub/dashboard`  
-This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the StageBloc backend)
+This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the Fullscreen Direct backend)
 
 ### Example Response
 
@@ -688,7 +688,7 @@ This endpoint will return various stats and information about the account's fan 
 
 ## /fanclubs/{type}
 `GET /account/fanclubs/{type}`  
-This endpoint retrieves a listing of Fan Clubs on StageBloc. The accepted values for `type` are `following`, `featured`, or `recent` with `featured` being the default. Note that for `featured` Fan Clubs, `limit` and `offset` are ignored as it will return all featured Fan Clubs at the time.
+This endpoint retrieves a listing of Fan Clubs on Fullscreen Direct. The accepted values for `type` are `following`, `featured`, or `recent` with `featured` being the default. Note that for `featured` Fan Clubs, `limit` and `offset` are ignored as it will return all featured Fan Clubs at the time.
 
 ### GET Parameters
 
@@ -709,7 +709,7 @@ offset
     defaults to 0
 
 # Audio
-These endpoints revolve around the ability to upload and stream audio through StageBloc. Audio consists of both individual tracks and those tracks being organized into various playlists.
+These endpoints revolve around the ability to upload and stream audio through Fullscreen Direct. Audio consists of both individual tracks and those tracks being organized into various playlists.
 
 ## /audio
 `[GET] /account/{accountId}/audio`  
@@ -803,7 +803,7 @@ exclusive
 			"modified": "2014-11-14 17:49:04",
 			"short_url": "http:\/\/stgb.dev\/a\/ek",
 			"stream_url": "https:\/\/stagebloc-audio.s3.amazonaws.com\/1\/stream\/607_20120327_192954_1_101.mp3",
-			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.stagebloc.dev\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
+			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
 			"sticky": false,
 			"exclusive": false,
 			"private": false,
@@ -813,7 +813,7 @@ exclusive
 			"comment_count": 0,
 			"like_count": 0,
 			"user": 8,
-			"edit_url": "https:\/\/stagebloc.dev\/demo\/admin\/audio\/edit\/773",
+			"edit_url": "https:\/\/www.fullscreendirect.com\/demo\/admin\/audio\/edit\/773",
 			"user_has_liked": false
 		}]
 	}
@@ -826,7 +826,7 @@ duration
 
 stream_url
 
-	the URL to use to stream this audio file (could be a StageBloc URL or a third party one such as SoundCloud)
+	the URL to use to stream this audio file (could be a Fullscreen Direct URL or a third party one such as SoundCloud)
 
 in_moderation
 
@@ -901,7 +901,7 @@ direction
 			"title": "Best Music of the 90s",
 			"description": "",
 			"short_url": "http:\/\/stgb.dev\/ap\/4q",
-			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.stagebloc.dev\/audio\/playlist\/198\u0022 style=\u0022width:250px;height:320px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
+			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/playlist\/198\u0022 style=\u0022width:250px;height:320px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
 			"created_by": 1,
 			"created": "2014-11-14 11:17:50",
 			"modified_by": 1,
@@ -920,7 +920,7 @@ direction
 
 embed_code
 
-	StageBloc has audio playlist widgets for playlists that you can use by embedding this code on an HTML page if you so choose
+	Fullscreen Direct has audio playlist widgets for playlists that you can use by embedding this code on an HTML page if you so choose
 
 artist
 
@@ -943,7 +943,7 @@ This endpoint can be used to get an individual audio playlist.
 See the response for `/audio/playlists`, it will be structured the same except that it won't be in an array.
 
 # Photos
-These endpoints revolve around the ability to upload and view photos on StageBloc. Photos consist of both individual images as well as those images being organized into various photo albums.
+These endpoints revolve around the ability to upload and view photos on Fullscreen Direct. Photos consist of both individual images as well as those images being organized into various photo albums.
 
 ## /photo
 `[POST] /account/{accountId}/photo`  
@@ -1150,7 +1150,7 @@ This endpoint can be used to add an existing photo to a photo album.
     See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
 
 # Video
-These endpoints revolve around the ability to upload and stream video through StageBloc. Video consists of both individual videos and those videos being organized into various playlists.
+These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
 
 ## /video
 `[POST] /account/{accountId}/video/`  
@@ -1213,11 +1213,11 @@ embed_code
 	the embed code of the video to include in HTML
 
 # Store and Commerce
-These endpoints revolve around StageBloc store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
+These endpoints revolve around Fullscreen Direct store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
 
 ## /store/dashboard
 `[GET] /account/{accountId}/store/dashboard`  
-This endpoint is used to get stats and data regarding commerce and sales (very similar to the data shown on the Store dashboard in the StageBloc backend). It will provide all time, overall stats regarding your store and its revenue as well as results per country you've had at least one order in.
+This endpoint is used to get stats and data regarding commerce and sales (very similar to the data shown on the Store dashboard in the Fullscreen Direct backend). It will provide all time, overall stats regarding your store and its revenue as well as results per country you've had at least one order in.
 
 When dealing with monetary values, the currency will be USD.
 
@@ -1583,7 +1583,7 @@ store\_item[featured]
 
 store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 
-    an integer ID for a fulfiller already configured in StageBloc which is associated with this account
+    an integer ID for a fulfiller already configured in Fullscreen Direct which is associated with this account
 
 ### Example Request
 
@@ -1874,12 +1874,44 @@ An optional tracking number for when this item was shipped
 `carrier`  
 An optional carrier that this was shipped with for use with the `tracking_number`
 
+## /store/orders/{orderId}/receipt/resend
+`[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
+This endpoint can be used to resend a receipt for an order.
+
+## /store/orders/{orderId}/refund
+`[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
+This endpoint can be used to refund an entire order.
+
+### POST Parameters
+
+`adjust_stock`  
+
+  Whether or not to adjust the stock
+
+  Defaults to `false`
+
+`alert_user`  
+
+  Whether or not to email the user about this refund
+
+  Defaults to `false`
+
+`refund_reason`  
+
+  A reasoning code for this refund
+
+  One of good_will, product_not_received, goods_services_returned_or_refused, correct_taxes, or other
+
+`refund_reason_text`  
+
+  A reason / description for this refund
+
 # Statuses
-Statuses on StageBloc are shorter text updates that account's are able to schedule and post to both StageBloc itself and their connected social networks.
+Statuses on Fullscreen Direct are shorter text updates that account's are able to schedule and post to both Fullscreen Direct itself and their connected social networks.
 
 ## /status
 `[POST] /account/{accountId}/status`  
-This endpoint can be used to post a status to StageBloc.
+This endpoint can be used to post a status to Fullscreen Direct.
 
 ### POST Parameters
 
@@ -1898,10 +1930,10 @@ See the response for listing a single status post
 
 ## /status/{statusId}
 `[GET] /account/{accountId}/status/{statusId}`  
-This endpoint can be used to get a single status post on StageBloc.
+This endpoint can be used to get a single status post on Fullscreen Direct.
 
 `[DELETE] /account/{accountId}/status/{statusId}`  
-This endpoint can be used to delete a single status post on StageBloc. Only admins of the account with the right admin level or the original fan who posted the status are capable of deleting it.
+This endpoint can be used to delete a single status post on Fullscreen Direct. Only admins of the account with the right admin level or the original fan who posted the status are capable of deleting it.
 
 ### Example Response
 
@@ -1924,7 +1956,7 @@ This endpoint can be used to delete a single status post on StageBloc. Only admi
 
 ## /likers
 `[GET] /account/{accountId}/status/{statusId}/likers`  
-This endpoint can be used to list the users who have liked this status on StageBloc.
+This endpoint can be used to list the users who have liked this status on Fullscreen Direct.
 
 ### Example Response
 
@@ -1938,7 +1970,7 @@ This endpoint can be used to list the users who have liked this status on StageB
     }
 
 # Events
-Events on StageBloc can be many different things including shows, conferences, or really anything.
+Events on Fullscreen Direct can be many different things including shows, conferences, or really anything.
 
 ## /events
 `[GET] /account/{accountId}/events`  
@@ -2017,7 +2049,7 @@ past
 	            "is-sold-out": false
 	        },
 	        "location": {
-	            "name": "StageBloc Office",
+	            "name": "Fullscreen Direct Office",
 	            "street_address": "935 W Chestnut",
 	            "street_address_2": "",
 	            "city": "Chicago",
@@ -2055,7 +2087,7 @@ custom\_field\_data
 	if you have custom data set on events for your account, the slugs will show up as keys here with their values
 
 # Comments
-Comments can be made on almost all types of content in StageBloc.
+Comments can be made on almost all types of content in Fullscreen Direct.
 
 ## /comment
 `POST /account/{accountId}/{contentType}/{contentId}/comment`  
@@ -2097,7 +2129,7 @@ This endpoint will create a comment on a piece of content. The user must be a fa
 
 ## /comments
 `GET /account/{accountId}/{contentType}/{contentId}/comments`  
-Retrieves comments for a particular piece of content on StageBloc.  
+Retrieves comments for a particular piece of content on Fullscreen Direct.  
 **Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
 
 ### GET Parameters
@@ -2183,7 +2215,7 @@ content_type
 	a string specifying what type of content this comment was made on (i.e. what type of content the `content` key conforms to)
 
 # Actions
-StageBloc as a network has a lot of social functionality built in that allows fans to interact with content. Those endpoints are outlined here.
+Fullscreen Direct as a network has a lot of social functionality built in that allows fans to interact with content. Those endpoints are outlined here.
 
 ## /{contentId}/like
 `POST /account/{accountId}/{contentType}/{contentId}/like`  

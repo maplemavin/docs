@@ -1,5 +1,5 @@
 # Home
-Hello there! You are about to embark on an epic journey through StageBloc's Theming Engine documentation. It may sound scary, but you won't have any issues if you have a basic understanding of HTML, CSS, and/or JavaScript.
+Hello there! You are about to embark on an epic journey through Fullscreen Direct's Theming Engine documentation. It may sound scary, but you won't have any issues if you have a basic understanding of HTML, CSS, and/or JavaScript.
 
 These docs aim to make using the Theming Engine super simple. If there is anything you'd like exposed in the Theming Engine that doesn't already appear to be available, please contact us about adding it for you.
 
@@ -8,9 +8,9 @@ If you learn better by diving into things, we have a bunch of example themes we'
 ### General Information
 In general, a theme consists of defining the pages that make sense for your website and filling them with data. Each `{page}` represents a separate URL on the site. The data within each `{page}` is built using any combination of `{module}`s and `{block}`s.
 
-It is easiest to think of `{module}`s as `for` loops that loop through various data from your StageBloc account. Within a `{module}` a `{block}` can be used to represent a "model" of the data by exposing various pieces of information about that data.
+It is easiest to think of `{module}`s as `for` loops that loop through various data from your Fullscreen Direct account. Within a `{module}` a `{block}` can be used to represent a "model" of the data by exposing various pieces of information about that data.
 
-StageBloc also then has various `{if}` statements and other helpful variables to make themes as customizable as possible.
+Fullscreen Direct also then has various `{if}` statements and other helpful variables to make themes as customizable as possible.
 
 The general structure of a theme is simply repeating chunks of code with the following structure. HTML can be placed anywhere inside of this hierarchy:
 
@@ -23,11 +23,11 @@ The general structure of a theme is simply repeating chunks of code with the fol
 
 #### Some useful notes...
 
-* If you don't explicitly provide a favicon in the `<head>` of your HTML, we'll add the [default StageBloc favicon](https://stagebloc.com/favicon.ico) for you. To add your own favicon, simply upload it as a Theme Asset and put it in your theme's `<head>` HTML tag.
+* If you don't explicitly provide a favicon in the `<head>` of your HTML, we'll add the [default Fullscreen Direct favicon](https://www.fullscreendirect.com/favicon.ico) for you. To add your own favicon, simply upload it as a Theme Asset and put it in your theme's `<head>` HTML tag.
 
 * We add various `<meta>` tags to your `<head>` content if they aren't explicitly set to aid in SEO. For instance, many tags from the [Open Graph Protocol](http://ogp.me/) are automatically added.
 
-* We allow you to upload assets *(images, fonts, favicons, etc)* to our CDN and encourage you to use this when creating a theme. This means you don't have to host any part of your theme outside of StageBloc, making it easier for you.
+* We allow you to upload assets *(images, fonts, favicons, etc)* to our CDN and encourage you to use this when creating a theme. This means you don't have to host any part of your theme outside of Fullscreen Direct, making it easier for you.
 
 * CSS and JS are both minified before being uploaded to our CDN so that you get the maximum performance and caching when users come to your site. Sometimes errors can occur during this process. If you notice your JS or CSS behaving differently once uploaded, please let us know.
 
@@ -43,17 +43,17 @@ The general structure of a theme is simply repeating chunks of code with the fol
 The documentation for the Theming Engine is up on GitHub for you to fork, modify, and improve. Join us over there to request features, add suggestions, and report bugs. What are you waiting for? [Git to it!](https://github.com/stagebloc/docs/blob/master/theming.md)
 
 ## Local Theme Dev
-StageBloc themes can be edited in a web based sidebar, but that isn't ideal when doing rapid development and prototyping of a theme. For that reason, we've built an open source, PHP based tool to allow for easy localhost theme development. The tool simply uses our API to render a theme and return the HTML back to you. As such, a similar tool could be built in any other language pretty easily.
+We've built an open source, PHP based tool to allow for easy localhost theme development. The tool simply uses our API to render a theme and return the HTML back to you. As such, a similar tool could be built in any other language pretty easily.
 
 For the PHP version, head over to our [Local Theme Dev](https://github.com/stagebloc/local-theme-dev) repo on GitHub. Once installed and running, it allows developers to quickly and easily swap between different themes and accounts to get a feel for how various data looks in their theme.
 
 Please feel free to open issues and/or submit pull requests if you find ways to make it more useful.
 
 ## Submitting Themes
-Once you've built your theme, you can submit it to the StageBloc team for approval to be sold in our marketplace. This can be done via the StageBloc backend for your account. Themes can be priced as whatever amount you see fit (as well as free), and the same revenue share percentages apply to themes that apply to any other products sold on StageBloc. Once someone purchases your theme, they'll get the full source code and will be able to install and use it on their account.
+Once you've built your theme, you can submit it to the Fullscreen Direct team for approval to be sold in our marketplace. This can be done via the Fullscreen Direct backend for your account. Themes can be priced as whatever amount you see fit (as well as free), and the same revenue share percentages apply to themes that apply to any other products sold on Fullscreen Direct. Once someone purchases your theme, they'll get the full source code and will be able to install and use it on their account.
 
 # User Interaction
-Understanding and being able to directly communicate with your fan base are among the most important processes in building a brand. At StageBloc, we pride ourselves in creating tools and functionality that make this as easy as possible. As such, we've created a couple of different ways to easily make sure this is the case.
+Understanding and being able to directly communicate with your fan base are among the most important processes in building a brand. At Fullscreen Direct, we pride ourselves in creating tools and functionality that make this as easy as possible. As such, we've created a couple of different ways to easily make sure this is the case.
 
 ## Profile Information
 Prompting users to keep their profile information up to date is a great way to ensure you get the complete picture of your fan base. One way to do this is to include the JavaScript below on your hosted site. When present, this post message ping will cause an SBNav modal to show up prompting the user for their information if we determine it may be out of date.
@@ -75,12 +75,12 @@ If you want a more custom experience for your fans, simply using the `{if:UserIs
 `pm({ target: window.frames.sbnav, type: 'sbInlineSendVerificationEmail', data: {} });`
 
 # Syntax
-The StageBloc Theming Engine makes use of curly brackets and a few main building blocks for the majority of its syntax. The building blocks (page, modules, and blocks) should be kept lowercase like they are in these docs.
+The Fullscreen Direct Theming Engine makes use of curly brackets and a few main building blocks for the majority of its syntax. The building blocks (page, modules, and blocks) should be kept lowercase like they are in these docs.
 
 To find out more information about each building block, navigate to them in the navigation on the left hand side of this page.
     
 ## Pages
-Each view (i.e. URL) on StageBloc is contained within a `{page}`. There are a bunch of built in pages, but you can also create your own custom pages (see below). Any HTML, `{module}`s, or `{block}`s can be put inside of a `{page}`.
+Each view (i.e. URL) on Fullscreen Direct is contained within a `{page}`. There are a bunch of built in pages, but you can also create your own custom pages (see below). Any HTML, `{module}`s, or `{block}`s can be put inside of a `{page}`.
 
 It is not necessary to define a view for every `{page}` available via the Theming Engine. Define pages that make sense for your theme, and the rest will be taken care of via a fallback theme we've created so that no links will be broken.
 
@@ -136,7 +136,7 @@ The following options are available for `{page}`s:
 
     default value is based on the page or whatever comes after "Custom" for custom pages
 
-    if a page has more than one [%id] (i.e. `BlogCommentView`), use an asterik (*) for the first [%id]
+    if a page has more than one [%id] (i.e. `BlogCommentView`), use an asterisk (*) for the first [%id]
 
 `title`
 
@@ -280,7 +280,7 @@ Custom variables must start with "Custom" in their names. In this example, your 
     {CustomMyVariable}
 
 ### {option} Variables
-You can set up ways for StageBloc users to customize their theme to their liking without them doing any HTML/CSS/JS editing by using `{option}` variables. Options variables are pulled into the sidebar theme editor on the web and presented using `<form>` elements that less technical users can use to customize their theme. The general syntax for an `{option}` variable is:
+You can set up ways for Fullscreen Direct account admins to customize their theme to their liking without them doing any HTML/CSS/JS editing by using `{option}` variables. Options variables are pulled into the sidebar theme editor on the web and presented using `<form>` elements that less technical users can use to customize their theme. The general syntax for an `{option}` variable is:
 
     {option:VariableType
         group="VariableGroup"
@@ -410,7 +410,7 @@ If statements support the use of `||` and `&&` for AND and OR logic. However, mi
     {/if:IfStatementOne||IfStatementTwo}
     
 # Sections
-The main sections of the Theming Engine line up with the available content you can create and share on StageBloc.
+The main sections of the Theming Engine line up with the available content you can create and share on Fullscreen Direct.
 
 In general, the documentation for each section goes from higher level to lower level. It will first list the pages. After the pages, the modules are listed with their available options. The block is listed after the modules and can be used inside of any of the modules for that section. After the definition of the block, all of the variables (and variables with options) available to that block specifically are listed.
 
@@ -429,11 +429,11 @@ The following Theme Engine elements are available for general use within a theme
 
 `CSS`
 
-    a <link rel="stylesheet" /> tag with a link to the theme's CSS on StageBloc's CDN
+    a <link rel="stylesheet" /> tag with a link to the theme's CSS on Fullscreen Direct's CDN
 
 `JS`
 
-    a <script src=""> tag with a link to the theme's JS on StageBloc's CDN
+    a <script src=""> tag with a link to the theme's JS on Fullscreen Direct's CDN
 
 `Body-ID`
 
@@ -453,7 +453,7 @@ The following Theme Engine elements are available for general use within a theme
     
 `Link-StageBloc`
 
-    a link to stagebloc.com
+    a link to www.fullscreendirect.com
 
 ### Variables With Options
 **jQuery**  
@@ -709,21 +709,21 @@ A link that opens a modal and allows a user to enter a contest
 `closeTag`
 
     whether or not to close the tag
-    
+
     accepted values are true or false
-    
+
     defaults to true
 
 `class`
 
     the class to assign to the <a> tag
-    
+
     accepted values are any string
-    
+
     defaults to none
 
 ### {SignupLink}
-A link that opens a modal and allows a user to sign up for StageBloc and follow your account
+A link that opens a modal and allows a user to sign up for Fullscreen Direct and follow your account
 
 `tag`
 
@@ -744,21 +744,21 @@ A link that opens a modal and allows a user to sign up for StageBloc and follow 
 `closeTag`
 
     whether or not to close the tag
-    
+
     accepted values are true or false
-    
+
     defaults to true
 
 `class`
 
     the class to assign to the <a> tag
-    
+
     accepted values are any string
-    
+
     defaults to none
 
 ### {LoginLink}
-A link that opens a modal and allows a user to log in to their StageBloc profile
+A link that opens a modal and allows a user to log in to their Fullscreen Direct profile
 
 `tag`
 
@@ -987,7 +987,7 @@ Creates a link that, when clicked, will open a modal to allow fans to submit con
     defaults to status
 
 ### {ShareLink}
-Add a link to open the built in StageBloc sharing modal. When the user is logged out this will have generic social sharing buttons for services like Twitter and Facebook. When the user is logged in, content can be shared using their connected social accounts.
+Add a link to open the built in Fullscreen Direct sharing modal. When the user is logged out this will have generic social sharing buttons for services like Twitter and Facebook. When the user is logged in, content can be shared using their connected social accounts.
 
 `linkText`
 
@@ -1191,21 +1191,21 @@ A link that deletes a specific piece of content (if the user is authorized)
 There are a few tools available to linking to various parts within your site and outside of your site. For general site navigation it is recommended to use `{module:Navigation}`.
 
 ### {Link}
-A variable that allows for linking to various functionality, pages on your hosted site, and pages on StageBloc (i.e. `{Link to="page"}`)
+A variable that allows for linking to various functionality, pages on your hosted site, and pages on Fullscreen Direct (i.e. `{Link to="page"}`)
 
 `to`
 
     where you want to link to
 
     available options include:
-        TOS - StageBloc's Terms of Service
-        PrivacyPolicy - StageBloc's privacy policy
-        Contact - StageBloc's contact page
+        TOS - Fullscreen Direct's Terms of Service
+        PrivacyPolicy - Fullscreen Direct's privacy policy
+        Contact - Fullscreen Direct's contact page
         StageBloc - Our homepage
-        ForgotPassword - StageBloc's forgot password page
-        Signup - StageBloc's sign up page
-        ConnectTwitter - A link that will OAuth connect a user's Twitter to StageBloc
-        ConnectFacebook - A link that will OAuth connect a user's Facebook to StageBloc
+        ForgotPassword - Fullscreen Direct's forgot password page
+        Signup - Fullscreen Direct's sign up page
+        ConnectTwitter - A link that will OAuth connect a user's Twitter to Fullscreen Direct
+        ConnectFacebook - A link that will OAuth connect a user's Facebook to Fullscreen Direct
         DisconnectTwitter
         DisconnectFacebook
         CurrentPage - A link to the current page the user is on
@@ -1251,7 +1251,7 @@ AccountAbout
 :    the biography text of the account
 
 AccountAboutStageBlocUrl  
-:    the StageBloc URL for this account
+:    the Fullscreen Direct URL for this account
 
 AccountAboutCleaned  
 :    the bio text stripped of all tags except `<span><em><strong><a><u><i><b>`
@@ -1912,7 +1912,7 @@ AuthorName
 :   the author's full name
 
 AuthorUsername  
-:   the author's StageBloc username
+:   the author's Fullscreen Direct username
 
 AuthorUrl  
 :   the URL to the public facing user page for this author
@@ -2089,7 +2089,7 @@ AuthorName
 :   the name of the user that created this audio track
 
 AuthorUsername  
-:   the StageBloc username of the user that created this audio track
+:   the Fullscreen Direct username of the user that created this audio track
 
 AuthorUrl  
 :   the URL to the public facing user page for this author
@@ -2146,7 +2146,7 @@ AudioFreeDownloadQuality, AudioPaidDownloadQuaility
 
 ### Variables With Options
 **AudioAddToCartLink**  
-Creates a link that, when clicked, will add the audio track to the user's cart on StageBloc
+Creates a link that, when clicked, will add the audio track to the user's cart on Fullscreen Direct
 
 `audioId` (*required*)
 
@@ -2320,7 +2320,7 @@ CreatedByPhotoUrl, ModifiedByPhotoUrl
 CreatedByName, ModifiedByName
 :   the name of the user who created/modified the audio playlist
 
-AudioPlaylistFreeDownloadQuality, AudioPlaylistPaidDownloadQuaility  
+AudioPlaylistFreeDownloadQuality, AudioPlaylistPaidDownloadQuality  
 :   a string representing the quality of the free/paid version of this audio playlist, one of the following values:
 
     128kb MP3, 320kb MP3, Original WAV, Original AIFF, Original WAV / AIFF
@@ -2349,7 +2349,7 @@ The date the audio playlist was released on
     defaults to `n/j/y`
 
 **AudioPlaylistAddToCartLink**  
-Creates a link that, when clicked, will add the audio track to the user's cart on StageBloc
+Creates a link that, when clicked, will add the audio track to the user's cart on Fullscreen Direct
 
 `audioPlaylistId` (*required*)
 
@@ -2539,7 +2539,7 @@ AuthorName
 :   the name of the user that created this audio track
 
 AuthorUsername  
-:   the StageBloc username of the user that created this audio track
+:   the Fullscreen Direct username of the user that created this audio track
 
 AuthorUrl  
 :   the URL to the public facing user page for this author
@@ -2807,7 +2807,7 @@ AuthorName
 :   the name of the user that created this audio track
 
 AuthorUsername  
-:   the StageBloc username of the user that created this audio track
+:   the Fullscreen Direct username of the user that created this audio track
 
 AuthorUrl  
 :   the URL to the public facing user page for this author
@@ -4045,10 +4045,10 @@ UserEventAttendingCount
 :   the number of events the user is attending for the current account
 
 UserUrl  
-:   the URL to the user's page on StageBloc (i.e. `stagebloc.com/user/[%id]`)
+:   the URL to the user's page on Fullscreen Direct (i.e. `www.fullscreendirect.com/user/[%id]`)
 
 UserFansiteUrl  
-:   the URL to the user's pages on the current account's fansite (if they have one setup) (i.e. `stagebloc.com/[%account_url]/fansite/users/[%user_id]`)
+:   the URL to the user's pages on the current account's fansite (if they have one setup) (i.e. `www.fullscreendirect.com/[%account_url]/fansite/users/[%user_id]`)
 
 ### Variables With Options
 **UserPhotoUrl**  
@@ -4142,7 +4142,7 @@ SBNav adds a few CSS rules to your `<html>` element, namely `position: relative`
 If you use `position: fixed` in your theme (sticky headers, etc), you may notice that the sliding animation of the page becomes unsightly. You can disable it by adding `html { position: initial !important; }` to your CSS.
 
 # Advanced Functionality
-Using JavaScript and SBNav we are able to expose some advanced functionality. The functionality allowed here is available using built in StageBloc modals, but these methods allow theme authors to have a little bit more control over how it looks and works in their theme. In general, advanced functionality is achieved by targeting SBNav via `postMessage` as follows:
+Using JavaScript and SBNav we are able to expose some advanced functionality. The functionality allowed here is available using built in Fullscreen Direct modals, but these methods allow theme authors to have a little bit more control over how it looks and works in their theme. In general, advanced functionality is achieved by targeting SBNav via `postMessage` as follows:
 
     pm({ target: window.frames.sbnav, type: 'advancedFunctionalityType', data: { key: value } });
 
@@ -4161,7 +4161,7 @@ When a request such as the above is made, SBNav will act accordingly given the d
     });
 
 ## Search
-Searching for your content within StageBloc is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `stagebloc.com/<account_url>/_search`
+Searching for your content within Fullscreen Direct is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `www.fullscreendirect.com/<account_url>/_search`
 
     $('.js-search').click(function() {
         $.ajax({
@@ -4195,7 +4195,7 @@ The structure of the returned data will be:
     }
 
 ## Custom Fields
-Custom Fields is a feature that allows you to attach extra pieces of information to content within StageBloc that we don't natively support. For instance, if you wanted to be able to mark events as sold out, something we won't natively support, then you could create a custom field to add a boolean flag to events marking whether or not they are sold out.
+Custom Fields is a feature that allows you to attach extra pieces of information to content within Fullscreen Direct that we don't natively support. For instance, if you wanted to be able to mark events as sold out, something we won't natively support, then you could create a custom field to add a boolean flag to events marking whether or not they are sold out.
 
 To start using Custom Fields, you must first set some up in the advanced part of the backend account management section. You are currently able to setup the following types of custom fields:
 
@@ -4294,7 +4294,7 @@ Finally, you should add a binding to your theme's JavaScript. You can use this c
     });
 
 ## User Password Resetting
-This allows a user to initiate a password reset if they forgot their password. The system will then send them an email with a reset link. You can optionally choose to handle the reset page otherwise they will be taken through the normal StageBloc password resetting flow.
+This allows a user to initiate a password reset if they forgot their password. The system will then send them an email with a reset link. You can optionally choose to handle the reset page otherwise they will be taken through the normal Fullscreen Direct password resetting flow.
 
 **Step One**
 
@@ -4376,7 +4376,7 @@ First, you'll need some sort way of having users enter their information. For in
         <input type="submit" value="Subscribe to email list" />
     </form>
 
-The available keys for passing are `name`, `email`, `emailListId`, and `country` (two digit code). As such, you'll also need to have made a generic email list in the StageBloc backend so that you can use the list's ID here (required). A birthday can also be passed through with the input `name` being `birthday[month]`, `birthday[day]`, and `birthday[year]`
+The available keys for passing are `name`, `email`, `emailListId`, and `country` (two digit code). As such, you'll also need to have made a generic email list in the Fullscreen Direct backend so that you can use the list's ID here (required). A birthday can also be passed through with the input `name` being `birthday[month]`, `birthday[day]`, and `birthday[year]`
 
 **Step Two**
 
@@ -4438,7 +4438,6 @@ Finally, you should add a binding to your theme's JavaScript. You can use this c
 
 ## Contest Entry
 This allows users to enter in to contests you are running through your account.  
-**Note:** Right now contests are limited to the events area in the StageBloc backend.
 
 **Step One**
 
@@ -4486,7 +4485,7 @@ First, need some sort of `HTML` to get the necessary data. Here's an example:
         <textarea name="commentText"></textarea>
         <input type="submit" value="Post Comment" />
     </form>
-    
+
 Note that `content_id` and `content_slug` will vary depending on the content you're trying to comment on and will most likely be received from some sort of `{block}` data within your theme.
 
 There is also an optional `replyToId` parameter that can be passed to serve as the `id` of the original comment if this new comment is meant to be a reply to it.
