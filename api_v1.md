@@ -782,6 +782,10 @@ exclusive
 
 	whether or not this audio track should be exclusive
 
+exclusive_tiers
+
+	what fan club tier(s) the audio track is exclusive to
+
 ### Example Response
 
 	{
@@ -805,7 +809,8 @@ exclusive
 			"stream_url": "https:\/\/stagebloc-audio.s3.amazonaws.com\/1\/stream\/607_20120327_192954_1_101.mp3",
 			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
 			"sticky": false,
-			"exclusive": false,
+			"exclusive": true,
+			"exclusive_tiers": [1, 3],
 			"private": false,
 			"in_moderation": false,
 			"custom_field_data": [ ],
@@ -1025,6 +1030,7 @@ direction
 	        "height": 654,
 	        "sticky": false,
 	        "exclusive": false,
+	        "exclusive_tiers": [],
 	        "in_moderation": false,
 	        "is_fan_content": false,
 	        "comment_count": 0,
@@ -1177,6 +1183,10 @@ description
 exclusive
 
 	whether or not this video should be exclusive
+
+exclusive_tiers
+
+	what fan club tier(s) the video is exclusive to
 
 ### Example Response
 
@@ -1390,7 +1400,8 @@ offset
             "short_url": "http:\/\/stgb.dev\/st\/3g",
             "description": "",
             "sold_out": false,
-            "exclusive": false,
+            "exclusive": true,
+            "exclusive_tiers": [2, 3],
             "featured": false,
             "created": "2014-08-03 19:11:19",
             "created_by": 8,
@@ -1437,7 +1448,8 @@ offset
             "short_url": "http:\/\/stgb.dev\/st\/39",
             "description": "",
             "sold_out": false,
-            "exclusive": false,
+            "exclusive": true,
+            "exclusive_tiers": [2],
             "featured": false,
             "created": "2014-07-31 11:59:17",
             "created_by": 8,
@@ -1577,6 +1589,14 @@ store\_item[exclusive]
 
     defaults to false
 
+store\_item[exclusive_tiers]
+
+    an integer occurring 1 to 3 times specifying which fan club tier(s) an item is exclusive to
+
+    should be used _instead of_ [exclusive] above.
+
+    defaults to none
+
 store\_item[featured]
 
     a boolean, true if this should be considered a featured item
@@ -1594,7 +1614,7 @@ store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 	        "description": "<p>This is a physical product</p>",
 	        "category": "Cool Things",
 	        "type": "PHYSICAL",
-	        "exclusive": false,
+	        "exclusive_tiers": [1, 2],
 	        "featured": false,
 	        "options": [
 	            {
@@ -2191,6 +2211,7 @@ offset
 	            "embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.stagebloc.dev\/audio\/768\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
 	            "sticky": false,
 	            "exclusive": false,
+	            "exclusive_tiers": [],
 	            "in_moderation": false,
 	            "is_fan_content": false,
 	            "comment_count": 3,
