@@ -1989,8 +1989,72 @@ This endpoint can be used to list the users who have liked this status on Fullsc
         ]
     }
 
+# Blog
+Endpoints around interacting with blog posts on Fullscreen Direct
+
+## /events
+`[GET] /account/{accountId}/blog`  
+This endpoint can be used to list the blog posts for an account.
+
+### GET Parameters
+
+order_by
+
+    what to order the results by
+
+    accepted values are "published", "created", or "modified"
+
+    defaults to "published"
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 50
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+### Example Response
+
+	{
+		"data": [
+			{
+				"id": 7824,
+				"account": 2937,
+				"title": "Test Post, Please Ignore",
+				"body": "<p>My best work so far!</p>,
+				"category": "Random",
+				"slug": "test-post-please-ignore",
+				"short_url": "http://stgb.dev/b/3jU",
+				"published": "2013-02-01 05:00:00",
+				"created": "2013-02-01 05:00:00",
+				"modified": "2016-07-06 13:20:13",
+				"sticky": false,
+				"exclusive": false,
+				"exclusive_tiers": [],
+				"in_moderation": false,
+				"is_fan_content": false,
+				"comment_count": 12,
+				"like_count": 0,
+				"user": 21,
+				"user_has_liked": false
+			}
+		],
+		"metadata": {
+			"http_code": 200
+		}
+	}
+
 # Events
-Events on Fullscreen Direct can be many different things including shows, conferences, or really anything.
+Events on Fullscreen Direct can be many different things including shows, conferences, etc.
 
 ## /events
 `[GET] /account/{accountId}/events`  
