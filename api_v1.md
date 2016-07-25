@@ -1992,7 +1992,7 @@ This endpoint can be used to list the users who have liked this status on Fullsc
 # Blog
 Endpoints around interacting with blog posts on Fullscreen Direct
 
-## /events
+## /blog
 `[GET] /account/{accountId}/blog`  
 This endpoint can be used to list the blog posts for an account.
 
