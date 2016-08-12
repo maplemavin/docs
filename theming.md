@@ -2003,6 +2003,10 @@ The date this blog post was published
     
     pass it a "category" parameter with a comma separated list of categories to check
     
+`if:ContentIsFanSubmitted`
+
+    checks to see if the blog post is fan submitted
+    
 ## Audio
 ### page:AudioList
 `/audio` - This page should show a listing of audio content such as audio tracks or audio playlists
