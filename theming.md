@@ -3799,6 +3799,10 @@ CommentItemId
     check to see if a comment is a reply to another comment
 
 ## Contests
+
+### page:ContestList
+`/contests` - This page should show a listing of contests
+
 ### module:ContestView
 This module loads the content for a single contest
 
