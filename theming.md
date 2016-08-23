@@ -1531,6 +1531,9 @@ FansiteContentPhotoCount
 FansiteContentLikeCount  
 :   the number of likes the content has
 
+CommentCount
+:   the number of comments the content has
+
 ### Variables With Options
 **ActivityDate**  
 The date this content item was published
@@ -1588,6 +1591,12 @@ A cover image for this content or a default one if there is no cover set
     accepted sizes are "thumbnail", "small", "medium", "large", "original"
     
     defaults to "thumbnail"
+    
+### If Statements
+`if:BlogPostHasPhoto`
+
+    check if a blog post has at least one photo (`<img>` tag) in it
+
 
 ## Activity Stream
 ### page:ActivityStreamList
