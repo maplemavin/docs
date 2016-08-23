@@ -2284,6 +2284,15 @@ This module lists audio playlists by an account.
 ### module:AudioPlaylistView
 This module will load the content for a single audio playlist. When on {page:AudioPlaylistView} it will automatically grab the right data from the URL.
 
+**Module Options**  
+`audioPlaylistId`
+
+    an ID for which audio playlist to show
+    
+    accepted values are any audio playlist ID that belongs to the same account
+    
+    defaults to none or the ID from the URL if on {page:AudioPlaylistView}
+
 ### block:AudioPlaylistView
 This block exposes various content for an audio playlist object
 
