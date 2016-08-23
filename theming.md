@@ -4159,6 +4159,54 @@ When a request such as the above is made, SBNav will act accordingly given the d
         // This binding will handle generic errors (i.e. if SBNav receives a 500 or anything for any reason)
         // data.type will be the action it came from (i.e. 'advancedFunctionalityType')
     });
+    
+## postMessage Hooks
+Some platform modals will return a message with extra data upon success. These can be used to reload stale data and provide a more app-like experience.
+
+You can listen for these events with a `pm.bind` call. For example,
+
+    pm.bind('sbEditUserProfileModal', function(data) {
+        console.log(data);
+    });
+
+### sbEditUserProfileModal
+
+Note: this response has been trimmed for brevity
+
+    {
+      "user": {
+        "id": 32518,
+        "url": "https://www.fullscreendirect.com/user/mycoolusername",
+        "created": "2009-10-27 14:29:16",
+        "name": "Jake Smith",
+        "username": "mycoolusername",
+        "bio": "Baseball and batman",
+        "color": "70,170,255",
+        "email": "hi@stagebloc.com",
+        "gender": "male",
+        "birthday": "1923-07-05",
+        "photo": {
+          "id": 23170,
+          "width": 500,
+          "height": 410,
+          "images": {
+            "thumbnail_url": "",
+            "small_url": "",
+            "medium_url": "",
+            "large_url": ""
+          }
+        }
+      }
+    }
+
+### sbComment
+
+    {
+        "contentSlug": "blog",
+        "contentId": 2516,
+        "likeCount": 52,
+        "commentCount": 129
+    }
 
 ## Search
 Searching for your content within Fullscreen Direct is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `www.fullscreendirect.com/<account_url>/_search`
