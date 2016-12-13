@@ -1946,6 +1946,9 @@ BlogPostAccountId
 BlogPostTitle  
 :   the title of the blog post
 
+BlogPostCategory  
+:   the category of the blog post
+
 BlogPostId  
 :   the blog post's ID
 
@@ -3520,7 +3523,10 @@ StoreItemTitle
 StoreItemDescription  
 :   the description of the store item
 
-LikeCount
+StoreItemCategory  
+:   the category of the store item
+
+LikeCount  
 :   the number of likes for this store item
 
 StoreItemPrice  
