@@ -1142,7 +1142,7 @@ This endpoint can be used to get a single photo album from an account.
 
 See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
 ## /albums/{albumId}/photos
-`[POST] /account/{accountId}/photos/album/{albumId}/photos`  
+`[POST] /account/{accountId}/photos/albums/{albumId}/photos`  
 This endpoint can be used to add an existing photo to a photo album.
 
 ### POST Parameters
