@@ -1409,6 +1409,7 @@ offset
             "modified_by": 8,
             "fans_name_price": true,
             "category": null,
+	    "sort_order": 1,
             "prices": [{
                 "currency": "usd",
                 "price": 12
@@ -1457,6 +1458,7 @@ offset
             "modified_by": 8,
             "fans_name_price": false,
             "category": null,
+	    "sort_order": 2,
             "prices": [{
                 "currency": "usd",
                 "price": 20
