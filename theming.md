@@ -2396,22 +2396,6 @@ Creates a link that, when clicked, will add the audio track to the user's cart o
 
     defaults to "Add To Cart"
 
-`preorderText`
-
-    the text to be put inside the <a> tag when a pre-order is set up for the playlist
-
-    accepted values are any string (HTML included)
-
-    defaults to "Pre-order"
-
-`preorderSoldOutText`
-
-    the text to be put inside the <a> tag when a preorder is set up for the playlist and it has sold out
-
-    accepted values are any string (HTML included)
-
-    defaults to "Pre-order Sold Out"
-
 `closeTag`
 
     whether or not to close the <a> tag
