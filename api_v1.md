@@ -950,33 +950,71 @@ See the response for `/audio/playlists`, it will be structured the same except t
 # Photos
 These endpoints revolve around the ability to upload and view photos on Fullscreen Direct. Photos consist of both individual images as well as those images being organized into various photo albums.
 
-## /photo
-`[POST] /account/{accountId}/photo`  
-Uploads a photo to an account.
+## Definition
 
-### POST Parameters
+### Photo
 
-`photo` _(optional)_
-The photo file itself, if `photo_url` is not passed this parameter is required
+    {
+        "id": 3311,
+        "title": "Super Cool Image",
+        "created": "2014-12-07 23:37:32",
+        "modified": "2014-12-07 23:37:36",
+        "short_url": "http:\/\/stgb.dev\/p\/Z6",
+        "description": "",
+        "width": 534,
+        "height": 654,
+        "sticky": false,
+        "exclusive": false,
+        "exclusive_tiers": [],
+        "in_moderation": false,
+        "is_fan_content": false,
+        "comment_count": 0,
+        "like_count": 0,
+        "images": {
+            "thumbnail_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/thumbnail\/20141207_233732_1_3311.jpeg",
+            "small_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/small\/20141207_233732_1_3311.jpeg",
+            "medium_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/medium\/20141207_233732_1_3311.jpeg",
+            "large_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/large\/20141207_233732_1_3311.jpeg",
+            "original_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/original\/20141207_233732_1_3311.jpeg"
+        },
+        "user": 8,
+        "custom_field_data": {
+            "is-cool": true
+        }
+    }
 
-`photo_url` _(optional)_
-A url for a photo, if `photo` is not passed this parameter is required
+width & height
 
-`title` _(required)_  
-The title to use for the photo
+	the width / height in pixels of the originally uploaded image
 
-`description`  
-A longer description of the photo
+images
 
-`fan_content`  
-If the photo is being posted by an admin as a fan photo, this can be set to `true`
+	an array of image URLs that are various sizes
 
-### Example Response
+### Photo Album
 
-See the endpoint for listing an individual photo for the response structure
+    {
+        "id": 1724,
+        "title": "Photo Album Title",
+        "description": "",
+        "short_url": "http:\/\/stgb.dev\/pa\/vJ",
+        "created_by": 1,
+        "created": "2014-12-04 13:44:26",
+        "modified_by": 8,
+        "modified": "2014-12-16 22:38:56",
+        "like_count": 0,
+        "custom_field_data": [],
+        "photos": 1
+    }
 
-## /photos
-`[GET] /account/{accountId}/photos`  
+photos
+
+    the number of photos this photo album has
+
+    if you specify to expand the photos key, it will be an array of the photos for this album (structured the same as the photo listing endpoint)
+
+## List
+`[GET] /account/{accountId}/photo`
 Lists photos from an account.
 
 ### GET Parameters
@@ -1013,62 +1051,47 @@ direction
 
     defaults to `DESC`
 
-### Example Response
+## Create
+`[POST] /account/{accountId}/photo`  
+Uploads a photo to an account.
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": [{
-	        "id": 3311,
-	        "title": "Super Cool Image",
-	        "created": "2014-12-07 23:37:32",
-	        "modified": "2014-12-07 23:37:36",
-	        "short_url": "http:\/\/stgb.dev\/p\/Z6",
-	        "description": "",
-	        "width": 534,
-	        "height": 654,
-	        "sticky": false,
-	        "exclusive": false,
-	        "exclusive_tiers": [],
-	        "in_moderation": false,
-	        "is_fan_content": false,
-	        "comment_count": 0,
-	        "like_count": 0,
-	        "images": {
-	            "thumbnail_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/thumbnail\/20141207_233732_1_3311.jpeg",
-	            "small_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/small\/20141207_233732_1_3311.jpeg",
-	            "medium_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/medium\/20141207_233732_1_3311.jpeg",
-	            "large_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/large\/20141207_233732_1_3311.jpeg",
-	            "original_url": "http:\/\/cdn.stagebloc.com\/production\/photos\/1\/original\/20141207_233732_1_3311.jpeg"
-	        },
-	        "user": 8,
-	        "custom_field_data": {
-	            "is-cool": true
-	        }
-	    }]
-	}
+### POST Parameters
 
-### Response Explanation
+`photo` _(optional)_
+The photo file itself, if `photo_url` is not passed this parameter is required
 
-width & height
+`photo_url` _(optional)_
+A url for a photo, if `photo` is not passed this parameter is required
 
-	the width / height in pixels of the originally uploaded image
+`title` _(required)_  
+The title to use for the photo
 
-images
+`description`  
+A longer description of the photo
 
-	an array of image URLs that are various sizes
+`fan_content`  
+If the photo is being posted by an admin as a fan photo, this can be set to `true`
 
-## /photo/{photoId}
+## Retrieve
 `[GET] /account/{accountId}/photo/{photoId}`  
 This endpoint can be used to get a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
 
-### Example Response
+## Update
+`[POST] /account/{accountId}/photo/{photoId}`  
+This endpoint can be used to update the descriptive data of a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
 
-See the response for `/photos`, the photo object will be structured with the same keys / values (just not in an array).
+`title`
 
-## /photos/albums
-`[GET] /account/{accountId}/photos/albums`  
+`description`
+
+`exclusive_tiers` / `exclusive`
+
+## Delete
+`[DELETE] /account/{accountId}/photo/{photoId}`  
+This endpoint can be used to delete a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
+
+## List Albums
+`[GET] /account/{accountId}/photo/album`  
 Lists photos albums from an account.
 
 ### GET Parameters
@@ -1105,44 +1128,12 @@ direction
 
     defaults to `DESC`
 
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": [{
-	        "id": 1724,
-	        "title": "Photo Album Title",
-	        "description": "",
-	        "short_url": "http:\/\/stgb.dev\/pa\/vJ",
-	        "created_by": 1,
-	        "created": "2014-12-04 13:44:26",
-	        "modified_by": 8,
-	        "modified": "2014-12-16 22:38:56",
-	        "like_count": 0,
-	        "custom_field_data": [],
-	        "photos": 1
-	    }]
-	}
-
-### Response Explanation
-
-photos
-
-    the number of photos this photo album has
-
-    if you specify to expand the photos key, it will be an array of the photos for this album (structured the same as the photo listing endpoint)
-
-## /albums/{albumId}
-`[GET] /account/{accountId}/photos/album/{albumId}`  
+## Retrieve Album
+`[GET] /account/{accountId}/photo/album/{albumId}`  
 This endpoint can be used to get a single photo album from an account.
 
-### Example Response
-
-See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
-## /albums/{albumId}/photos
-`[POST] /account/{accountId}/photos/albums/{albumId}/photos`  
+## Add Photos to Album
+`[POST] /account/{accountId}/photo/album/{albumId}/photo`  
 This endpoint can be used to add an existing photo to a photo album.
 
 ### POST Parameters
@@ -1150,10 +1141,6 @@ This endpoint can be used to add an existing photo to a photo album.
 `photo_ids` _(required)_
 
     an array of photo IDs to be added to the album
-
-### Example Response
-
-    See the response for `/photos/albums`, it will be structured the same except that it won't be in an array.
 
 # Video
 These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
@@ -1680,7 +1667,7 @@ album_id
 
     only returned if a photo_url is passed and is successfully processed
 
-    this ID can be used to add additional photos for this store item via /photos/albums/{albumId}/photos
+    this ID can be used to add additional photos for this store item via /photo/album/{albumId}/photo
 
 ## /store/items/{itemId}
 `[GET] /account/{accountId}/store/items/{itemId}`  
