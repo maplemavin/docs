@@ -58,8 +58,9 @@ A `client_id` must usually be passed with each request depending on the authenti
 
 Once an access token is received, it should be passed with the request as an HTTP header: `Authorization: OAuth <access token here>`
 
-## /oauth2
-`[POST]`  
+## Request Token
+`[POST] /oauth2`
+
 This endpoint is used to get a request token.
 
 username _(required)_
@@ -99,8 +100,9 @@ redirect\_uri _(required)_
         }
     }
 
-## /oauth2/token
-`[POST]`  
+## Access Token
+`[POST] /oauth2/token`
+
 This endpoint is used to get an access token once a request token is received.
 
 client\_id _(required)_
@@ -151,11 +153,38 @@ include\_admin\_accounts
         }
     }
 
+# Applications
+These endpoints revolved around the application requests are being made on behalf of.
+
+## Enable User Push Token
+`[POST] /application/push/token`
+
+Allows an application to give Fullscreen Direct a push notification for a user so that they can be messaged via push notifications from the Fullscreen Direct backend.
+**Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
+
+### POST Parameters
+
+`token` _(required)_
+
+	the push notification token for this user
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "message": "Token successfully saved!"
+	    }
+	}
+
 # Accounts
 These endpoints revolve around Fullscreen Direct accounts and their data. An account can have any number of admins, and all content on Fullscreen Direct is tied to an account.
 
-## /account
-`[POST]`  
+## Create
+`[POST] /account`
+
 Creates a new account and makes the currently authenticated user an admin for that account
 
 ### POST Parameters
@@ -170,8 +199,9 @@ Creates a new account and makes the currently authenticated user an admin for th
 
 	an image file to use for the account's image
 
-## /accounts
-`[GET]`  
+## List
+`[GET] /account`
+
 Gets a listing of various types of accounts for a user
 
 ### GET Parameters
@@ -188,22 +218,21 @@ Gets a listing of various types of accounts for a user
 
 	whether or not to include accounts the user is follow (defaults to true)
 
-### Example Response
+## Retrieve
+`[GET] /account/{accountId}`
 
-An array of accounts (see `/account` endpoint for structure)
-
-## /account/{accountId}
-`[GET]`  
 Gets an account's information from its ID.
 
-`[POST]`  
+## Update
+`[POST] /account/{accountId}`
+
 Updates an account by its ID. Only admins of the account can use this endpoint.
 
 ### POST Parameters
 
 `name`  
 `description`  
-`stagebloc_url`
+`stagebloc_url`  
 
 ### Example Response
 
@@ -230,20 +259,23 @@ Updates an account by its ID. Only admins of the account can use this endpoint.
 
 ### Response Explanation
 
-`user_is_admin`
+`user_is_admin`  
 
 	whether or not the user is an admin in some capacity for this account
 
-`user_role`
+`user_role`  
 
 	if the user is an admin, this will be what type of admin they are ("owner", "editor", "author", "read_only", or "fan_club_moderator")
 
-## /{accountId}/follow
-`POST /account/{accountId}/follow`  
+## User Follow
+`[POST] /account/{accountId}/follow`
+
 This endpoint allows a user to follow an account.  
 **Note:** If the `tier` the user is trying to follow is a paid tier, that functionality is not possible through the API.
 
-`DELETE /account/{accountId}/follow`  
+## User Unfollow
+`[DELETE] /account/{accountId}/follow`
+
 This will have a user unfollow an account regardless of the tier they are on
 
 ### POST Parameters
@@ -276,12 +308,14 @@ This will have a user unfollow an account regardless of the tier they are on
         }
     }
 
-## /content
-`[GET] /account/{accountId}/content`  
+## List - Content
+`[GET] /account/{accountId}/content`
+
 Gets an activity stream of recent content from the account.
 
-## /fans
-`[GET] /account/{accountId}/fans`  
+## List - Fans
+`[GET] /account/{accountId}/fans`
+
 Gets a list of fans for the account.
 
 ### GET Parameters
@@ -318,12 +352,9 @@ direction
 
     defaults to DESC
 
-### Example Response
+## List - Child Accounts
+`[GET] /account/{accountId}/children/{type}`
 
-This will be a listing of user objects, so check out the user endpoints for the structure
-
-## /children/{type}
-`[GET] /account/{accountId}/children/{type}`  
 Gets the children accounts of a parent account. The `{type}` is optional and omitting it will return children accounts of all types. Otherwise, simply take the type of children accounts you are looking for, replace the spaces with dashes, and use that as the `{type}`.
 
 In the response, `child_account_types` will show all of the types regardless of the `{type}` requested.
@@ -373,56 +404,32 @@ child_accounts
 
 	An array of account objects (see account listing endpoint for structure). It will also add a `child_account_type` key to each account specifying the type it is
 
-# Applications
-These endpoints revolved around the application requests are being made on behalf of.
-
-## /push/token
-`[POST] /application/push/token`  
-Allows an application to give Fullscreen Direct a push notification for a user so that they can be messaged via push notifications from the Fullscreen Direct backend.  
-**Note:** For iOS development, you'll need to upload your Apple Push Notification Certificate so we can authenticate push notifications with your tokens. Please contact us to handle this.
-
-### POST Parameters
-
-`token` _(required)_  
-
-	the push notification token for this user
-
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "message": "Token successfully saved!"
-	    }
-	}
-
 # Users
 These endpoints revolve around Fullscreen Direct users and their data. A user on Fullscreen Direct can be an admin for any number of accounts, and their login is tied to their email address. A user can also be a fan of any number of accounts. These endpoints allow for management of both admin and fan relationships between users and their accounts.
 
-## /users
-`[POST]`  
+## Create
+`[POST] /user`
+
 Creates a new user on Fullscreen Direct.
 
 ### POST Parameters
 
-`email` _(required)_  
+`email` _(required)_
 The email address to use for the user
 
-`password` _(required)_  
+`password` _(required)_
 
-`birthday` _(required)_  
+`birthday` _(required)_
 
-`source_account_id`  
+`source_account_id`
 An account ID for an account to follow / join the Fan Club of during signup, this will then send a Fan Club welcome email instead of the generic Fullscreen Direct signup email
 
-`name`  
+`name`
 
-`username`  
+`username`
 The username for this user, it must be unique across all of Fullscreen Direct and only accepts letters, numbers, and underscores.
 
-`gender`  
+`gender`
 Accepts "male" or "female"
 
 ### Example Response
@@ -464,20 +471,23 @@ color
 
 	the RGB value of the color the user has chosen in our backend
 
-## /users/me
-`[GET]`  
+## Retrieve - Current User
+`[GET] /user/me`
+
 Gets the currently authenticated user's information.
 
-`[POST]`  
+## Update - Current User
+`[POST] /user/me`
+
 Updates the currently authenticated user's information.
 
 ### POST Parameters
 
-`bio`  
-`birthday`  
-`email`  
-`username`  
-`name`  
+`bio`
+`birthday`
+`email`
+`username`
+`name`
 `gender`
 
 ### Example Response
@@ -527,40 +537,106 @@ photo
 
     the width and height are the dimensions of the originally uploaded photo
 
-## /users/{userId}
-`[GET]`  
+## Retrieve
+`[GET] /user/{userId}`
+
 Gets a user by their user ID
 
-### Example Response
+## List - Content
+`[GET] /user/{userId}/content/updates`
 
-See the response for `/users/me`, it will be structured the same.
-
-## /content/updates
-`GET /users/{userId}/content/updates`  
 This returns a listing of content that this user has created across any account they are a part of. Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
 
 ### GET Parameters
 
-`filter` _(required)_  
+`filter` _(required)_
 A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video.
 
-## /content/likes
-`GET /users/{userId}/content/likes`  
+## List - Like
+`[GET] /user/{userId}/content/like`
+
 This returns a listing of content that this user has liked across Fullscreen Direct.  Each content object returned in this response will have its `kind` value automatically expanded, and the structure of the content type will match it as if you were loading that single object via its own endpoint. Looking at the structure of a audio response, for example, will show you what an audio object in the array of content returned here will be formatted like.
 
 ### GET Parameters
 
-`filter` _(required)_  
+`filter` _(required)_
 A comma separated string for the type(s) of content to be returned. Allowed values are audio, blog, event, photo, status, store, and video.
 
 # Fan Clubs
 Users on Fullscreen Direct can join Fan Clubs associated with accounts. By default an account doesn’t have a Fan Club set up, but creating one adds extra functionality such as having three different membership tiers and requiring payment for joining the Fan Club.
 
-## /fanclub
-`GET /account/{accountId}/fanclub`  
+## Overview Dashboard
+`[GET] /account/{accountId}/fanclub/dashboard`
+
+This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the Fullscreen Direct backend)
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "kind": "fan_club_dashboard",
+	        "totals": {
+	            "fans": 27,
+	            "likes": 17,
+	            "comments": 78,
+	            "posts": 21,
+	            "gender": {
+	                "male": 10,
+	                "female": 17,
+	                "unknown": 0
+	            },
+	            "tiers": {
+	                "1": {
+	                    "name": "Free Tier",
+	                    "fans": 10
+	                },
+	                "2": {
+	                    "name": "Basic Tier",
+	                    "fans": 5
+	                },
+	                "3": {
+	                    "name": "Premium Tier",
+	                    "fans": 12
+	                }
+	            }
+	        }
+	    }
+	}
+
+## List
+`[GET] /account/fanclub/{type}`
+
+This endpoint retrieves a listing of Fan Clubs on Fullscreen Direct. The accepted values for `type` are `following`, `featured`, or `recent` with `featured` being the default. Note that for `featured` Fan Clubs, `limit` and `offset` are ignored as it will return all featured Fan Clubs at the time.
+
+### GET Parameters
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 20
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+## Retrieve
+`[GET] /account/{accountId}/fanclub`
+
 This will return the details about the Fan Club.
 
-`POST /account/{accountId}/fanclub`  
+## Update
+`[POST] /account/{accountId}/fanclub`
+
 This will create or update a Fan Club that belongs to the account with the given `accountId`.
 
 ### POST Parameters
@@ -646,77 +722,109 @@ allowed\_content\_sections
 
     the types of content fans are able to submit to this Fan Club
 
-## /fanclub/dashboard
-`GET /account/{accountId}/fanclub/dashboard`  
-This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the Fullscreen Direct backend)
-
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "kind": "fan_club_dashboard",
-	        "totals": {
-	            "fans": 27,
-	            "likes": 17,
-	            "comments": 78,
-	            "posts": 21,
-	            "gender": {
-	                "male": 10,
-	                "female": 17,
-	                "unknown": 0
-	            },
-	            "tiers": {
-	                "1": {
-	                    "name": "Free Tier",
-	                    "fans": 10
-	                },
-	                "2": {
-	                    "name": "Basic Tier",
-	                    "fans": 5
-	                },
-	                "3": {
-	                    "name": "Premium Tier",
-	                    "fans": 12
-	                }
-	            }
-	        }
-	    }
-	}
-
-## /fanclubs/{type}
-`GET /account/fanclubs/{type}`  
-This endpoint retrieves a listing of Fan Clubs on Fullscreen Direct. The accepted values for `type` are `following`, `featured`, or `recent` with `featured` being the default. Note that for `featured` Fan Clubs, `limit` and `offset` are ignored as it will return all featured Fan Clubs at the time.
-
-### GET Parameters
-
-limit
-
-    the number of items to limit the response to
-
-    accepted values are any positive number
-
-    defaults to 20
-
-offset
-
-    how much to offset the returned items by
-
-    accepted values are any number greater than or equal to zero
-
-    defaults to 0
-
 # Audio
 These endpoints revolve around the ability to upload and stream audio through Fullscreen Direct. Audio consists of both individual tracks and those tracks being organized into various playlists.
 
-## /audio
-`[GET] /account/{accountId}/audio`  
-This endpoint can used to list all the audio for a certain account.
+## Definition
 
-`[POST] /account/{accountId}/audio`  
-This endpoint can be used to create a single audio track for an account. It currently only allows actual uploads as opposed to also allowing SoundCloud or other third party source URLs.
+
+### Audio
+
+    {
+        "id": 773,
+        "title": "The Best Track ever",
+        "duration": 123,
+        "description": "",
+        "lyrics": "",
+        "artist":"",
+        "photo": 0,
+        "account": 1,
+        "created_by": 8,
+        "created": "2014-11-14 17:48:40",
+        "modified_by": 8,
+        "modified": "2014-11-14 17:49:04",
+        "short_url": "http:\/\/stgb.dev\/a\/ek",
+        "stream_url": "https:\/\/stagebloc-audio.s3.amazonaws.com\/1\/stream\/607_20120327_192954_1_101.mp3",
+        "embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
+        "sticky": false,
+        "exclusive": true,
+        "exclusive_tiers": [1, 3],
+        "private": false,
+        "in_moderation": false,
+        "custom_field_data": [ ],
+        "is_fan_content": false,
+        "comment_count": 0,
+        "like_count": 0,
+        "user": 8,
+        "edit_url": "https:\/\/www.fullscreendirect.com\/demo\/admin\/audio\/edit\/773",
+        "user_has_liked": false
+    }
+
+duration
+
+	the length (in seconds) of this track
+
+stream_url
+
+	the URL to use to stream this audio file (could be a Fullscreen Direct URL or a third party one such as SoundCloud)
+
+in_moderation
+
+	if this audio track was submitted by a fan, this handles if it is still in moderation or not
+
+is\_fan\_content
+
+	whether or not this audio was submitted by a fan or not
+
+user\_has\_liked
+
+	if the request as made with a logged in user, this will signify if that user has liked the track or not
+
+custom\_field\_data
+
+	if you have custom data set on audio for your account, the slugs will show up as keys here with their values
+
+### Audio Playlist
+
+    {
+        "id": 1,
+        "title": "Best Music of the 90s",
+        "description": "",
+        "short_url": "http:\/\/stgb.dev\/ap\/4q",
+        "embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/playlist\/198\u0022 style=\u0022width:250px;height:320px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
+        "created_by": 1,
+        "created": "2014-11-14 11:17:50",
+        "modified_by": 1,
+        "modified": "2014-11-19 21:37:25",
+        "comment_count": 0,
+        "like_count": 0,
+        "custom_field_data": [ ],
+        "artist": "",
+        "label": "",
+        "audio": 4,
+        "user_has_liked": false
+    }
+
+embed_code
+
+	Fullscreen Direct has audio playlist widgets for playlists that you can use by embedding this code on an HTML page if you so choose
+
+artist
+
+	admins can add a special artist to a playlist if it something different than the name of the account
+
+audio
+
+	the number of tracks in the playlist, or an array of audio objects if you pass specify to expand "audio" as a parameter
+
+custom\_field\_data
+
+	if you have custom data set on events for your account, the slugs will show up as keys here with their values
+
+## List
+`[GET] /account/{accountId}/audio`
+
+This endpoint can used to list all the audio for a certain account.
 
 ### GET Parameters
 
@@ -760,6 +868,11 @@ direction
 
     defaults to `DESC`
 
+## Create
+`[POST] /account/{accountId}/audio`
+
+This endpoint can be used to create a single audio track for an account. It currently only allows actual uploads as opposed to also allowing SoundCloud or other third party source URLs.
+
 ### POST Parameters
 
 `audio` _(required)_
@@ -786,79 +899,20 @@ exclusive_tiers
 
 	what fan club tier(s) the audio track is exclusive to
 
-### Example Response
+## Retrieve
+`[GET] /account/{accountId}/audio/{audioId}`
 
-	{
-		"metadata": {
-			"http_code":200
-		},
-		"data": [{
-			"id": 773,
-			"title": "The Best Track ever",
-			"duration": 123,
-			"description": "",
-			"lyrics": "",
-			"artist":"",
-			"photo": 0,
-			"account": 1,
-			"created_by": 8,
-			"created": "2014-11-14 17:48:40",
-			"modified_by": 8,
-			"modified": "2014-11-14 17:49:04",
-			"short_url": "http:\/\/stgb.dev\/a\/ek",
-			"stream_url": "https:\/\/stagebloc-audio.s3.amazonaws.com\/1\/stream\/607_20120327_192954_1_101.mp3",
-			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/773\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
-			"sticky": false,
-			"exclusive": true,
-			"exclusive_tiers": [1, 3],
-			"private": false,
-			"in_moderation": false,
-			"custom_field_data": [ ],
-			"is_fan_content": false,
-			"comment_count": 0,
-			"like_count": 0,
-			"user": 8,
-			"edit_url": "https:\/\/www.fullscreendirect.com\/demo\/admin\/audio\/edit\/773",
-			"user_has_liked": false
-		}]
-	}
-
-### Response Explanation
-
-duration
-
-	the length (in seconds) of this track
-
-stream_url
-
-	the URL to use to stream this audio file (could be a Fullscreen Direct URL or a third party one such as SoundCloud)
-
-in_moderation
-
-	if this audio track was submitted by a fan, this handles if it is still in moderation or not
-
-is\_fan\_content
-
-	whether or not this audio was submitted by a fan or not
-
-user\_has\_liked
-
-	if the request as made with a logged in user, this will signify if that user has liked the track or not
-
-custom\_field\_data
-
-	if you have custom data set on audio for your account, the slugs will show up as keys here with their values
-
-## /audio/{audioId}
-`[GET] /account/{accountId}/audio/{audioId}`  
 This endpoint can be used to get a single audio track from an account.
 
-### Example Response
+## Update
+`[POST] /account/{accountId}/audio/{audioId}`
 
-See the response for `/audio`, it will be structured the same except that it won't be in an array.
+## Delete
+`[DELETE] /account/{accountId}/audio/{audioId}`
 
-## /audio/playlists
-`[GET] /account/{accountId}/audio/playlists`  
+## List Playlists
+`[GET] /account/{accountId}/audio/playlists`
+
 This endpoint can be used to list audio playlists that are available for an account.
 
 ### GET Parameters
@@ -895,57 +949,199 @@ direction
 
     defaults to `DESC`
 
-### Example Response
+## Retrieve Playlist
+`[GET] /account/{accountId}/audio/playlist/{playlistId}`
 
-	{
-		"metadata": {
-			"http_code":200
-		},
-		"data": [{
-			"id": 1,
-			"title": "Best Music of the 90s",
-			"description": "",
-			"short_url": "http:\/\/stgb.dev\/ap\/4q",
-			"embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.fullscreendirect.com\/audio\/playlist\/198\u0022 style=\u0022width:250px;height:320px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
-			"created_by": 1,
-			"created": "2014-11-14 11:17:50",
-			"modified_by": 1,
-			"modified": "2014-11-19 21:37:25",
-			"comment_count": 0,
-			"like_count": 0,
-			"custom_field_data": [ ],
-			"artist": "",
-			"label": "",
-			"audio": 4,
-			"user_has_liked": false
-		}]
-	}
+This endpoint can be used to get an individual audio playlist.
 
-### Response Explanation
+# Blog
+Endpoints around interacting with blog posts on Fullscreen Direct
 
-embed_code
+## Definition
 
-	Fullscreen Direct has audio playlist widgets for playlists that you can use by embedding this code on an HTML page if you so choose
+### Blog
 
-artist
+    {
+        "id": 7824,
+        "account": 2937,
+        "title": "Test Post, Please Ignore",
+        "body": "<p>My best work so far!</p>,
+        "category": "Random",
+        "slug": "test-post-please-ignore",
+        "short_url": "http://stgb.dev/b/3jU",
+        "published": "2013-02-01 05:00:00",
+        "created": "2013-02-01 05:00:00",
+        "modified": "2016-07-06 13:20:13",
+        "sticky": false,
+        "exclusive": false,
+        "exclusive_tiers": [],
+        "in_moderation": false,
+        "is_fan_content": false,
+        "comment_count": 12,
+        "like_count": 0,
+        "user": 21,
+        "user_has_liked": false
+    }
 
-	admins can add a special artist to a playlist if it something different than the name of the account
+## List
+`[GET] /account/{accountId}/blog`
 
-audio
+This endpoint can be used to list the blog posts for an account.
 
-	the number of tracks in the playlist, or an array of audio objects if you pass specify to expand "audio" as a parameter
+### GET Parameters
+
+order_by
+
+    what to order the results by
+
+    accepted values are "published", "created", or "modified"
+
+    defaults to "published"
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 50
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+## Create
+`[POST] /account/{accountId}/blog`
+
+## Retrieve
+`[GET] /account/{accountId}/blog/{blogId}`
+
+## Update
+`[POST] /account/{accountId}/blog/{blogId}`
+
+## Delete
+`[DELETE] /account/{accountId}/blog/{blogId}`
+
+# Events
+Events on Fullscreen Direct can be many different things including shows, conferences, etc.
+
+## Definition
+
+### Event
+
+    {
+        "id": 1611,
+        "title": "Awesome Thing Happening!",
+        "description": "",
+        "short_url": "http:\/\/stgb.dev\/e\/tM",
+        "ticket_price": 0,
+        "ticket_link": "",
+        "start_date_time": "2014-10-12 11:00:00 -04:00",
+        "end_date_time": "2014-10-12 14:00:00 -04:00",
+        "timezone": "America\/New_York",
+        "comment_count": 1,
+        "like_count": 0,
+        "attending_count": 0,
+        "custom_field_data": {
+            "is-sold-out": false
+        },
+        "location": {
+            "name": "Fullscreen Direct Office",
+            "street_address": "935 W Chestnut",
+            "street_address_2": "",
+            "city": "Chicago",
+            "state": "IL",
+            "postal_code": "12345",
+            "country": "UA",
+            "latitude": 0,
+            "longitude": 0
+        },
+        "user_has_liked": false,
+        "user_is_attending": "maybe"
+    }
+
+ticket_link
+
+	a link to a third party service where tickets for this events can be purchased
+
+start\_date\_time & end\_date\_time
+
+	the start / end date and time of the event, unlike other timestamps they won't be in GMT time but will specify an offset from GMT
+
+timezone
+
+	the timezone the event is in which is specified by the hour offset in the start and end time
+
+user\_is_attending
+
+	if the request is made with a logged in user, this will specify "yes", "no", or "maybe"
 
 custom\_field\_data
 
 	if you have custom data set on events for your account, the slugs will show up as keys here with their values
 
-## /playlist/{playlistId}
-`[GET] /account/{accountId}/audio/playlist/{playlistId}`  
-This endpoint can be used to get an individual audio playlist.
+## List
+`[GET] /account/{accountId}/event`
 
-### Example Response
+This endpoint can be used to list the events for an account.
 
-See the response for `/audio/playlists`, it will be structured the same except that it won't be in an array.
+### GET Parameters
+
+direction
+
+    the direction to list results in
+
+    accepted values are "ASC" or "DESC"
+
+    defaults to "DESC"
+
+limit
+
+    the number of items to limit the response to
+
+    accepted values are any positive number
+
+    defaults to 50
+
+offset
+
+    how much to offset the returned items by
+
+    accepted values are any number greater than or equal to zero
+
+    defaults to 0
+
+order_by
+
+    what to order the results by
+
+    accepted values are "created", "startDateTime", "endDateTime"
+
+    defaults to "startDateTime"
+
+upcoming
+
+	whether or not to include upcoming events
+
+	accepted values are true or false
+
+	defaults to true
+
+past
+
+	whether or not to include past events
+
+	accepted values are true or false
+
+	defaults to true
+
+## Retrieve
+`[GET] /account/{accountId}/event/{eventId}`
+
 
 # Photos
 These endpoints revolve around the ability to upload and view photos on Fullscreen Direct. Photos consist of both individual images as well as those images being organized into various photo albums.
@@ -1015,6 +1211,7 @@ photos
 
 ## List
 `[GET] /account/{accountId}/photo`
+
 Lists photos from an account.
 
 ### GET Parameters
@@ -1052,7 +1249,8 @@ direction
     defaults to `DESC`
 
 ## Create
-`[POST] /account/{accountId}/photo`  
+`[POST] /account/{accountId}/photo`
+
 Uploads a photo to an account.
 
 ### POST Parameters
@@ -1063,21 +1261,23 @@ The photo file itself, if `photo_url` is not passed this parameter is required
 `photo_url` _(optional)_
 A url for a photo, if `photo` is not passed this parameter is required
 
-`title` _(required)_  
+`title` _(required)_
 The title to use for the photo
 
-`description`  
+`description`
 A longer description of the photo
 
-`fan_content`  
+`fan_content`
 If the photo is being posted by an admin as a fan photo, this can be set to `true`
 
 ## Retrieve
-`[GET] /account/{accountId}/photo/{photoId}`  
+`[GET] /account/{accountId}/photo/{photoId}`
+
 This endpoint can be used to get a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
 
 ## Update
-`[POST] /account/{accountId}/photo/{photoId}`  
+`[POST] /account/{accountId}/photo/{photoId}`
+
 This endpoint can be used to update the descriptive data of a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
 
 `title`
@@ -1087,11 +1287,13 @@ This endpoint can be used to update the descriptive data of a single photo from 
 `exclusive_tiers` / `exclusive`
 
 ## Delete
-`[DELETE] /account/{accountId}/photo/{photoId}`  
+`[DELETE] /account/{accountId}/photo/{photoId}`
+
 This endpoint can be used to delete a single photo from an account. Note that if the photo is fan submitted or exclusive, it will require that the request be made by a logged in user who has access to that account as a fan or admin.
 
 ## List Albums
-`[GET] /account/{accountId}/photo/album`  
+`[GET] /account/{accountId}/photo/album`
+
 Lists photos albums from an account.
 
 ### GET Parameters
@@ -1129,11 +1331,13 @@ direction
     defaults to `DESC`
 
 ## Retrieve Album
-`[GET] /account/{accountId}/photo/album/{albumId}`  
+`[GET] /account/{accountId}/photo/album/{albumId}`
+
 This endpoint can be used to get a single photo album from an account.
 
 ## Add Photos to Album
-`[POST] /account/{accountId}/photo/album/{albumId}/photo`  
+`[POST] /account/{accountId}/photo/album/{albumId}/photo`
+
 This endpoint can be used to add an existing photo to a photo album.
 
 ### POST Parameters
@@ -1142,78 +1346,75 @@ This endpoint can be used to add an existing photo to a photo album.
 
     an array of photo IDs to be added to the album
 
-# Video
-These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
+# Statuses
+Statuses on Fullscreen Direct are shorter text updates that account's are able to schedule and post to both Fullscreen Direct itself and their connected social networks.
 
-## /video
-`[POST] /account/{accountId}/video/`  
-This endpoint can be used to upload a video to an account. Once uploaded, there will be a slight delay before it can play while it converts. This request must be made by a logged in fan or admin of the account. Depending on the access level of the logged in user, it will become fan content or official content.
+## Definition
+
+    {
+        "id": 1,
+        "short_url": "http:\/\/stgb.dev\/s\/2",
+        "text": "New status post!",
+        "in_moderation": false,
+        "is_fan_content": false,
+        "published": "2014-08-19 20:31:29",
+        "comment_count": 0,
+        "like_count": 1,
+        "user": 8
+    }
+
+## List
+`[GET] /account/{accountId}/status`
+
+
+## Create
+`[POST] /account/{accountId}/status`
+
+This endpoint can be used to post a status to Fullscreen Direct.
 
 ### POST Parameters
 
-`video` _(required)_
+`text` _(required)_
+The text of the status to post
 
-	the contents of the video file itself
+`latitude`
+The latitude of the user posting the status to tie a location to it
 
-`title` _(required)_
+`longitude`
+The longitude of the user posting the status to tie a location to it
 
-	the title of the video
+## Retrieve
+`[GET] /account/{accountId}/status/{statusId}`
 
-fan_content
+This endpoint can be used to get a single status post on Fullscreen Direct.
 
-	whether to force this content to be submitted as fan content (versus official content, only applies if the logged in user is an admin of the account)
+## Delete
+`[DELETE] /account/{accountId}/status/{statusId}`
 
-description
+This endpoint can be used to delete a single status post on Fullscreen Direct. Only admins of the account with the right admin level or the original fan who posted the status are capable of deleting it.
 
-	the description of the video
+## /likers
+`[GET] /account/{accountId}/status/{statusId}/liker`
 
-exclusive
-
-	whether or not this video should be exclusive
-
-exclusive_tiers
-
-	what fan club tier(s) the video is exclusive to
+This endpoint can be used to list the users who have liked this status on Fullscreen Direct.
 
 ### Example Response
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "id": 1,
-	        "title": "Test API Upload",
-	        "description": "",
-	        "short_url": "http:\/\/stgb.dev\/v\/B",
-	        "video_url": null,
-	        "embed_code": "\u003Ciframe width=\u0022640\u0022 height=\u0022360\u0022 src=\u0022\/\/video.stagebloc.com\/e\/4jpzTNGy\u0022 frameborder=\u00220\u0022 allowfullscreen\u003E\u003C\/iframe\u003E",
-	        "created": "2014-12-03 17:38:50",
-	        "modified": "2014-12-03 17:38:50",
-	        "in_moderation": false,
-	        "is_fan_content": false,
-	        "comment_count": 0,
-	        "like_count": 0,
-	        "user": 8,
-	        "user_has_liked": false
-	    }
-	}
-
-### Response Explanation
-
-video_url
-
-	only relevant to videos not uploaded directly to StageBloc, this would be the link to the video on the third party site
-
-embed_code
-
-	the embed code of the video to include in HTML
+    {
+        "metadata": {
+            "http_code": 200
+        },
+        "data": [
+            <array of user objects here>
+        ]
+    }
 
 # Store and Commerce
 These endpoints revolve around Fullscreen Direct store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
 
-## /store/dashboard
-`[GET] /account/{accountId}/store/dashboard`  
+## Overview Dashboard
+`[GET] /account/{accountId}/store/dashboard`
+
 This endpoint is used to get stats and data regarding commerce and sales (very similar to the data shown on the Store dashboard in the Fullscreen Direct backend). It will provide all time, overall stats regarding your store and its revenue as well as results per country you've had at least one order in.
 
 When dealing with monetary values, the currency will be USD.
@@ -1255,89 +1456,49 @@ When dealing with monetary values, the currency will be USD.
 	    }
 	}
 
-## /store/fulfillers
-`[GET] /account/{accountId}/store/fulfillers`  
-This endpoint is use to get a listing of all fulfillers belonging to an account
+## Definition - Store Item
 
-`[POST] /account/{accountId}/store/fulfillers`  
-This endpoint is used to create a new fulfiller. Many of the data requirements are specific to the type of fulfiller being created.
+	{
+	    "store_item": {
+	        "price": 10.5,
+	        "title": "Physical Product",
+	        "description": "<p>This is a physical product</p>",
+	        "category": "Cool Things",
+	        "type": "PHYSICAL",
+	        "exclusive_tiers": [1, 2],
+	        "featured": false,
+	        "options": [
+	            {
+	                "name": "an option",
+	                "sku": "ITM_1_OPT_1",
+	                "upc": "UPC",
+	                "quantity": null,
+	                "status": "NORMAL"
+	            },
+	            {
+	                "name": "minimal option",
+	                "weight": 4.5
+	            }
+	        ],
+	        "shipping_price_handlers": [
+	            {
+	                "name":"USPS",
+	                "price":4.5,
+	                "media_mail":true
+	            },
+	            {
+	                "name":"FLAT_RATE",
+	                "price":5.5
+	            }
+	        ],
+	        "photo_url": "https://21cif.com/tutorials/micro/mm/urls/images/url2.gif"
+	    }
+	}
 
-### POST Parameters
+## List - Store Item
+`[GET] /account/{accountId}/store/item`
 
-name _(required)_
-
-    a name for this fulfiller
-
-type _(required)_
-
-    the type of fulfiller to create, one of: STAGEBLOC
-
-international\_shipping\_agreement
-
-    a plain text string to which the user must agree if they are requesting shipment to a country which does not match the country for this fulfiller's private address
-
-private\_address[name]
-
-    a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
-
-private\_address[street\_address]
-
-    the street address for the fulfiller's private address
-
-private\_address[street\_address\_2]
-
-    a second street address for the fulfiller's private address
-
-private\_address[city]
-
-    the city for the fulfiller's private address
-
-private\_address[country]
-
-    the 2 character country code as specified by ISO-3361-alpha 2
-
-private\_address[postal\_code]
-
-    the postal code appropriate to the country. If country is US the 5 digit zip code for the private address. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
-
-private\_address[state]
-
-    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
-
-public\_address[name]
-
-    a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
-
-public\_address[street\_address]
-
-    see private_address[street_address] above
-
-public\_address[street\_address\_2]
-
-    see private_address[street_address_2] above
-
-public\_address[city]
-
-    see private_address[city] above
-
-public\_address[country]
-
-    see private_address[country] above
-
-public\_address[postal\_code]
-
-    see private_address[postal_code] above
-
-public\_address[state]
-
-    see private_address[state] above
-
-## /store/items
-`[GET] /account/{accountId}/store/items`  
 This endpoint is used to get a listing of store items belonging to an account.
-
-`[POST] /account/{accountId}/store/items`  
-This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
 ### GET Parameters
 
@@ -1372,6 +1533,12 @@ offset
     accepted values are any number greater than or equal to zero
 
     defaults to 0
+
+## Update - Store Item
+`[POST] /account/{accountId}/store/item`
+
+This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
+
 
 ### Example Response
 
@@ -1594,45 +1761,6 @@ store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
 
     an integer ID for a fulfiller already configured in Fullscreen Direct which is associated with this account
 
-### Example Request
-
-	{
-	    "store_item": {
-	        "price": 10.5,
-	        "title": "Physical Product",
-	        "description": "<p>This is a physical product</p>",
-	        "category": "Cool Things",
-	        "type": "PHYSICAL",
-	        "exclusive_tiers": [1, 2],
-	        "featured": false,
-	        "options": [
-	            {
-	                "name": "an option",
-	                "sku": "ITM_1_OPT_1",
-	                "upc": "UPC",
-	                "quantity": null,
-	                "status": "NORMAL"
-	            },
-	            {
-	                "name": "minimal option",
-	                "weight": 4.5
-	            }
-	        ],
-	        "shipping_price_handlers": [
-	            {
-	                "name":"USPS",
-	                "price":4.5,
-	                "media_mail":true
-	            },
-	            {
-	                "name":"FLAT_RATE",
-	                "price":5.5
-	            }
-	        ],
-	        "photo_url": "https://21cif.com/tutorials/micro/mm/urls/images/url2.gif"
-	    }
-	}
-
 ### Response Explanation
 
 type
@@ -1669,12 +1797,95 @@ album_id
 
     this ID can be used to add additional photos for this store item via /photo/album/{albumId}/photo
 
-## /store/items/{itemId}
-`[GET] /account/{accountId}/store/items/{itemId}`  
+## Retrieve - Store Item
+`[GET] /account/{accountId}/store/item/{itemId}`
+
 This endpoint is used to get a single store items belonging to an account.
 
-## /coupon/{couponId}
-`[GET] /account/{accountId}/store/coupon/{couponId}`  
+## List - Fulfiller
+`[GET] /account/{accountId}/store/fulfiller`
+
+This endpoint is use to get a listing of all fulfillers belonging to an account
+
+## Create - Fulfiller
+
+`[POST] /account/{accountId}/store/fulfiller`
+
+This endpoint is used to create a new fulfiller. Many of the data requirements are specific to the type of fulfiller being created.
+
+### POST Parameters
+
+name _(required)_
+
+    a name for this fulfiller
+
+type _(required)_
+
+    the type of fulfiller to create, one of: STAGEBLOC
+
+international\_shipping\_agreement
+
+    a plain text string to which the user must agree if they are requesting shipment to a country which does not match the country for this fulfiller's private address
+
+private\_address[name]
+
+    a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+private\_address[street\_address]
+
+    the street address for the fulfiller's private address
+
+private\_address[street\_address\_2]
+
+    a second street address for the fulfiller's private address
+
+private\_address[city]
+
+    the city for the fulfiller's private address
+
+private\_address[country]
+
+    the 2 character country code as specified by ISO-3361-alpha 2
+
+private\_address[postal\_code]
+
+    the postal code appropriate to the country. If country is US the 5 digit zip code for the private address. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
+
+private\_address[state]
+
+    The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
+
+public\_address[name]
+
+    a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+
+public\_address[street\_address]
+
+    see private_address[street_address] above
+
+public\_address[street\_address\_2]
+
+    see private_address[street_address_2] above
+
+public\_address[city]
+
+    see private_address[city] above
+
+public\_address[country]
+
+    see private_address[country] above
+
+public\_address[postal\_code]
+
+    see private_address[postal_code] above
+
+public\_address[state]
+
+    see private_address[state] above
+
+## Retrieve - Coupon
+`[GET] /account/{accountId}/store/coupon/{couponId}`
+
 This endpoint is used to get a single store coupon belonging to an account.
 
 ### Example Response
@@ -1717,8 +1928,10 @@ start_date
 
 	if the coupon is only valid for a certain date range, this will be the start date of that range
 
-## /store/orders
-`[GET] /account/{accountId}/store/orders`  
+
+## List - Order
+`[GET] /account/{accountId}/store/order`
+
 This endpoint is used to get retrieve orders that have been made in your store.
 
 When dealing with monetary values, the currency will be USD unless otherwise specified.
@@ -1868,8 +2081,11 @@ transactions item type
 
     possible values are "audio", "audio_playlist", "store", "theme", and "fan_club_subscription"
 
-## /store/orders/{orderId}
-`[POST] /account/{accountId}/store/orders/{orderId}`  
+## Retrieve - Order
+
+## Update - Order
+`[POST] /account/{accountId}/store/order/{orderId}`
+
 This endpoint can be used to update various elements about orders.
 
 ### POST Parameters
@@ -1883,12 +2099,14 @@ An optional tracking number for when this item was shipped
 `carrier`  
 An optional carrier that this was shipped with for use with the `tracking_number`
 
-## /{orderId}/receipt/resend
-`[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
+## Resend Receipt - Order
+`[POST] /account/{accountId}/store/order/{orderId}/receipt/resend`
+
 This endpoint can be used to resend a receipt for an order.
 
-## /{orderId}/refund
-`[POST] /account/{accountId}/store/orders/{orderId}/receipt/resend`  
+## Refund - Order
+`[POST] /account/{accountId}/store/order/{orderId}/receipt/resend`
+
 This endpoint can be used to refund an entire order.
 
 ### POST Parameters
@@ -1915,255 +2133,121 @@ This endpoint can be used to refund an entire order.
 
     a reason / description for this refund
 
-# Statuses
-Statuses on Fullscreen Direct are shorter text updates that account's are able to schedule and post to both Fullscreen Direct itself and their connected social networks.
+# Video
+These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
 
-## /status
-`[POST] /account/{accountId}/status`  
-This endpoint can be used to post a status to Fullscreen Direct.
+## Definition
+
+    {
+        "id": 1,
+        "title": "Test API Upload",
+        "description": "",
+        "short_url": "http:\/\/stgb.dev\/v\/B",
+        "video_url": null,
+        "embed_code": "\u003Ciframe width=\u0022640\u0022 height=\u0022360\u0022 src=\u0022\/\/video.stagebloc.com\/e\/4jpzTNGy\u0022 frameborder=\u00220\u0022 allowfullscreen\u003E\u003C\/iframe\u003E",
+        "created": "2014-12-03 17:38:50",
+        "modified": "2014-12-03 17:38:50",
+        "in_moderation": false,
+        "is_fan_content": false,
+        "comment_count": 0,
+        "like_count": 0,
+        "user": 8,
+        "user_has_liked": false
+    }
+
+video_url
+
+	only relevant to videos not uploaded directly to StageBloc, this would be the link to the video on the third party site
+
+embed_code
+
+	the embed code of the video to include in HTML
+
+## List
+`[GET] /account/{accountId}/video`
+
+
+## Create
+`[POST] /account/{accountId}/video`
+
+This endpoint can be used to upload a video to an account. Once uploaded, there will be a slight delay before it can play while it converts. This request must be made by a logged in fan or admin of the account. Depending on the access level of the logged in user, it will become fan content or official content.
 
 ### POST Parameters
 
-`text` _(required)_  
-The text of the status to post
+`video` _(required)_
 
-`latitude`  
-The latitude of the user posting the status to tie a location to it
+	the contents of the video file itself
 
-`longitude`  
-The longitude of the user posting the status to tie a location to it
+`title` _(required)_
 
-### Examples Response
+	the title of the video
 
-See the response for listing a single status post
+fan_content
 
-## /status/{statusId}
-`[GET] /account/{accountId}/status/{statusId}`  
-This endpoint can be used to get a single status post on Fullscreen Direct.
-
-`[DELETE] /account/{accountId}/status/{statusId}`  
-This endpoint can be used to delete a single status post on Fullscreen Direct. Only admins of the account with the right admin level or the original fan who posted the status are capable of deleting it.
-
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "id": 1,
-            "short_url": "http:\/\/stgb.dev\/s\/2",
-            "text": "New status post!",
-            "in_moderation": false,
-            "is_fan_content": false,
-            "published": "2014-08-19 20:31:29",
-            "comment_count": 0,
-            "like_count": 1,
-            "user": 8
-        }
-    }
+	whether to force this content to be submitted as fan content (versus official content, only applies if the logged in user is an admin of the account)
 
-## /likers
-`[GET] /account/{accountId}/status/{statusId}/likers`  
-This endpoint can be used to list the users who have liked this status on Fullscreen Direct.
+description
 
-### Example Response
+	the description of the video
 
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": [
-            <array of user objects here>
-        ]
-    }
+exclusive
 
-# Blog
-Endpoints around interacting with blog posts on Fullscreen Direct
+	whether or not this video should be exclusive
 
-## /blog
-`[GET] /account/{accountId}/blog`  
-This endpoint can be used to list the blog posts for an account.
+exclusive_tiers
 
-### GET Parameters
+	what fan club tier(s) the video is exclusive to
 
-order_by
+## Retrieve
+`[GET] /account/{accountId}/video/{videoId}`
 
-    what to order the results by
+## Update
+`[POST] /account/{accountId}/video/{videoId}`
 
-    accepted values are "published", "created", or "modified"
+## Delete
+`[DELETE] /account/{accountId}/video/{videoId}`
 
-    defaults to "published"
+## List - Playlist
+`[GET] /account/{accountId}/video/playlist`
 
-limit
+## Create - Playlist
+`[POST] /account/{accountId}/video/playlist`
 
-    the number of items to limit the response to
+## Retrieve - Playlist
+`[GET] /account/{accountId}/video/playlist/{playlistId}`
 
-    accepted values are any positive number
+## Update - Playlist
+`[POST] /account/{accountId}/video/playlist/{playlistId}`
 
-    defaults to 50
-
-offset
-
-    how much to offset the returned items by
-
-    accepted values are any number greater than or equal to zero
-
-    defaults to 0
-
-### Example Response
-
-	{
-		"data": [
-			{
-				"id": 7824,
-				"account": 2937,
-				"title": "Test Post, Please Ignore",
-				"body": "<p>My best work so far!</p>,
-				"category": "Random",
-				"slug": "test-post-please-ignore",
-				"short_url": "http://stgb.dev/b/3jU",
-				"published": "2013-02-01 05:00:00",
-				"created": "2013-02-01 05:00:00",
-				"modified": "2016-07-06 13:20:13",
-				"sticky": false,
-				"exclusive": false,
-				"exclusive_tiers": [],
-				"in_moderation": false,
-				"is_fan_content": false,
-				"comment_count": 12,
-				"like_count": 0,
-				"user": 21,
-				"user_has_liked": false
-			}
-		],
-		"metadata": {
-			"http_code": 200
-		}
-	}
-
-# Events
-Events on Fullscreen Direct can be many different things including shows, conferences, etc.
-
-## /events
-`[GET] /account/{accountId}/events`  
-This endpoint can be used to list the events for an account.
-
-### GET Parameters
-
-direction
-
-    the direction to list results in
-
-    accepted values are "ASC" or "DESC"
-
-    defaults to "DESC"
-
-limit
-
-    the number of items to limit the response to
-
-    accepted values are any positive number
-
-    defaults to 50
-
-offset
-
-    how much to offset the returned items by
-
-    accepted values are any number greater than or equal to zero
-
-    defaults to 0
-
-order_by
-
-    what to order the results by
-
-    accepted values are "created", "startDateTime", "endDateTime"
-
-    defaults to "startDateTime"
-
-upcoming
-
-	whether or not to include upcoming events
-
-	accepted values are true or false
-
-	defaults to true
-
-past
-
-	whether or not to include past events
-
-	accepted values are true or false
-
-	defaults to true
-
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": [{
-	        "id": 1611,
-	        "title": "Awesome Thing Happening!",
-	        "description": "",
-	        "short_url": "http:\/\/stgb.dev\/e\/tM",
-	        "ticket_price": 0,
-	        "ticket_link": "",
-	        "start_date_time": "2014-10-12 11:00:00 -04:00",
-	        "end_date_time": "2014-10-12 14:00:00 -04:00",
-	        "timezone": "America\/New_York",
-	        "comment_count": 1,
-	        "like_count": 0,
-	        "attending_count": 0,
-	        "custom_field_data": {
-	            "is-sold-out": false
-	        },
-	        "location": {
-	            "name": "Fullscreen Direct Office",
-	            "street_address": "935 W Chestnut",
-	            "street_address_2": "",
-	            "city": "Chicago",
-	            "state": "IL",
-	            "postal_code": "12345",
-	            "country": "UA",
-	            "latitude": 0,
-	            "longitude": 0
-	        },
-			"user_has_liked": false,
-			"user_is_attending": "maybe"
-	    }]
-	}
-
-### Response Explanation
-
-ticket_link
-
-	a link to a third party service where tickets for this events can be purchased
-
-start\_date\_time & end\_date\_time
-
-	the start / end date and time of the event, unlike other timestamps they won't be in GMT time but will specify an offset from GMT
-
-timezone
-
-	the timezone the event is in which is specified by the hour offset in the start and end time
-
-user\_is_attending
-
-	if the request is made with a logged in user, this will specify "yes", "no", or "maybe"
-
-custom\_field\_data
-
-	if you have custom data set on events for your account, the slugs will show up as keys here with their values
+## Delete - Playlist
+`[DELETE] /account/{accountId}/video/playlist/{playlistId}`
 
 # Comments
 Comments can be made on almost all types of content in Fullscreen Direct.
 
-## /comment
-`POST /account/{accountId}/{contentType}/{contentId}/comment`  
+## Definition
+
+### Comment
+
+    {
+        "id": 6,
+        "text": "This is my awesome comment!",
+        "user": 204,
+        "created": "2013-02-27 19:51:46",
+        "account": 1,
+        "reply_to": 0,
+        "reply_count": 0,
+        "short_url": "http:\/\/stgb.dev\/c\/b\/7",
+        "in_moderation": false,
+        "content": {
+            "id": 7724,
+            "content_type": "blog"
+        }
+    }
+
+## Create
+`[POST] /account/{accountId}/{contentType}/{contentId}/comment`
+
 This endpoint will create a comment on a piece of content. The user must be a fan of the account the content belongs to.  
 **Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
 
@@ -2177,31 +2261,9 @@ This endpoint will create a comment on a piece of content. The user must be a fa
 
 	if this is a reply to another comment, this would be the ID of the original comment
 
-### Example Response
+## List
+`[GET] /account/{accountId}/{contentType}/{contentId}/comment`
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "id": 6,
-	        "text": "This is my awesome comment!",
-	        "user": 204,
-	        "created": "2013-02-27 19:51:46",
-	        "account": 1,
-	        "reply_to": 0,
-	        "reply_count": 0,
-	        "short_url": "http:\/\/stgb.dev\/c\/b\/7",
-	        "in_moderation": false,
-	        "content": {
-	            "id": 7724,
-	            "content_type": "blog"
-	        }
-	    }
-	}
-
-## /comments
-`GET /account/{accountId}/{contentType}/{contentId}/comments`  
 Retrieves comments for a particular piece of content on Fullscreen Direct.  
 **Note:** `contentType` can be one of audio, blog, photo, status, video, event, or store.
 
@@ -2291,17 +2353,21 @@ content_type
 # Actions
 Fullscreen Direct as a network has a lot of social functionality built in that allows fans to interact with content. Those endpoints are outlined here.
 
-## /{contentId}/like
-`POST /account/{accountId}/{contentType}/{contentId}/like`  
+## Like Content
+`[POST] /account/{accountId}/{contentType}/{contentId}/like`
+
 This endpoint is used for liking content in the API. Allowed content types (for the `contentType` parameter) include the main content types you'll find across our endpoints: `audio`, `blog`, `event`, `photo`, `status`, `store`, `video`.
 
-`DELETE /account/{accountId}/{contentType}/{contentId}/like`  
+## Unlike Content
+`[DELETE] /account/{accountId}/{contentType}/{contentId}/like`
+
 This will remove a like from a piece of content.
 
 Upon a successful like (or removal of a like), the JSON returned will simply be the same you'd receive from a `/account/{accountId}/{contentType}/{contentId}` `GET` request.
 
-## /{contentId}/flag
-`POST /account/{accountId}/{contentType}/{contentId}/flag`  
+## Flag Content
+`[POST] /account/{accountId}/{contentType}/{contentId}/flag`
+
 This endpoint is used for flagging content in the API. This mostly applies to fan submitted content within Fan Clubs to ensure the content is kept at a high standard. Allowed content types (for the `contentType` parameter) include the main content types that fans are able to submit: `audio`, `blog`, `photo`, `status`, `video`.
 
 ### POST Parameters
