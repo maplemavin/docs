@@ -179,6 +179,12 @@ These endpoints revolve around Fullscreen Direct accounts and their data. An acc
         "user_is_admin": false
     }
 
+`user_is_admin`
+> <p> whether or not the user is an admin in some capacity for this account
+
+`user_role`
+> <p> if the user is an admin, this will be what type of admin they are (`owner`, `editor`, `author`, `read_only`, or `fan_club_moderator`)
+
 ## Create
 `[POST] /account`
 
@@ -229,38 +235,6 @@ Updates an account by its ID. Only admins of the account can use this endpoint.
 `description`
 
 `stagebloc_url`
-
-
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "id": 1,
-            "url": "http:\/\/customdomain.com",
-            "stagebloc_url": "demo",
-            "name": "Demo Account",
-            "description": "Description here...",
-            "type": "business",
-            "stripe_enabled": true,
-            "verified": true,
-            "photo": {
-                <see structure for a photo response>
-            },
-            "user_is_admin": true,
-            "user_role": "read_only"
-        }
-    }
-
-### Response Explanation
-
-`user_is_admin`
-> <p> whether or not the user is an admin in some capacity for this account
-
-`user_role`
-> <p> if the user is an admin, this will be what type of admin they are (`owner`, `editor`, `author`, `read_only`, or `fan_club_moderator`)
 
 ## User Follow
 `[POST] /account/{accountId}/follow`
@@ -378,6 +352,50 @@ child_accounts
 # Users
 These endpoints revolve around Fullscreen Direct users and their data. A user on Fullscreen Direct can be an admin for any number of accounts, and their login is tied to their email address. A user can also be a fan of any number of accounts. These endpoints allow for management of both admin and fan relationships between users and their accounts.
 
+## Definition
+
+    {
+        "id": 8,
+        "url": "https:\/\/www.fullscreendirect.com\/user\/testuser",
+        "created": "2009-10-27 14:29:16",
+        "name": "Test User",
+        "username": "testuser",
+        "bio": "Biography here...",
+        "color": "70,170,255",
+        "birthday": "1995-07-05",
+        "gender": "male",
+        "email": "testuser@sb.com",
+        "photo": {
+            "width": 525,
+            "height": 500,
+            "images": {
+                "thumbnail_url": "http://placekitten.com/300/300",
+                "small_url": "http://placekitten.com/300/300",
+                "medium_url": "http://placekitten.com/300/300",
+                "large_url": "http://placekitten.com/300/300",
+                "original_url": "http://placekitten.com/300/300"
+            }
+        },
+        "access_token": "<access_token_here>",
+        "scope": "non-expiring"
+    }
+
+`color`
+> <p> the RGB value of the color the user has chosen in our backend
+
+`birthday`
+> <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
+
+`email`
+> <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
+
+`photo`
+> <p> the user's photo
+> <p> the width and height are the dimensions of the originally uploaded photo
+
+`access_token` & `scope`
+> <p> Only returned when creating user.
+
 ## Create
 `[POST] /user`
 
@@ -403,44 +421,6 @@ The username for this user, it must be unique across all of Fullscreen Direct an
 `gender`
 Accepts `male` or `female`
 
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "id": 8,
-            "url": "https:\/\/www.fullscreendirect.com\/user\/testuser",
-            "created": "2009-10-27 14:29:16",
-            "name": "Test User",
-            "username": "testuser",
-            "bio": "Biography here...",
-            "color": "70,170,255",
-            "birthday": "1995-07-05",
-            "gender": "male",
-            "email": "testuser@sb.com",
-            "photo": {
-                "width": 525,
-                "height": 500,
-                "images": {
-                    "thumbnail_url": "http://placekitten.com/300/300",
-                    "small_url": "http://placekitten.com/300/300",
-                    "medium_url": "http://placekitten.com/300/300",
-                    "large_url": "http://placekitten.com/300/300",
-                    "original_url": "http://placekitten.com/300/300"
-                }
-            },
-			"access_token": "<access_token_here>",
-            "scope": "non-expiring"
-        }
-    }
-
-### Response Explanation
-
-color
-> <p> the RGB value of the color the user has chosen in our backend
-
 ## Retrieve - Current User
 `[GET] /user/me`
 
@@ -454,54 +434,16 @@ Updates the currently authenticated user's information.
 ### POST Parameters
 
 `bio`
+
 `birthday`
+
 `email`
+
 `username`
+
 `name`
+
 `gender`
-
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "id": 8,
-            "url": "https:\/\/www.fullscreendirect.com\/user\/testuser",
-            "created": "2009-10-27 14:29:16",
-            "name": "Test User",
-            "username": "testuser",
-            "bio": "Biography here...",
-            "color": "70,170,255",
-            "birthday": "1995-07-05",
-            "gender": "male",
-            "email": "testuser@sb.com",
-            "photo": {
-                "width": 525,
-                "height": 500,
-                "images": {
-                    "thumbnail_url": "http://placekitten.com/300/300",
-                    "small_url": "http://placekitten.com/300/300",
-                    "medium_url": "http://placekitten.com/300/300",
-                    "large_url": "http://placekitten.com/300/300",
-                    "original_url": "http://placekitten.com/300/300"
-                }
-            }
-        }
-    }
-
-### Response Explanation
-
-email
-> <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
-
-birthday
-> <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
-
-photo
-> <p> the user's photo
-> <p> the width and height are the dimensions of the originally uploaded photo
 
 ## Retrieve
 `[GET] /user/{userId}`
@@ -536,41 +478,95 @@ Users on Fullscreen Direct can join Fan Clubs associated with accounts. By defau
 
 This endpoint will return various stats and information about the account's fan club (similar to the data shown on the fan club dashboard in the Fullscreen Direct backend)
 
-### Example Response
+### Definition
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "kind": "fan_club_dashboard",
-	        "totals": {
-	            "fans": 27,
-	            "likes": 17,
-	            "comments": 78,
-	            "posts": 21,
-	            "gender": {
-	                "male": 10,
-	                "female": 17,
-	                "unknown": 0
-	            },
-	            "tiers": {
-	                "1": {
-	                    "name": "Free Tier",
-	                    "fans": 10
-	                },
-	                "2": {
-	                    "name": "Basic Tier",
-	                    "fans": 5
-	                },
-	                "3": {
-	                    "name": "Premium Tier",
-	                    "fans": 12
-	                }
-	            }
-	        }
-	    }
-	}
+    {
+        "kind": "fan_club_dashboard",
+        "totals": {
+            "fans": 27,
+            "likes": 17,
+            "comments": 78,
+            "posts": 21,
+            "gender": {
+                "male": 10,
+                "female": 17,
+                "unknown": 0
+            },
+            "tiers": {
+                "1": {
+                    "name": "Free Tier",
+                    "fans": 10
+                },
+                "2": {
+                    "name": "Basic Tier",
+                    "fans": 5
+                },
+                "3": {
+                    "name": "Premium Tier",
+                    "fans": 12
+                }
+            }
+        }
+    }
+
+## Definition
+
+    {
+        "title": "Awesome Fan Club",
+        "description": "This fan club is so cool!",
+        "account": 1,
+        "moderation_queue": false,
+        "tier_info": {
+            "1": {
+                "title": "Basic Membership",
+                "description": "",
+                "price": 0,
+                "discount": 0,
+                "membership_length_interval": 1,
+                "membership_length_unit": "once",
+                "renewal_price": null,
+                "can_submit_content": false
+            },
+            "2": {
+                "title": "Standard Membership",
+                "description": "",
+                "price": 10,
+                "discount": 0,
+                "membership_length_interval": 3,
+                "membership_length_unit": "month",
+                "renewal_price": null,
+                "can_submit_content": true
+            },
+            "3": {
+                "title": "Premium Membership",
+                "description": "You get a T-Shirt with this tier!",
+                "price": 50,
+                "discount": 10,
+                "membership_length_interval": 1,
+                "membership_length_unit": "year",
+                "renewal_price": 10,
+                "can_submit_content": true
+            }
+        },
+        "allowed_content_sections": {
+            "blog": true,
+            "statuses": false,
+            "photos": true,
+            "videos": true,
+            "audio": true
+        }
+    }
+
+membership\_length\_interval and membership\_length\_unit
+> <p> together these represent how long the membership lasts
+> <p> the unit can be `once`, `year`, or `month`
+
+discount
+> <p> the discount (in percentage points) that this tier gives fans off of store items for this account
+
+allowed\_content\_sections
+> <p> the types of content fans are able to submit to this Fan Club
+
 
 ## List
 `[GET] /account/fanclub/{type}`
@@ -612,71 +608,6 @@ This will create or update a Fan Club that belongs to the account with the given
 
 `tier_info` _(required)_
 > <p> An array structured similar to the return data for each array in the response below used to setup each tier. If one of the tier keys is missing from this array, that tier will be removed from the Fan Club. Instead of the two returned membership values, pass a `membership_length` parameter as a value in seconds that must match either zero, one month, three months, six months, or a year using number of seconds in a day (86,400) multiplied by the days in that interval (months are assumed to be 30 days in length).
-
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": {
-            "title": "Awesome Fan Club",
-            "description": "This fan club is so cool!",
-            "account": 1,
-            "moderation_queue": false,
-            "tier_info": {
-                "1": {
-                    "title": "Basic Membership",
-                    "description": "",
-                    "price": 0,
-                    "discount": 0,
-                    "membership_length_interval": 1,
-                    "membership_length_unit": "once",
-                    "renewal_price": null,
-                    "can_submit_content": false
-                },
-                "2": {
-                    "title": "Standard Membership",
-                    "description": "",
-                    "price": 10,
-                    "discount": 0,
-                    "membership_length_interval": 3,
-                    "membership_length_unit": "month",
-                    "renewal_price": null,
-                    "can_submit_content": true
-                },
-                "3": {
-                    "title": "Premium Membership",
-                    "description": "You get a T-Shirt with this tier!",
-                    "price": 50,
-                    "discount": 10,
-                    "membership_length_interval": 1,
-                    "membership_length_unit": "year",
-                    "renewal_price": 10,
-                    "can_submit_content": true
-                }
-            },
-            "allowed_content_sections": {
-                "blog": true,
-                "statuses": false,
-                "photos": true,
-                "videos": true,
-                "audio": true
-            }
-        }
-    }
-
-### Response Explanation
-
-membership\_length\_interval and membership\_length\_unit
-> <p> together these represent how long the membership lasts
-> <p> the unit can be `once`, `year`, or `month`
-
-discount
-> <p> the discount (in percentage points) that this tier gives fans off of store items for this account
-
-allowed\_content\_sections
-> <p> the types of content fans are able to submit to this Fan Club
 
 # Audio
 These endpoints revolve around the ability to upload and stream audio through Fullscreen Direct. Audio consists of both individual tracks and those tracks being organized into various playlists.
@@ -1311,21 +1242,12 @@ This endpoint can be used to get a single status post on Fullscreen Direct.
 
 This endpoint can be used to delete a single status post on Fullscreen Direct. Only admins of the account with the right admin level or the original fan who posted the status are capable of deleting it.
 
-## /likers
+## Likers
 `[GET] /account/{accountId}/status/{statusId}/liker`
 
 This endpoint can be used to list the users who have liked this status on Fullscreen Direct.
 
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": [
-            <array of user objects here>
-        ]
-    }
+The response data will be an array of User objects.
 
 # Store and Commerce
 These endpoints revolve around Fullscreen Direct store and commerce data in the backend. They can be used for tasks including retrieving store items and orders, updating orders, or getting analytics from a store.
@@ -1412,8 +1334,6 @@ When dealing with monetary values, the currency will be USD.
 	        "photo_url": "https://21cif.com/tutorials/micro/mm/urls/images/url2.gif"
 	    }
 	}
-
-### Response Explanation
 
 type
 > <p> the type of store item this is
@@ -1722,34 +1642,22 @@ public\_address[postal\_code]
 public\_address[state]
 > <p> see private_address[state] above
 
-## Retrieve - Coupon
-`[GET] /account/{accountId}/store/coupon/{couponId}`
+## Definition - Coupon
 
-This endpoint is used to get a single store coupon belonging to an account.
-
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "id": 2,
-	        "account": 1,
-	        "title": "Awesome Coupon",
-	        "discount_ype": "percent",
-	        "amount": 10,
-	        "apply_to": "order",
-	        "exclusive": false,
-	        "start_date": null,
-	        "end_date": null,
-	        "timezone": "America\/New_York",
-	        "created": "2014-09-09 19:40:52",
-	        "created_by": 8
-	    }
-	}
-
-### Response Explanation
+    {
+        "id": 2,
+        "account": 1,
+        "title": "Awesome Coupon",
+        "discount_ype": "percent",
+        "amount": 10,
+        "apply_to": "order",
+        "exclusive": false,
+        "start_date": null,
+        "end_date": null,
+        "timezone": "America\/New_York",
+        "created": "2014-09-09 19:40:52",
+        "created_by": 8
+    }
 
 discount_type
 > <p> the type of discount this is
@@ -1762,6 +1670,72 @@ apply_to
 start_date
 > <p> if the coupon is only valid for a certain date range, this will be the start date of that range
 
+## Retrieve - Coupon
+`[GET] /account/{accountId}/store/coupon/{couponId}`
+
+This endpoint is used to get a single store coupon belonging to an account.
+
+## Definition - Order
+
+    {
+        "id": 580,
+        "account": 1,
+        "ordered": "2014-08-10 23:18:02",
+        "shipped": false,
+        "currency": "usd",
+        "total": 26.62,
+        "total_usd": 26.62,
+        "shipping_amount": 5.6,
+        "tax_amount": 1.02,
+        "stripe_charge_id": "<Stripe charge ID>",
+        "email": "testfan@stagebloc.com",
+        "user": { <user object> },
+        "address": {
+            "street_address": "12345 Main Street",
+            "street_address_2": "",
+            "city": "Chicago",
+            "state": "IL",
+            "postal_code": "60647",
+            "country": "US"
+        },
+        "transactions": [{
+            "id": 2968,
+            "modified": "2014-08-10 23:18:03",
+            "amount": 0,
+            "quantity": 1,
+            "item": {
+                "type": "store",
+                "object": { <store object> }
+            },
+            "shipping": {
+                "method": "USPS Priority Mail",
+            },
+            "shipment": {
+                "id": 12,
+                "shipped": null,
+                "tracking_number": "HS2334JFGS0"
+            }
+        }, {
+            "id": 2969,
+            "modified": "2014-08-10 23:18:03",
+            "amount": 0,
+            "quantity": 1,
+            "item": {
+                "type": "audio",
+                "object": { <audio obkect> }
+            }
+        }]
+    }
+
+user
+> <p> this will be `null` if the order was a guest checkout
+
+transactions
+> <p> this will list the items in this order
+
+transactions item type
+> <p> this will list the type of item that was ordered
+> <p> possible values are `audio`, `audio_playlist`, `store`, `theme`, and `fan_club_subscription`
 
 ## List - Order
 `[GET] /account/{accountId}/store/order`
@@ -1792,114 +1766,8 @@ offset
 > <p> accepted values are any number greater than or equal to zero
 > <p> defaults to 0
 
-### Example Response
-
-    {
-        "metadata": {
-            "http_code": 200
-        },
-        "data": [{
-            "id": 580,
-            "account": 1,
-            "ordered": "2014-08-10 23:18:02",
-            "shipped": false,
-            "currency": "usd",
-            "total": 26.62,
-            "total_usd": 26.62,
-            "shipping_amount": 5.6,
-            "tax_amount": 1.02,
-            "stripe_charge_id": "<Stripe charge ID>",
-            "email": "testfan@stagebloc.com",
-            "user": { <user object> },
-            "address": {
-                "street_address": "12345 Main Street",
-                "street_address_2": "",
-                "city": "Chicago",
-                "state": "IL",
-                "postal_code": "60647",
-                "country": "US"
-            },
-            "transactions": [{
-                "id": 2968,
-                "modified": "2014-08-10 23:18:03",
-                "amount": 0,
-                "quantity": 1,
-                "item": {
-                    "type": "store",
-                    "object": { <store object> }
-                },
-                "shipping": {
-                    "method": "USPS Priority Mail",
-                },
-                "shipment": {
-                    "id": 12,
-                    "shipped": null,
-                    "tracking_number": "HS2334JFGS0"
-                }
-            }, {
-                "id": 2969,
-                "modified": "2014-08-10 23:18:03",
-                "amount": 0,
-                "quantity": 1,
-                "item": {
-                    "type": "audio",
-                    "object": { <audio obkect> }
-                }
-            }]
-        }, {
-            "id": 579,
-            "account": 1,
-            "ordered": "2014-08-10 20:25:55",
-            "shipped": false,
-            "currency": "usd",
-            "total": 31.17,
-            "total_usd": 31.17,
-            "shipping_amount": 7,
-            "tax_amount": 1.17,
-            "stripe_charge_id": "<Stripe charge ID>",
-            "email": "fakemail@stagebloc.com",
-            "user": null,
-            "address": {
-                "street_address": "555 Main Street",
-                "street_address_2": "",
-                "city": "Chicago",
-                "state": "IL",
-                "postal_code": "60642",
-                "country": "US"
-            },
-            "transactions": [{
-                "id": 2966,
-                "modified": "2014-08-10 20:25:57",
-                "amount": 23,
-                "status": "Paid",
-                "quantity": 1,
-                "item": {
-                    "type": "store",
-                    "object": { <store object> }
-                },
-                "shipping": {
-                    "provider": "USPS",
-                    "method": "USPS Priority Mail",
-                    "shipped": null,
-                    "tracking_number": null
-                }
-            }]
-        }]
-    }
-
-### Response Explanation
-
-user
-> <p> this will be `null` if the order was a guest checkout
-
-transactions
-> <p> this will list the items in this order
-
-transactions item type
-> <p> this will list the type of item that was ordered
-> <p> possible values are `audio`, `audio_playlist`, `store`, `theme`, and `fan_club_subscription`
-
 ## Retrieve - Order
+`[GET] /account/{accountId}/store/order/{orderId}`
 
 ## Update - Order
 `[POST] /account/{accountId}/store/order/{orderId}`
@@ -1923,7 +1791,7 @@ This endpoint can be used to update various elements about orders.
 This endpoint can be used to resend a receipt for an order.
 
 ## Refund - Order
-`[POST] /account/{accountId}/store/order/{orderId}/receipt/resend`
+`[POST] /account/{accountId}/store/order/{orderId}/refund`
 
 This endpoint can be used to refund an entire order.
 
@@ -2048,13 +1916,19 @@ Comments can be made on almost all types of content in Fullscreen Direct.
         }
     }
 
+content
+> <p> the content object this comment was made on (will match the same JSON structure as listing these objects in their respective endpoints), by default this will be collapsed unless expand=content is used
+
+content_type
+> <p> a string specifying what type of content this comment was made on (i.e. what type of content the `content` key conforms to)
+
 ## Create
 `[POST] /account/{accountId}/{contentType}/{contentId}/comment`
 
-This endpoint will create a comment on a piece of content. The user must be a fan of the account the content belongs to.
-
 `contentType`
-> <p> can be one of audio, blog, photo, status, video, event, or store.
+> <p> can be one of `audio`, `blog`, `photo`, `status`, `video`, `event`, or `store`.
+
+This endpoint will create a comment on a piece of content. The user must be a fan of the account the content belongs to.
 
 ### POST Parameters
 
@@ -2067,10 +1941,10 @@ This endpoint will create a comment on a piece of content. The user must be a fa
 ## List
 `[GET] /account/{accountId}/{contentType}/{contentId}/comment`
 
-Retrieves comments for a particular piece of content on Fullscreen Direct.
-
 `contentType`
-> <p> can be one of audio, blog, photo, status, video, event, or store.
+> <p> can be one of `audio`, `blog`, `photo`, `status`, `video`, `event`, or `store`.
+
+Retrieves comments for a particular piece of content on Fullscreen Direct.
 
 ### GET Parameters
 
@@ -2089,71 +1963,31 @@ offset
 > <p> accepted values are any number greater than or equal to zero
 > <p> defaults to 0
 
-### Example Response
-
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": [{
-	        "id": 1,
-	        "text": "I made a comment on this really cool thing!",
-	        "user": 8,
-	        "created": "2014-09-15 15:38:36",
-	        "account": 1,
-	        "reply_to": 0,
-	        "reply_count": 0,
-	        "short_url": "http:\/\/stgb.dev\/c\/a\/2",
-	        "in_moderation": false,
-	        "content": {
-	            "id": 768,
-	            "title": "An audio track!",
-	            "description": "",
-	            "lyrics": "",
-	            "artist": "",
-	            "photo": 0,
-	            "account": 1,
-	            "created_by": 8,
-	            "created": "2014-11-11 15:13:52",
-	            "modified_by": 8,
-	            "modified": "2014-11-11 15:14:05",
-	            "short_url": "http:\/\/stgb.dev\/a\/ef",
-	            "stream_url": "https:\/\/stagebloc-audio.s3.amazonaws.com\/dev\/1\/stream\/975_20141111_151352_1_768.mp3?response-content-type=audio%2Fmpeg",
-	            "embed_code": "\u003Ciframe src=\u0022https:\/\/widgets.stagebloc.dev\/audio\/768\u0022 style=\u0022width:250px;height:70px;border-radius:6px\u0022\u003E\u003C\/iframe\u003E",
-	            "sticky": false,
-	            "exclusive": false,
-	            "exclusive_tiers": [],
-	            "in_moderation": false,
-	            "is_fan_content": false,
-	            "comment_count": 3,
-	            "like_count": 0,
-	            "user": 8,
-	            "custom_field_data": {
-	                "episodenumber": "1"
-	            },
-	            "content_type": "audio"
-	        }
-	    }]
-	}
-
-### Response Explanation
-
-content
-> <p> the content object this comment was made on (will match the same JSON structure as listing these objects in their respective endpoints), by default this will be collapsed unless expand=content is used
-
-content_type
-> <p> a string specifying what type of content this comment was made on (i.e. what type of content the `content` key conforms to)
-
-# Actions
+# Content Actions
 Fullscreen Direct as a network has a lot of social functionality built in that allows fans to interact with content. Those endpoints are outlined here.
 
-## Like Content
+## List Likes
 `[POST] /account/{accountId}/{contentType}/{contentId}/like`
 
-This endpoint is used for liking content in the API. Allowed content types (for the `contentType` parameter) include the main content types you'll find across our endpoints: `audio`, `blog`, `event`, `photo`, `status`, `store`, `video`.
+`contentType`
+> <p> can be one of `audio`, `audio/playlist`, `blog`, `event`, `photo`, `photo/album`, `status`, `store`, `video`, `video/playlist`.
 
-## Unlike Content
+This will return a list of users who have liked this content.
+
+
+## Like
+`[POST] /account/{accountId}/{contentType}/{contentId}/like`
+
+`contentType`
+> <p> can be one of `audio`, `audio/playlist`, `blog`, `event`, `photo`, `photo/album`, `status`, `store`, `video`, `video/playlist`.
+
+This endpoint is used for liking content.
+
+## Unlike
 `[DELETE] /account/{accountId}/{contentType}/{contentId}/like`
+
+`contentType`
+> <p> can be one of `audio`, `audio/playlist`, `blog`, `event`, `photo`, `photo/album`, `status`, `store`, `video`, `video/playlist`.
 
 This will remove a like from a piece of content.
 
@@ -2162,12 +1996,16 @@ Upon a successful like (or removal of a like), the JSON returned will simply be 
 ## Flag Content
 `[POST] /account/{accountId}/{contentType}/{contentId}/flag`
 
-This endpoint is used for flagging content in the API. This mostly applies to fan submitted content within Fan Clubs to ensure the content is kept at a high standard. Allowed content types (for the `contentType` parameter) include the main content types that fans are able to submit: `audio`, `blog`, `photo`, `status`, `video`.
+`contentType`
+> <p> can be one of `audio`, `blog`, `photo`, `status`, `video`.
+
+Flag content for account moderation. This mostly applies to fan submitted content within Fan Clubs to ensure the content is kept at a high standard.
 
 ### POST Parameters
 
 `type`
-> <p> The type of flagging this is. Accepted values are `duplicate`, `offensive`, `copyright`, or `prejudice`.
+> <p> The type of flagging this is.
+> <p> Accepted values are `duplicate`, `offensive`, `copyright`, or `prejudice`.
 
 `reason`
 > <p> This specifies why the user is flagging this content and should be a sentence or two provided by the end user using your application.
