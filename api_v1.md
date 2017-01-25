@@ -1298,42 +1298,111 @@ When dealing with monetary values, the currency will be USD.
 
 ## Definition - Store Item
 
-	{
-	    "store_item": {
-	        "price": 10.5,
-	        "title": "Physical Product",
-	        "description": "<p>This is a physical product</p>",
-	        "category": "Cool Things",
-	        "type": "PHYSICAL",
-	        "exclusive_tiers": [1, 2],
-	        "featured": false,
-	        "options": [
-	            {
-	                "name": "an option",
-	                "sku": "ITM_1_OPT_1",
-	                "upc": "UPC",
-	                "quantity": null,
-	                "status": "NORMAL"
-	            },
-	            {
-	                "name": "minimal option",
-	                "weight": 4.5
-	            }
-	        ],
-	        "shipping_price_handlers": [
-	            {
-	                "name":"USPS",
-	                "price":4.5,
-	                "media_mail":true
-	            },
-	            {
-	                "name":"FLAT_RATE",
-	                "price":5.5
-	            }
-	        ],
-	        "photo_url": "https://21cif.com/tutorials/micro/mm/urls/images/url2.gif"
-	    }
-	}
+    {
+      "id": 26,
+      "type": "physical",
+      "account": 2937,
+      "title": "Physical Product",
+      "short_url": "http://stgb.dev/st/s",
+      "description": "This is a physical product",
+      "description_html": "<p>This is a physical product</p>",
+      "sold_out": false,
+      "exclusive": false,
+      "exclusive_tiers": [],
+      "featured": false,
+      "created": "2017-01-25 11:20:14",
+      "created_by": 8,
+      "modified": "2017-01-25 11:20:14",
+      "modified_by": 8,
+      "fans_name_price": false,
+      "category": "Cool Things",
+      "price": 10.5,
+      "sort_order": 0,
+      "prices": [
+        {
+          "currency": "usd",
+          "price": 10.5
+        }
+      ],
+      "require_follow": false,
+      "shipping_price_handlers": [
+        {
+          "id": 14,
+          "name": "USPS",
+          "price": 4.5
+        },
+        {
+          "id": 15,
+          "name": "Flat Rate",
+          "price": 5.5
+        }
+      ],
+      "fulfiller": {
+        "id": 1,
+        "type": 0,
+        "name": "Main Warehouse",
+        "settings": [],
+        "postal_code": "53103",
+        "address": {
+          "id": 1,
+          "name": "Domestic",
+          "street_address": "S89 W22630 Loretto Lane",
+          "street_address_2": "",
+          "city": "Big Bend",
+          "state": "WI",
+          "postal_code": "53103",
+          "country": "US"
+        }
+      },
+      "on_sale": false,
+      "options": [
+        {
+          "name": "an option",
+          "sku": "ITM_1_OPT_1",
+          "disabled": false,
+          "upc": "UPC",
+          "unlimited": true,
+          "sold_out": false,
+          "quantity": null,
+          "low_stock_threshold": 10,
+          "weight": 2.5,
+          "weight_unit": "ounces",
+          "height": 0,
+          "width": 0,
+          "length": 0,
+          "additional_price": [
+            {
+              "currency": "usd",
+              "price": 0
+            }
+          ]
+        },
+        {
+          "name": "minimal option",
+          "sku": "WE79XCW4",
+          "disabled": false,
+          "upc": null,
+          "unlimited": true,
+          "sold_out": false,
+          "quantity": null,
+          "low_stock_threshold": 10,
+          "weight": 4.5,
+          "weight_unit": "ounces",
+          "height": 0,
+          "width": 0,
+          "length": 0,
+          "additional_price": [
+            {
+              "currency": "usd",
+              "price": 0
+            }
+          ]
+        }
+      ],
+      "photo": 3309,
+      "album_id": 443,
+      "photos": 0
+    }
 
 type
 > <p> the type of store item this is
@@ -1385,109 +1454,102 @@ offset
 > <p> accepted values are any number greater than or equal to zero
 > <p> defaults to 0
 
-## Update - Store Item
+## Create - Store Item
 `[POST] /account/{accountId}/store/item`
 
 This endpoint is used to create a new store item and, if relevant, its options. In the case of a physical store item it also configures the shipping price handlers for this new store item.
 
-
-### Example Response
+### Example Request
 
     {
-        "metadata": {
-            "http_code": 200
+      "type": "PHYSICAL",
+      "price": 10.5,
+      "title": "Physical Product",
+      "description": "<p>This is a physical product</p>",
+      "category": "Cool Things",
+      "exclusive_tiers": [
+        1,
+        2
+      ],
+      "featured": false,
+      "fulfiller_id": 1,
+      "options": [
+        {
+          "name": "an option",
+          "sku": "ITM_1_OPT_1",
+          "upc": "UPC",
+          "weight": 2.5,
+          "quantity": null,
+          "status": "NORMAL"
         },
-        "data": [{
-            "id": 131,
-            "type": "physical",
-            "account": 1,
-            "title": "Test Shirt",
-            "short_url": "http:\/\/stgb.dev\/st\/3g",
-            "description": "",
-            "sold_out": false,
-            "exclusive": true,
-            "exclusive_tiers": [2, 3],
-            "featured": false,
-            "created": "2014-08-03 19:11:19",
-            "created_by": 8,
-            "modified": "2014-08-03 19:27:45",
-            "modified_by": 8,
-            "fans_name_price": true,
-            "category": null,
-            "sort_order": 1,
-            "prices": [{
-                "currency": "usd",
-                "price": 12
-            }],
-            "shipping_providers": [{
-                "id": 1,
-                "name": "Flat Rate",
-                "price": 3
-            }, {
-                "id": 2,
-                "name": "USPS",
-                "origin_zip_code": "53103",
-                "handling_fee": 2
-            }],
-            "on_sale": false,
-            "options": [{
-                "name": "Main",
-                "sku": "7HWE49JA",
-                "upc": null,
-                "unlimited": true,
-                "sold_out": false,
-                "quantity": null,
-                "low_stock_threshold": 10,
-                "weight": 2,
-                "weight_unit": "ounces",
-                "height": 0,
-                "width": 0,
-                "length": 0
-            }],
-            "photo": 3231,
-            "photos": 5
-        }, {
-            "id": 124,
-            "type": "bundle",
-            "account": 1,
-            "title": "All sorts of stuff",
-            "short_url": "http:\/\/stgb.dev\/st\/39",
-            "description": "",
-            "sold_out": false,
-            "exclusive": true,
-            "exclusive_tiers": [2],
-            "featured": false,
-            "created": "2014-07-31 11:59:17",
-            "created_by": 8,
-            "modified": "2014-08-05 16:30:15",
-            "modified_by": 8,
-            "fans_name_price": false,
-            "category": null,
-            "sort_order": 2,
-            "prices": [{
-                "currency": "usd",
-                "price": 20
-            }],
-            "living_bundle": false,
-            "bundled_items": {
-                "store_items": [ ... ],
-                "audio": [ ... ],
-                "audio_playlists": [ ... ]
-            },
-            "on_sale": false,
-            "photo": null,
-            "photos": 0
-        }]
+        {
+          "name": "minimal option",
+          "weight": 4.5
+        }
+      ],
+      "shipping_price_handlers": [
+        {
+          "name": "USPS",
+          "price": 4.5,
+          "media_mail": true
+        },
+        {
+          "name": "FLAT_RATE",
+          "price": 5.5
+        }
+      ],
+      "photo_url": "http://placehold.it/350x350.png"
     }
 
 ### POST Parameters
 
-store\_item _(required)_
-> <p> a parent object containing all information to be associated with this store item
+`type` _(required)_
+> <p> a string indicating the type of store item to create
+> <p> accepted values are PHYSICAL or EXPERIENCE
 
-store\_item[options] _(required for type set to PHYSICAL or EXPERIENCE)_
+`price` _(required)_
+> <p> a decimal number indicating the base price for this store item
+
+`title` _(required)_
+> <p> a string (up to 150 characters) representing the title of the store item
+
+`description`
+> <p> a string representing the description of the store item (HTML supported)
+
+`category`
+> <p> a string representing a category in which to group this store item
+
+`status`
+> <p> a string representing the status of the store item
+> <p> accepted values are OKAY or PRIVATE
+> <p> defaults to OKAY
+
+`exclusive`
+> <p> a boolean, true if this should only be presented to users who are following the account
+> <p> defaults to false
+
+`exclusive_tiers`
+> <p> an integer occurring 1 to 3 times specifying which fan club tier(s) an item is exclusive to
+> <p> should be used _instead of_ [exclusive] above.
+> <p> defaults to none
+
+`featured`
+> <p> a boolean, true if this should be considered a featured item
+
+`fulfiller_id` _(required for type set to PHYSICAL)_
+> <p> an integer ID for a fulfiller already configured in Fullscreen Direct which is associated with this account
+
+`options` _(required for type set to PHYSICAL or EXPERIENCE)_
 > <p> an array of objects representing each option (for a T-shirt each option may represent a size, a color, or a combination of the two, etc)
-> <p> each element in this array may contain the following fields:
+> <p> See _Options_ below for field information
+
+`shipping_price_handlers` _(required for type set to PHYSICAL)_
+> <p> an array of objects representing each shipping price handler to be offered to a user attempting to purchase this item. The object may include additional handling fees and options depending on the type of handler indicated.
+> <p> See _Shipping Price Handlers_ below for field information
+
+### Options
+
+each element in this array may contain the following fields:
 
 `name` _(required)_
 > <p> the name to display when there are multiple options under the store item
@@ -1507,76 +1569,72 @@ store\_item[options] _(required for type set to PHYSICAL or EXPERIENCE)_
 > <p> a non-negative integer representing the additional price to charge if this option is selected by the user (useful if an XXL t-shirt is more expensive than other variations, for example)
 > <p> defaults to no additional price
 
-> <p> `weight` _(required for type set to PHYSICAL)_
+`weight` _(required for type set to PHYSICAL)_
 > <p> a non-negative decimal number indicating the weight in ounces of this option (used for shipping price calculation)
 
-> <p> `height` _(required for type set to PHYSICAL)_
+`height` _(required for type set to PHYSICAL)_
 > <p> a non-negative decimal number indicating the height in inches of this option (used for shipping price calculation)
 
-> <p> `width` _(required for type set to PHYSICAL)_
+`width` _(required for type set to PHYSICAL)_
 > <p> a non-negative decimal number indicating the width in inches of this option (used for shipping price calculation)
 
-> <p> `length` _(required for type set to PHYSICAL)_
+`length` _(required for type set to PHYSICAL)_
 > <p> a non-negative decimal number indicating the length in inches of this option (used for shipping price calculation)
 
-> <p> `status`
+`status`
 > <p> a string representing the status for this option
 > <p> accepted values are NORMAL or DISABLED
 > <p> defaults to NORMAL
 
-store\_item[shipping\_price\_handlers] _(required for type set to PHYSICAL)_
-> <p> an array of objects representing each shipping price handler to be offered to a user attempting to purchase this item. The object may include additional handling fees and options depending on the type of handler indicated.
-> <p> Each element in this array may contain the following fields:
+### Shipping Price Handlers 
+Each element in this array may contain the following fields:
 
-> <p> `name` _(required)_
-> > <p> a string identifying which Shipping Price Handler to enable, one of: FLAT_RATE, USPS, TOWNSEND, BELLTOWER, RLP, FEDEX, CUSTOM_TABLE, PICK_UP, DELIVERY_AGENT, UPS
+`name` _(required)_
+> <p> a string identifying which Shipping Price Handler to enable, one of: FLAT_RATE, USPS, TOWNSEND, BELLTOWER, RLP, FEDEX, CUSTOM_TABLE, PICK_UP, DELIVERY_AGENT, UPS
 
-> <p> `price`
-> > <p> a non-negative integer, an additional price on top of the charges indicated by APIs for USPS, UPS, and FEDEX. For FLAT_RATE, this is the amount to charge a user selecting this shipping method.
+`price`
+> <p> a non-negative integer, an additional price on top of the charges indicated by APIs for USPS, UPS, and FEDEX. For FLAT_RATE, this is the amount to charge a user selecting this shipping method.
 
-> <p> `media_mail` _(applies to USPS only)_
-> > <p> a boolean, true if you want to offer USPS Media Mail pricing for this item
+`media_mail` _(applies to USPS only)_
+> <p> a boolean, true if you want to offer USPS Media Mail pricing for this item
 
-store\_item[type] _(required)_
-> <p> a string indicating the type of store item to create
-> <p> accepted values are PHYSICAL or EXPERIENCE
-
-store\_item[price] _(required)_
-> <p> a decimal number indicating the base price for this store item
-
-store\_item[title] _(required)_
-> <p> a string (up to 150 characters) representing the title of the store item
-
-store\_item[description]
-> <p> a string representing the description of the store item (HTML supported)
-
-store\_item[category]
-> <p> a string representing a category in which to group this store item
-
-store\_item[status]
-> <p> a string representing the status of the store item
-> <p> accepted values are OKAY or PRIVATE
-> <p> defaults to OKAY
-
-store\_item[exclusive]
-> <p> a boolean, true if this should only be presented to users who are following the account
-> <p> defaults to false
-
-store\_item[exclusive_tiers]
-> <p> an integer occurring 1 to 3 times specifying which fan club tier(s) an item is exclusive to
-> <p> should be used _instead of_ [exclusive] above.
-> <p> defaults to none
-
-store\_item[featured]
-> <p> a boolean, true if this should be considered a featured item
-
-store\_item[fulfiller\_id] _(required for type set to PHYSICAL)_
-> <p> an integer ID for a fulfiller already configured in Fullscreen Direct which is associated with this account
+## Update - Store Item
+`[POST] /account/{accountId}/store/item/{storeItemId}`
 
 ## Retrieve - Store Item
-`[GET] /account/{accountId}/store/item/{itemId}`
+`[GET] /account/{accountId}/store/item/{storeItemId}`
 
 This endpoint is used to get a single store items belonging to an account.
+
+## Definition - Fulfiller
+
+    {
+        "id": 15,
+        "type": 0,
+        "name": "Main Warehouse",
+        "settings": {},
+        "postal_code": "53103",
+        "address": {
+            "id": 113,
+            "name": "Main Warehouse",
+            "street_address": "S89 W22630 Loretto Lane",
+            "street_address_2": "",
+            "city": "Big Bend",
+            "state": "WI",
+            "postal_code": "53103",
+            "country": "US"
+        },
+        "public_address": {
+            "id": 112,
+            "name": "Main Warehouse",
+            "street_address": "Loretto Lane",
+            "street_address_2": "",
+            "city": "Big Bend",
+            "state": "WI",
+            "postal_code": "53103",
+            "country": "US"
+        }
+    }
 
 ## List - Fulfiller
 `[GET] /account/{accountId}/store/fulfiller`
@@ -1591,56 +1649,49 @@ This endpoint is used to create a new fulfiller. Many of the data requirements a
 
 ### POST Parameters
 
-name _(required)_
+`name` _(required)_
 > <p> a name for this fulfiller
 
-type _(required)_
+`type` _(required)_
 > <p> the type of fulfiller to create, one of: STAGEBLOC
 
-international\_shipping\_agreement
+`international_shipping_agreement`
 > <p> a plain text string to which the user must agree if they are requesting shipment to a country which does not match the country for this fulfiller's private address
 
-private\_address[name]
-> <p> a string the name of the recipient for the private address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+`private_address` _(required)_
+> <p> Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+> <p> See _Address_ below for fields
 
-private\_address[street\_address]
-> <p> the street address for the fulfiller's private address
+`public_address` _(optional)_
+> <p> See _Address_ below for fields
 
-private\_address[street\_address\_2]
-> <p> a second street address for the fulfiller's private address
+### Address
 
-private\_address[city]
-> <p> the city for the fulfiller's private address
+`name`
+> <p> a string the name for the address
 
-private\_address[country]
+`street_address`
+> <p> the street address
+
+`street_address_2`
+> <p> a second street address
+
+`city`
+> <p> the city
+
+`country`
 > <p> the 2 character country code as specified by ISO-3361-alpha 2
 
-private\_address[postal\_code]
+`postal_code`
 > <p> the postal code appropriate to the country. If country is US the 5 digit zip code for the private address. If country is CA then you must provide a 6 character postal code (you may provide this with an additional space separator). For all other countries please use an appropriate postal code.
 
-private\_address[state]
+`state`
 > <p> The region identifier appropriate for the country indicated. For US state codes please use the 2 character United States Postal Service abbreviations. For CA provinces please use the 2 character postal abbreviation for the province or territory. For all other countries please use a region identifier of your choice.
 
-public\_address[name]
-> <p> a string the name of the recipient for the public address of the fulfiller. Private addresses are used in all location if no public address is set. If a public address is set the private address only appears on Purchase Orders.
+## Retrieve - Fulfiller
+`[GET] /account/{accountId}/store/fulfiller/{fulfillerId}`
 
-public\_address[street\_address]
-> <p> see private_address[street_address] above
-
-public\_address[street\_address\_2]
-> <p> see private_address[street_address_2] above
-
-public\_address[city]
-> <p> see private_address[city] above
-
-public\_address[country]
-> <p> see private_address[country] above
-
-public\_address[postal\_code]
-> <p> see private_address[postal_code] above
-
-public\_address[state]
-> <p> see private_address[state] above
+This endpoint is use to get information about a single fulfiller belonging to an account
 
 ## Definition - Coupon
 
@@ -1678,53 +1729,59 @@ This endpoint is used to get a single store coupon belonging to an account.
 ## Definition - Order
 
     {
-        "id": 580,
-        "account": 1,
-        "ordered": "2014-08-10 23:18:02",
+        "id": 28,
+        "account": 2937,
+        "receipt_url": "https://www.fullscreendirect.dev/receipt/28",
+        "ordered": "2016-11-16 21:43:57",
+        "email": "hosted_site_test@automated.test",
+        "phone_number": "262 501 6621",
         "shipped": false,
         "currency": "usd",
-        "total": 26.62,
-        "total_usd": 26.62,
-        "shipping_amount": 5.6,
-        "tax_amount": 1.02,
-        "stripe_charge_id": "<Stripe charge ID>",
-        "email": "testfan@stagebloc.com",
-        "user": { <user object> },
+        "total": 15.93,
+        "total_usd": 15.93,
+        "shipping_amount": 5,
+        "handling_amount": 0,
+        "tax_amount": 0.93,
+        "status": "paid",
+        "notes": null,
+        "user": {
+            "id": 1931,
+            "url": "https://www.fullscreendirect.dev/user/hosted_site_test",
+            "created": "2015-03-16 17:06:45",
+            "name": "Hosted Site Test",
+            "username": "hosted_site_test",
+            "bio": "",
+            "color": "70,170,255"
+        },
         "address": {
-            "street_address": "12345 Main Street",
+            "id": 96,
+            "name": "Josh Holat",
+            "street_address": "2245 W North Ave",
             "street_address_2": "",
             "city": "Chicago",
             "state": "IL",
             "postal_code": "60647",
             "country": "US"
         },
-        "transactions": [{
-            "id": 2968,
-            "modified": "2014-08-10 23:18:03",
-            "amount": 0,
-            "quantity": 1,
-            "item": {
-                "type": "store",
-                "object": { <store object> }
-            },
-            "shipping": {
-                "method": "USPS Priority Mail",
-            },
-            "shipment": {
-                "id": 12,
-                "shipped": null,
-                "tracking_number": "HS2334JFGS0"
+        "transactions": [
+            {
+                "id": 31,
+                "modified": "2016-11-16 21:44:00",
+                "amount": 10,
+                "status": "paid",
+                "quantity": 1,
+                "sku": "EJ_WRXHL",
+                "item": {
+                    "type": "store",
+                    "object": {
+                        "<see store item definition>"
+                    }
+                },
+                "shipping": {
+                    "method": "Flat Rate"
+                }
             }
-        }, {
-            "id": 2969,
-            "modified": "2014-08-10 23:18:03",
-            "amount": 0,
-            "quantity": 1,
-            "item": {
-                "type": "audio",
-                "object": { <audio obkect> }
-            }
-        }]
+        ]
     }
 
 user
@@ -1776,14 +1833,17 @@ This endpoint can be used to update various elements about orders.
 
 ### POST Parameters
 
-`shipped`  _(required)_
-> <p> A date string that specifies when this order was shipped
+`shipped` _(required)_
+> <p> A boolean that specifies if this order is now shipped
 
 `tracking_number`
 > <p> An optional tracking number for when this item was shipped
 
 `carrier`
 > <p> An optional carrier that this was shipped with for use with the `tracking_number`
+
+`transaction_ids` _(optional)_
+> <p> An array of transaction ids to indicate a partial shipment. If not supplied then all transactions and the order as a whole is marked as shipped.
 
 ## Resend Receipt - Order
 `[POST] /account/{accountId}/store/order/{orderId}/receipt/resend`
