@@ -4,6 +4,13 @@ Use the Fullscreen Direct API to develop custom, standalone integrations with Fu
 ### Under Development
 The API is actively evolving - please check back here for updates and changes.
 
+#### Updates
+
+##### 2017-02-15
+- All urls have been updated to use singular resource names. Any plural endpoints will continue to work as they are now aliased to the singular version for backward compatibility.
+- Endpoints between content items, such as Photos, Events, Audio, etc, have been updated to be more consistent with having the same abilities on each endpoint, such as updating or creating, and sub-resource lists now have the same features.
+- Store Item Creation endpoint now treats the 'store_item' as an optional namespacer, making it behave like other REST endpoints.
+
 ### Fork us on GitHub!
 All of Fullscreen Direct's documentation is up on GitHub for you to fork, modify, and improve. Join us over there to request features, add suggestions, and report bugs. What are you waiting for? [Git to it!](https://github.com/stagebloc/docs)
 
