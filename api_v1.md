@@ -372,6 +372,7 @@ These endpoints revolve around Fullscreen Direct users and their data. A user on
         "birthday": "1995-07-05",
         "gender": "male",
         "email": "testuser@sb.com",
+	"phone_number": "262 555 1234",
         "photo": {
             "width": 525,
             "height": 500,
@@ -394,6 +395,9 @@ These endpoints revolve around Fullscreen Direct users and their data. A user on
 > <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
 
 `email`
+> <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
+
+`phone_number`
 > <p> this is only included for the currently authenticated user (i.e. won't show up for users other than the authenticated one)
 
 `photo`
