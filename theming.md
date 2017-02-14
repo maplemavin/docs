@@ -706,6 +706,46 @@ A link that opens a modal and allows a user to enter a contest
 
     defaults to "Enter Contest"
 
+`threshholdText`
+
+    the text to be put inside the tag when the contest threshold of entries has been met
+
+    accepted values are any string (HTML included)
+
+    defaults to "Contest Closed"
+
+`comingSoonText`
+
+    the text to be put inside the tag when the contest has not started yet
+
+    accepted values are any string (HTML included)
+
+    defaults to "Contest Coming Soon"
+
+`enteredText`
+
+    the text to be put inside the tag when someone has entered the contest but it is not yet over
+
+    accepted values are any string (HTML included)
+
+    defaults to "Contest Entered"
+
+`loserText`
+
+    the text to be put inside the tag when someone has lost
+
+    accepted values are any string (HTML included)
+
+    defaults to "You Did Not Win"
+
+`winnerText`
+
+    the text to be put inside the tag when someone has won
+
+    accepted values are any string (HTML included)
+
+    defaults to "Contest Winner!"
+
 `closeTag`
 
     whether or not to close the tag
