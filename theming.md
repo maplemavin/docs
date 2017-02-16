@@ -467,6 +467,17 @@ The latest version of jQuery on the page via Google's CDN
     
     defaults to the latest version
 
+**PositionInModule**  
+Get a module's current loop position. By default it is one-indexed.
+
+`start`
+
+    use this parameter to specify a start position (ie, change to be zero-indexed)
+    
+    accepted values are any integer
+    
+    defaults to 1
+
 **BootstrapCSS**  
 The latest version of Bootstrap's combined (responsive with icons) CSS from [BootstrapCDN](http://www.bootstrapcdn.com/)
 
