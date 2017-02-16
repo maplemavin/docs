@@ -4064,6 +4064,23 @@ ChildAccountRelationship
 ### module:FanList
 This module lists fans of an account.
 
+**Module Options**  
+`includeAdmins`
+
+    whether or not to include admins in the listing
+    
+    accepted values are true or false
+
+    defaults to false
+
+`userGroupId`
+
+    the ID of a user group to limit the fans by
+    
+    accepted values are any user group ID belonging to this account
+
+    defaults to none
+
 ### module:UserView
 This module will load the information for a single user
 
