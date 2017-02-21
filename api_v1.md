@@ -2324,3 +2324,78 @@ The type of flagging this is. Accepted values are `duplicate`, `offensive`, `cop
 
 `reason`  
 This specifies why the user is flagging this content and should be a sentence or two provided by the end user using your application.
+
+# Devices
+These endpoints revolve around Fullscreen Direct Checkout and the devices used for the checkout process. They allow the application to label a device identifier with a convenient human readable label.
+
+## /device
+`GET /account/{accountId}/device`  
+Returns a list of all devices and their current labels (if a human readable label has been registered) for each device which is registered OR has been tracked as the device on which an order was made for this account.
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": [{
+	        "identifier": "abcdefghijklmnopqrstuvwxyz",
+	        "label": "The dude's ipad"
+	    }, {
+	    	"identifier": "12345678901234567890123456",
+		"label": "The old ipad"
+	    }]
+	}
+
+## /device/{deviceIdentifier}
+`GET /account/{accountId}/device/{deviceIdentifier}`  
+Returns the device identifier and the current label (or null) for the specified device identifier.
+
+### Example Response
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "identifier": "abcdefghijklmnopqrstuvwxyz",
+	        "label": "The dude's ipad"
+	    }
+	}
+
+## /device
+`POST /account/{accountId}/device`  
+Registers a device label associated with the device identifier indicated.
+
+### POST Parameters
+
+`deviceIdentifier` _(required)_  
+
+	the device identifier to register with the system
+
+`label`  
+
+	the label to associate with the deviceIdentifier indicated
+
+## /device/{deviceIdentifier}
+`POST /account/{accountId}/device/{deviceIdentifier}`  
+`PUT /account/{accountId}/device/{deviceIdentifier}`  
+Registers a device label associated with the device identifier indicated.
+
+### POST/PUT Parameters
+
+`label`  
+
+	the label to associate with the deviceIdentifier indicated
+
+### Example Response
+
+	see [GET] /device/{deviceIdentifier} above
+
+## /device/{deviceIdentifier}
+`DELETE /account/{accountId}/device/{deviceIdentifier}`  
+Removes a device's label from our system. All orders associated with this device will remain, only the label currently associated with the device identifier will be removed.
+
+### Example Response
+
+	see [GET] /device/{deviceIdentifier} above
