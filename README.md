@@ -1,6 +1,6 @@
 # Fullscreen Direct Documentation
 
-This repo contains all the docs found at http://www.fullscreendirect.com/developers/. This includes the [API](https://github.com/stagebloc/docs/blob/master/api.md) and [Theming Engine](https://github.com/stagebloc/docs/blob/master/theming.md).
+This repo contains all the docs found at http://www.fullscreendirect.com/developers/. This includes the [API](https://github.com/stagebloc/docs/blob/master/api_v1.md) and [Theming Engine](https://github.com/stagebloc/docs/blob/master/theming.md).
 
 We are constantly working to make these docs awesome. Have a suggestion? Open an issue!
 
