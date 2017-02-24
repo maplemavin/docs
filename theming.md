@@ -3227,9 +3227,6 @@ TicketsBuyLink
 VenueName  
 :   the name of the venue where this event is taking place
 
-SupportingActs  
-:   a comma separated listing of the supporting acts for the event
-
 VenueWebsiteUrl  
 :   the URL to the venue where the event is taking place
 
@@ -3287,10 +3284,6 @@ The date and time this event end
 `if:EventHasPrice`
 
     check if an event has a price of more than $0.00
-
-`if:EventHasSupportingActs`
-
-    check if there is at least one supporting act for the event
 
 `if:EventHasTicketsBuyLink`
 
