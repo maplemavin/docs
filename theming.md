@@ -4135,6 +4135,38 @@ UserUrl
 UserFansiteUrl  
 :   the URL to the user's pages on the current account's fansite (if they have one setup) (i.e. `www.fullscreendirect.com/[%account_url]/fansite/users/[%user_id]`)
 
+### module:UserLinks
+This module will list links a user has added to their profile
+
+**Module Options**  
+`userId`
+
+    the ID of the user to show
+    
+    accepted values are the ID of any of the fans for the account
+
+    defaults to the user ID in the URL
+
+`loggedIn`
+
+    whether or not to use the currently logged in user, will override userId if true
+
+    accepted values are true and false
+
+    defaults to false
+
+### block:UserLink
+This block exposes link information for an individual user's links
+
+LinkUrl  
+:   the URL for the link itself
+
+LinkTitle  
+:    the title of the link
+
+LinkTitleSlug  
+:    a slug for the link
+
 ### Variables With Options
 **UserPhotoUrl**  
 This users profile image
