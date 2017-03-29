@@ -1847,6 +1847,9 @@ This endpoint can be used to update various elements about orders.
 `shipped` _(required)_
 > <p> A boolean that specifies if this order is now shipped
 
+`weight` _(optional)_
+> <p> The weight of the package sent, in ounces. May be omitted or left as null.
+
 `tracking_number`
 > <p> An optional tracking number for when this item was shipped
 
