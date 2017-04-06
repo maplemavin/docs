@@ -1860,7 +1860,7 @@ This endpoint can be used to update various elements about orders.
 > <p> An array of transaction ids to indicate a partial shipment. If not supplied then all transactions and the order as a whole is marked as shipped.
 
 ## Resend Receipt - Order
-`[POST] /account/{accountId}/store/order/{orderId}/receipt/resend`
+`[POST] /account/{accountId}/order/{orderId}/receipt/resend`
 
 This endpoint can be used to resend a receipt for an order.
 
