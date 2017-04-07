@@ -3878,7 +3878,7 @@ This module loads the content for a single contest
 
     accepted values are any contest that belongs to this account
     
-    deafaults to none
+    defaults to none
 
 `eventId`
 
@@ -3886,7 +3886,7 @@ This module loads the content for a single contest
 
     accepted values are any events that belongs to the same account as the contests
     
-    deafaults to none
+    defaults to none
 
 ### block:ContestView
 ContestId  
