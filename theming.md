@@ -3154,6 +3154,23 @@ This module lists events by an account. Events are returned by the date they occ
 
     defaults to none
 
+`useLiteralSearch`
+
+    when used with page:EventSearch this will determine if the search phrase must match exactly for a result to count
+
+    accepted values are true or false
+
+    defaults to false
+
+`useSearchFields`
+
+    when used with page:EventSearch this will change the fields used in the search results and their weighted priority
+
+    accepted values are any CSV combination of "title", "tags", and "text" (i.e. "title,tags")
+
+    defaults to all three in the order above
+
+
 ### module:EventView
 This module will load the content for an event. When on {page:EventView} it will automatically grab the right data from the URL.
 
