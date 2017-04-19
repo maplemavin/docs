@@ -3164,11 +3164,11 @@ This module lists events by an account. Events are returned by the date they occ
 
 `useSearchFields`
 
-    when used with page:EventSearch this will change the fields used in the search results and their weighted priority
+    when used with page:EventSearch this will change the fields used in the search results and their weighted priority (earlier items in the list count more strongly against a match)
 
     accepted values are any CSV combination of "title", "tags", and "text" (i.e. "title,tags")
 
-    defaults to all three in the order above
+    defaults to "title,tags,text"
 
 
 ### module:EventView
