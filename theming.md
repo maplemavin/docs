@@ -4434,7 +4434,7 @@ First, you'll need some sort way of having users add information. For instance, 
 
 The available keys for passing are `name`, `username`, `email`, `bio`, and `gender`. You can also pass a `birthday` parameter as an array with the keys `day`, `month`, and `year`.
 
-Note that if you are changing the email of the user, you must also ask the user for their current passwrod and pass `currentPassword` with your request.
+Note that if you are changing the email of the user, you must also ask the user for their current password and pass `currentPassword` with your request.
 
 You are also able to pass a user photo with the `photoFile` key, but it requires that the browser support `FileReader`. When a `file` input is changed, you can show a preview of the image on the page using code similar to the following:
 
