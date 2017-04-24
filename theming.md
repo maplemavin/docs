@@ -3872,13 +3872,21 @@ This module loads the content for a single contest
 
 ### Options
 **Module Options**  
-`contestId` *(required)*
+`contestId`
 
     the ID of the contest to load
 
-    accepts values are any contest that belongs to this account
+    accepted values are any contest that belongs to this account
     
-    deafaults to none
+    defaults to none
+
+`eventId`
+
+    the ID of the event the contests belong to
+
+    accepted values are any events that belongs to the same account as the contests
+    
+    defaults to none
 
 ### block:ContestView
 ContestId  
