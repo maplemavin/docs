@@ -3238,10 +3238,10 @@ EventState
 EventCountry  
 :   the country in which the event is taking place
 
-EventLatitude  
+EventLocationLatitude  
 :   the latitude of the location for the event
 
-EventLongitude  
+EventLocationLongitude  
 :   the longitude of the location for the event
 
 EventPrice  
