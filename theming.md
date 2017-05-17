@@ -3154,6 +3154,23 @@ This module lists events by an account. Events are returned by the date they occ
 
     defaults to none
 
+`useLiteralSearch`
+
+    when used with page:EventSearch this will determine if the search phrase must match exactly for a result to count
+
+    accepted values are true or false
+
+    defaults to false
+
+`useSearchFields`
+
+    when used with page:EventSearch this will change the fields used in the search results and their weighted priority (earlier items in the list count more strongly against a match)
+
+    accepted values are any CSV combination of "title", "tags", and "text" (i.e. "title,tags")
+
+    defaults to "title,tags,text"
+
+
 ### module:EventView
 This module will load the content for an event. When on {page:EventView} it will automatically grab the right data from the URL.
 
@@ -3178,9 +3195,6 @@ EventDescription
 
 EventAges  
 :   will return either "Any age" or "[%Age]+" (meaning this age and up)
-
-EventCity  
-:   the city in which the event is taking place
 
 EventContestId  
 :   the ID for the contest for this event (if it has one)
@@ -3215,8 +3229,20 @@ EventLocation
 EventStreetAddress  
 :   the street address of the event's location
 
+EventCity  
+:   the city in which the event is taking place
+
 EventState  
 :   the state in which the event is taking place
+
+EventCountry  
+:   the country in which the event is taking place
+
+EventLocationLatitude  
+:   the latitude of the location for the event
+
+EventLocationLongitude  
+:   the longitude of the location for the event
 
 EventPrice  
 :   the event for the price if it has one
@@ -3226,9 +3252,6 @@ TicketsBuyLink
 
 VenueName  
 :   the name of the venue where this event is taking place
-
-SupportingActs  
-:   a comma separated listing of the supporting acts for the event
 
 VenueWebsiteUrl  
 :   the URL to the venue where the event is taking place
@@ -3287,10 +3310,6 @@ The date and time this event end
 `if:EventHasPrice`
 
     check if an event has a price of more than $0.00
-
-`if:EventHasSupportingActs`
-
-    check if there is at least one supporting act for the event
 
 `if:EventHasTicketsBuyLink`
 
@@ -3879,13 +3898,21 @@ This module loads the content for a single contest
 
 ### Options
 **Module Options**  
-`contestId` *(required)*
+`contestId`
 
     the ID of the contest to load
 
-    accepts values are any contest that belongs to this account
+    accepted values are any contest that belongs to this account
     
-    deafaults to none
+    defaults to none
+
+`eventId`
+
+    the ID of the event the contests belong to
+
+    accepted values are any events that belongs to the same account as the contests
+    
+    defaults to none
 
 ### block:ContestView
 ContestId  
@@ -4142,6 +4169,38 @@ UserUrl
 UserFansiteUrl  
 :   the URL to the user's pages on the current account's fansite (if they have one setup) (i.e. `www.fullscreendirect.com/[%account_url]/fansite/users/[%user_id]`)
 
+### module:UserLinks
+This module will list links a user has added to their profile
+
+**Module Options**  
+`userId`
+
+    the ID of the user to show
+    
+    accepted values are the ID of any of the fans for the account
+
+    defaults to the user ID in the URL
+
+`loggedIn`
+
+    whether or not to use the currently logged in user, will override userId if true
+
+    accepted values are true and false
+
+    defaults to false
+
+### block:UserLink
+This block exposes link information for an individual user's links
+
+LinkUrl  
+:   the URL for the link itself
+
+LinkTitle  
+:    the title of the link
+
+LinkTitleSlug  
+:    a slug for the link
+
 ### Variables With Options
 **UserPhotoUrl**  
 This users profile image
@@ -4388,18 +4447,20 @@ This allows the user's profile to be edited.
 
 First, you'll need some sort way of having users add information. For instance, you could do:
 
-    {module:API v="3.0" path="user/list" me="true"}
-        {block:API}
+    {module:UserView loggedIn="true"}
+        {block:UserView}
         <form id="userEditForm">
-            <input type="hidden" name="email" value="{email}" />
-            <input type="hidden" name="username" value="{username}" />
-            <textarea name="bio">{bio}</textarea>
+            <input type="hidden" name="email" value="{UserEmail}" />
+            <input type="hidden" name="username" value="{UserUsername}" />
+            <textarea name="bio">{UserBio}</textarea>
             <input type="submit" value="Save Profile" />
         </form>
-        {/block:API}
-    {/module:API}
+        {/block:UserView}
+    {/module:UserView}
 
 The available keys for passing are `name`, `username`, `email`, `bio`, and `gender`. You can also pass a `birthday` parameter as an array with the keys `day`, `month`, and `year`.
+
+Note that if you are changing the email of the user, you must also ask the user for their current password and pass `currentPassword` with your request.
 
 You are also able to pass a user photo with the `photoFile` key, but it requires that the browser support `FileReader`. When a `file` input is changed, you can show a preview of the image on the page using code similar to the following:
 
