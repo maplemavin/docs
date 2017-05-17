@@ -3196,9 +3196,6 @@ EventDescription
 EventAges  
 :   will return either "Any age" or "[%Age]+" (meaning this age and up)
 
-EventCity  
-:   the city in which the event is taking place
-
 EventContestId  
 :   the ID for the contest for this event (if it has one)
 
@@ -3232,8 +3229,20 @@ EventLocation
 EventStreetAddress  
 :   the street address of the event's location
 
+EventCity  
+:   the city in which the event is taking place
+
 EventState  
 :   the state in which the event is taking place
+
+EventCountry  
+:   the country in which the event is taking place
+
+EventLocationLatitude  
+:   the latitude of the location for the event
+
+EventLocationLongitude  
+:   the longitude of the location for the event
 
 EventPrice  
 :   the event for the price if it has one
