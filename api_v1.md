@@ -2089,10 +2089,10 @@ These endpoints revolve around Fullscreen Direct Checkout and the devices used f
 
 ## Definition
 
-  {
-      "identifier": "abcdefghijklmnopqrstuvwxyz",
-	    "label": "The dude's ipad"
-	}
+    {
+        "identifier": "abcdefghijklmnopqrstuvwxyz",
+        "label": "The dude's ipad"
+    }
 
 identifier
 > <p> The identifier for the device.
@@ -2112,7 +2112,7 @@ label
 ### POST Parameters
 
 `deviceIdentifier` _(required)_
-> <p>	the device identifier to register with the system.
+> <p> the device identifier to register with the system.
 
 `label`
 > <p> the label to associate with the deviceIdentifier indicated.
