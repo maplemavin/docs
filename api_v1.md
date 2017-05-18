@@ -2083,3 +2083,49 @@ Flag content for account moderation. This mostly applies to fan submitted conten
 
 `reason`
 > <p> This specifies why the user is flagging this content and should be a sentence or two provided by the end user using your application.
+
+# Devices
+These endpoints revolve around Fullscreen Direct Checkout and the devices used for the checkout process. They allow the application to label a device identifier with a convenient human readable label.
+
+## Definition
+
+    {
+        "identifier": "abcdefghijklmnopqrstuvwxyz",
+        "label": "The dude's ipad"
+    }
+
+identifier
+> <p> The identifier for the device.
+
+label
+> <p> The current label assigned to this device under the current account context. Null if the identfier was used in an order but no label is currently assigned to it.
+
+## List
+`[GET] /account/{accountId}/device`
+
+## Retrieve
+`GET /account/{accountId}/device/{deviceIdentifier}`
+
+## Create
+`POST /account/{accountId}/device`
+
+### POST Parameters
+
+`deviceIdentifier` _(required)_
+> <p> the device identifier to register with the system.
+
+`label`
+> <p> the label to associate with the deviceIdentifier indicated.
+
+## Update
+`POST /account/{accountId}/device/{deviceIdentifier}`
+
+### POST Parameters
+
+`label`
+> <p> the label to associate with the deviceIdentifier indicated.
+
+## Delete
+`DELETE /account/{accountId}/device/{deviceIdentifier}`
+
+Removes a device's label from our system. All orders associated with this device will remain, only the label currently associated with the device identifier will be removed.
