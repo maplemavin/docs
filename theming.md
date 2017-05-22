@@ -3914,6 +3914,30 @@ This module loads the content for a single contest
     
     defaults to none
 
+`userId`
+
+    the ID of the user who has entered any contests, shows contests that user has entered (only works for currently logged in user)
+
+    accepted values are any user ID
+    
+    defaults to none
+
+`orderBy`
+
+    which criteria to base the order of the loaded contests in
+
+    accepted values are "created" and "endDateTime"
+    
+    defaults to "created"
+
+`direction`
+
+    the direction to load the contests in, along with orderBy
+
+    accepted values are "asc" and "desc"
+    
+    defaults to "desc"
+
 ### block:ContestView
 ContestId  
 :   the ID of the contest
