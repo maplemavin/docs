@@ -919,9 +919,9 @@ This endpoint can be used to list the blog posts for an account.
 
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive blog entries.
-> <p> pass with value 1 to enable exclusive blog entrie support. only blog entries
-> <p> which should be visible to the active user based on the blog entrie's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> pass with value 1 to enable exclusive blog entry support. only blog entries
+> <p> which should be visible to the active user based on the blog entries'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive blog entries.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -1020,7 +1020,7 @@ This endpoint can be used to list the events for an account.
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive events.
 > <p> pass with value 1 to enable exclusive event support. only events
-> <p> which should be visible to the active user based on the event's
+> <p> which should be visible to the active user based on the events'
 > <p> exclusivity setting and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive events.
@@ -1176,8 +1176,8 @@ Lists photos from an account.
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive photos.
 > <p> pass with value 1 to enable exclusive photo support. only photos
-> <p> which should be visible to the active user based on the photo's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the photos'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive photos.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -1259,8 +1259,8 @@ Lists photos albums from an account.
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive photo albums.
 > <p> pass with value 1 to enable exclusive photo album support. only photo albums
-> <p> which should be visible to the active user based on the photo album's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the photo albums'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive photo albums.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -1327,8 +1327,8 @@ Statuses on Fullscreen Direct are shorter text updates that account's are able t
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive statuses.
 > <p> pass with value 1 to enable exclusive status support. only statuses
-> <p> which should be visible to the active user based on the store item's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the statuses'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive statuses.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -1579,8 +1579,8 @@ This endpoint is used to get a listing of store items belonging to an account.
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive store item.
 > <p> pass with value 1 to enable exclusive store item support. only store items
-> <p> which should be visible to the active user based on the store item's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the store items'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive store items.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -2066,8 +2066,8 @@ embed_code
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive video.
 > <p> pass with value 1 to enable exclusive video support. only videos
-> <p> which should be visible to the active user based on the video's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the videos'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive videos.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
@@ -2118,8 +2118,8 @@ exclusive_tiers
 `honor_exclusivity`
 > <p> pass with value 0 or do not pass to return only non-exclusive video playlist.
 > <p> pass with value 1 to enable exclusive video playlist support. only video playlists
-> <p> which should be visible to the active user based on the video playlist's
-> <p> exclusivity setting and the user's fanclub status.
+> <p> which should be visible to the active user based on the video playlists'
+> <p> exclusivity settings and the user's fanclub status.
 > <p> requests without authentication or with non-fans will receive only
 > <p> non-exclusive video playlists.
 > <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
