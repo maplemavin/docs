@@ -312,6 +312,11 @@ direction
 > <p> accepted values are ASC or DESC
 > <p> defaults to DESC
 
+## Retrieve - Fan
+`/account/{accountId}/fan/{userId}`
+
+Gets a fan's membership information
+
 ## List - Child Accounts
 `[GET] /account/{accountId}/children/{type}`
 
