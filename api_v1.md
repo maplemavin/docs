@@ -65,6 +65,12 @@ A `client_id` must usually be passed with each request depending on the authenti
 
 Once an access token is received, it should be passed with the request as an HTTP header: `Authorization: OAuth <access token here>`
 
+Account content:
+> <p> requests without authentication or with non-fans will receive only non-exclusive content, except [audio](/developers/api/v1/audio/list) and [store item](/developers/api/v1/store-and-commerce/list--store-item) list endpoints which return all content.
+> <p> requests identifying a fanclub member (with the `honor_exclusivity` query string parameter) will receive content exclusive to their fanclub tier as well as non-exclusive content.
+> <p> requests identifying an account administrator will receive all content regardless of its exclusivity.
+
+
 ## Request Token
 `[POST] /oauth2`
 
@@ -737,17 +743,9 @@ This endpoint can used to list all the audio for a certain account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive audio.
-> <p> pass with value 1 to enable exclusive audio support. only audio
-> <p> which should be visible to the active user based on the audio's
-> <p> exclusivity setting and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive audio.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> audio exclusive to their fanclub tier as well as non-exclusive
-> <p> audio.
-> <p> requests identifying an account administrator will receive all audio
-> <p> regardless of their exclusivity.
+> <p> whether to restrict content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to show all content and 1 to restrict to only exclusive content visible to the user.
+> <p> defaults to 0
 
 `playlist_id`
 > <p> an audio playlist ID to limit the audio results to
@@ -820,17 +818,9 @@ This endpoint can be used to list audio playlists that are available for an acco
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive playlists.
-> <p> pass with value 1 to enable exclusive playlist support. only playlists
-> <p> which should be visible to the active user based on the playlist's
-> <p> exclusivity setting and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive playlists.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> playlists exclusive to their fanclub tier as well as non-exclusive
-> <p> playlists.
-> <p> requests identifying an account administrator will receive all playlists
-> <p> regardless of the playlists' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 limit
 > <p> the number of items to limit the response to
@@ -918,17 +908,9 @@ This endpoint can be used to list the blog posts for an account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive blog entries.
-> <p> pass with value 1 to enable exclusive blog entry support. only blog entries
-> <p> which should be visible to the active user based on the blog entries'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive blog entries.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> blog entries exclusive to their fanclub tier as well as non-exclusive
-> <p> blog entries.
-> <p> requests identifying an account administrator will receive all blog entries
-> <p> regardless of the blog entries' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 order_by
 > <p> what to order the results by
@@ -1018,17 +1000,9 @@ This endpoint can be used to list the events for an account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive events.
-> <p> pass with value 1 to enable exclusive event support. only events
-> <p> which should be visible to the active user based on the events'
-> <p> exclusivity setting and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive events.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> events exclusive to their fanclub tier as well as non-exclusive
-> <p> events.
-> <p> requests identifying an account administrator will receive all events
-> <p> regardless of the events' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 direction
 > <p> the direction to list results in
@@ -1174,17 +1148,9 @@ Lists photos from an account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive photos.
-> <p> pass with value 1 to enable exclusive photo support. only photos
-> <p> which should be visible to the active user based on the photos'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive photos.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> photos exclusive to their fanclub tier as well as non-exclusive
-> <p> photos.
-> <p> requests identifying an account administrator will receive all photos
-> <p> regardless of the photos' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 limit
 > <p> the number of items to limit the response to
@@ -1257,17 +1223,9 @@ Lists photos albums from an account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive photo albums.
-> <p> pass with value 1 to enable exclusive photo album support. only photo albums
-> <p> which should be visible to the active user based on the photo albums'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive photo albums.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> photo albums exclusive to their fanclub tier as well as non-exclusive
-> <p> photo albums.
-> <p> requests identifying an account administrator will receive all photo albums
-> <p> regardless of the photo albums' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 limit
 > <p> the number of items to limit the response to
@@ -1325,17 +1283,9 @@ Statuses on Fullscreen Direct are shorter text updates that account's are able t
 `[GET] /account/{accountId}/status`
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive statuses.
-> <p> pass with value 1 to enable exclusive status support. only statuses
-> <p> which should be visible to the active user based on the statuses'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive statuses.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> statuses exclusive to their fanclub tier as well as non-exclusive
-> <p> statuses.
-> <p> requests identifying an account administrator will receive all statuses
-> <p> regardless of the statuses' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 order_by
 > <p> how to order the returned items
@@ -1577,17 +1527,9 @@ This endpoint is used to get a listing of store items belonging to an account.
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive store item.
-> <p> pass with value 1 to enable exclusive store item support. only store items
-> <p> which should be visible to the active user based on the store items'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive store items.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> store items exclusive to their fanclub tier as well as non-exclusive
-> <p> store items.
-> <p> requests identifying an account administrator will receive all store items
-> <p> regardless of the store items' exclusivity.
+> <p> whether to restrict content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to show all content and 1 to restrict to only exclusive content visible to the user.
+> <p> defaults to 0
 
 order_by
 > <p> how to order the returned items
@@ -2064,17 +2006,9 @@ embed_code
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive video.
-> <p> pass with value 1 to enable exclusive video support. only videos
-> <p> which should be visible to the active user based on the videos'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive videos.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> videos exclusive to their fanclub tier as well as non-exclusive
-> <p> videos.
-> <p> requests identifying an account administrator will receive all videos
-> <p> regardless of the exclusivity flag of the videos.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 ## Create
 `[POST] /account/{accountId}/video`
@@ -2116,17 +2050,9 @@ exclusive_tiers
 ### GET Parameters
 
 `honor_exclusivity`
-> <p> pass with value 0 or do not pass to return only non-exclusive video playlist.
-> <p> pass with value 1 to enable exclusive video playlist support. only video playlists
-> <p> which should be visible to the active user based on the video playlists'
-> <p> exclusivity settings and the user's fanclub status.
-> <p> requests without authentication or with non-fans will receive only
-> <p> non-exclusive video playlists.
-> <p> requests identifying a fanclub member on tier 1, 2, or 3 receive
-> <p> video playlists exclusive to their fanclub tier as well as non-exclusive
-> <p> video playlists.
-> <p> requests identifying an account administrator will receive all video playlists
-> <p> regardless of the video playlists' exclusivity.
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 order_by
 > <p> how to order the returned items
