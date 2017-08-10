@@ -65,6 +65,12 @@ A `client_id` must usually be passed with each request depending on the authenti
 
 Once an access token is received, it should be passed with the request as an HTTP header: `Authorization: OAuth <access token here>`
 
+Account content:
+> <p> requests without authentication or with non-fans will receive only non-exclusive content, except [audio](/developers/api/v1/audio/list) and [store item](/developers/api/v1/store-and-commerce/list--store-item) list endpoints which return all content.
+> <p> requests identifying a fanclub member (with the `honor_exclusivity` query string parameter) will receive content exclusive to their fanclub tier as well as non-exclusive content.
+> <p> requests identifying an account administrator will receive all content regardless of its exclusivity.
+
+
 ## Request Token
 `[POST] /oauth2`
 
@@ -284,6 +290,26 @@ This will have a user unfollow an account regardless of the tier they are on
 `[GET] /account/{accountId}/content`
 
 Gets an activity stream of recent content from the account.
+
+### GET Parameters
+
+filter
+> <p> a comma separated list of content types to include
+> <p> in the returned stream of events.
+> <p> accepted values are audio, audio_playlists, blog,
+> <p> events, photos, photo_albums, statuses, store, videos,
+> <p> and video_playlists
+> <p> defaults to blog, statuses, photos, videos
+
+limit
+> <p> the number of items to limit the response to
+> <p> accepted values are any positive number
+> <p> defaults to 20
+
+offset
+> <p> how much to offset the returned items by
+> <p> accepted values are any number greater than or equal to zero
+> <p> defaults to 0
 
 ## List - Fans
 `[GET] /account/{accountId}/fans`
@@ -716,6 +742,11 @@ This endpoint can used to list all the audio for a certain account.
 
 ### GET Parameters
 
+`honor_exclusivity`
+> <p> whether to restrict content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to show all content and 1 to restrict to only exclusive content visible to the user.
+> <p> defaults to 0
+
 `playlist_id`
 > <p> an audio playlist ID to limit the audio results to
 > <p> accepted values are an ID of any playlist that belongs to the same account
@@ -785,6 +816,11 @@ This endpoint can be used to get a single audio track from an account.
 This endpoint can be used to list audio playlists that are available for an account.
 
 ### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 limit
 > <p> the number of items to limit the response to
@@ -870,6 +906,11 @@ Endpoints around interacting with blog posts on Fullscreen Direct
 This endpoint can be used to list the blog posts for an account.
 
 ### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 order_by
 > <p> what to order the results by
@@ -957,6 +998,11 @@ custom\_field\_data
 This endpoint can be used to list the events for an account.
 
 ### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 direction
 > <p> the direction to list results in
@@ -1101,6 +1147,11 @@ Lists photos from an account.
 
 ### GET Parameters
 
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
+
 limit
 > <p> the number of items to limit the response to
 > <p> accepted values are any positive number
@@ -1171,6 +1222,11 @@ Lists photos albums from an account.
 
 ### GET Parameters
 
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
+
 limit
 > <p> the number of items to limit the response to
 > <p> accepted values are any positive number
@@ -1225,6 +1281,31 @@ Statuses on Fullscreen Direct are shorter text updates that account's are able t
 
 ## List
 `[GET] /account/{accountId}/status`
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
+
+order_by
+> <p> how to order the returned items
+> <p> accepted values are `created`, `modified`, and `price`
+> <p> defaults to `created`
+
+direction
+> <p> what direction to order the returned items
+> <p> accepted values are `ASC` and `DESC`
+> <p> defaults to `DESC`
+
+limit
+> <p> the number of items to limit the response to
+> <p> accepted values are any positive number
+> <p> defaults to 50
+
+offset
+> <p> how much to offset the returned items by
+> <p> accepted values are any number greater than or equal to zero
+> <p> defaults to 0
 
 
 ## Create
@@ -1444,6 +1525,11 @@ album_id
 This endpoint is used to get a listing of store items belonging to an account.
 
 ### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to restrict content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to show all content and 1 to restrict to only exclusive content visible to the user.
+> <p> defaults to 0
 
 order_by
 > <p> how to order the returned items
@@ -1917,6 +2003,12 @@ embed_code
 ## List
 `[GET] /account/{accountId}/video`
 
+### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
 
 ## Create
 `[POST] /account/{accountId}/video`
@@ -1954,6 +2046,34 @@ exclusive_tiers
 
 ## List - Playlist
 `[GET] /account/{accountId}/video/playlist`
+
+### GET Parameters
+
+`honor_exclusivity`
+> <p> whether to include content exclusive to a specific tier based on the active user's permissions
+> <p> accepted values are 0 to only show public content and 1 to also include exclusive content.
+> <p> defaults to 0
+
+order_by
+> <p> how to order the returned items
+> <p> accepted values are `created`, `modified`, and `price`
+> <p> defaults to `created`
+
+direction
+> <p> what direction to order the returned items
+> <p> accepted values are `ASC` and `DESC`
+> <p> defaults to `DESC`
+
+limit
+> <p> the number of items to limit the response to
+> <p> accepted values are any positive number
+> <p> defaults to 50
+
+offset
+> <p> how much to offset the returned items by
+> <p> accepted values are any number greater than or equal to zero
+> <p> defaults to 0
+
 
 ## Create - Playlist
 `[POST] /account/{accountId}/video/playlist`
