@@ -313,9 +313,12 @@ direction
 > <p> defaults to DESC
 
 ## Retrieve - Fan
-`/account/{accountId}/fan/{userId}`
+`[GET] /account/{accountId}/fan/{userId}`
 
-Gets a fan's membership information
+Gets a single fan's user information.
+
+`user_membership`
+<p> the fanclub membership object if you pass specify to expand `user_membership` as a parameter
 
 ## List - Child Accounts
 `[GET] /account/{accountId}/children/{type}`
