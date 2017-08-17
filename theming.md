@@ -4383,6 +4383,69 @@ Note: this response has been trimmed for brevity
         "commentCount": 129
     }
 
+### sbCartAddedItem
+
+    {
+        "id": 4201,
+        "name": "My Cool Item",
+        "price": 14.14
+    }
+
+### sbCartBeginCheckout
+
+    {
+        "items": [
+            {
+                "id": 4201,
+                "name": "My Cool Item",
+                "price": 14.14,
+                "quantity": 1
+            },
+            {
+                "id": 1211,
+                "name": "Another cool Item!!!",
+                "price": 5,
+                "quantity": 2
+            }
+        ],
+        "subtotal": 24.14
+    }
+
+### sbCartSuccess
+
+    {
+        "google_analytics": {
+            "items": [
+                {
+                    "name": "My Cool Item",
+                    "sku": "Main",
+                    "price": 14.14,
+                    "quantity": 1,
+                    "currency": "usd"
+                },
+                {
+                    "name": "Another cool Item!!!",
+                    "sku": "Main",
+                    "price": 5,
+                    "quantity": 2,
+                    "currency": "usd"
+                },
+                {
+                    "name": "Cat Shirt",
+                    "sku": "Medium",
+                    "price": 50,
+                    "quantity": 1,
+                    "currency": "usd"
+                }
+            ],
+            "transaction": {
+                "revenue": 74.14,
+                "tax": 12.11,
+                "shipping": 10
+            }
+        }
+    }
+
 ## Search
 Searching for your content within Fullscreen Direct is possible with JavaScript in your theme. You simply make a `POST` request to `/_search` with your request, and a JSON blob will be returned with the search results. Make sure that `/_search` occurs at the root of your URL, e.g. `custom_domain.com/_search` or `www.fullscreendirect.com/<account_url>/_search`
 
