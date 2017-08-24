@@ -1972,6 +1972,46 @@ This endpoint can be used to refund an entire order.
 `refund_reason_text`
 > <p> a reason / description for this refund
 
+## Retrieve - Settings
+`[GET] /account/{accountId}/store/setting`
+
+This endpoint is used to get information on how your store has been configured.
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "return_policy": "",
+	        "support_email": "support@example.com",
+	        "shipping_minimum_price": "0",
+	        "shipping_maximum_price": null,
+	        "handling_fee_per_order": 0,
+	        "handling_fee_per_item": 0,
+	        "handling_fee_per_item_minimum_threshold": 0,
+	        "cart_lock_time_seconds": 0,
+	        "cart_require_billing_address": false,
+	        "cart_require_phone_number": false,
+	        "payment_preauth": false,
+	        "payment_verification": false
+	    }
+	}
+
+## Retrieve - Secure Settings
+`[GET] /account/{accountId}/store/setting/secure`
+
+This endpoint is used to get secure information about your store. It can only be accessed using an authentication token for an admin with store order creation access.
+
+	{
+	    "metadata": {
+	        "http_code": 200
+	    },
+	    "data": {
+	        "payworks_merchant_identifier": null,
+	        "payworks_merchant_secret_key": null
+	    }
+	}
+
 # Video
 These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
 
