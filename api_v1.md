@@ -2022,7 +2022,7 @@ cart_require_phone_number
 > <p> indicates that all orders should include the user's phone number
 
 payment_preauth
-> <p> indicates that all orders are created with an uncaptured credit card charge to allow time for assessing potential fraud because capturing the charge
+> <p> indicates that all orders are created with an uncaptured credit card charge to allow time for assessing potential fraud before capturing the charge
 
 payment_verification
 > <p> indicates the store is going to try to automatically contact users for verification based on the risk associated with their order
