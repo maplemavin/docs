@@ -1976,25 +1976,20 @@ This endpoint can be used to refund an entire order.
 
 ## Definition
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "return_policy": "Your return policy will appear here",
-	        "support_email": "support@example.com",
-	        "shipping_minimum_price": "0",
-	        "shipping_maximum_price": null,
-	        "handling_fee_per_order": 0,
-	        "handling_fee_per_item": 0,
-	        "handling_fee_per_item_minimum_threshold": 0,
-	        "cart_lock_time_seconds": 0,
-	        "cart_require_billing_address": false,
-	        "cart_require_phone_number": false,
-	        "payment_preauth": false,
-	        "payment_verification": false
-	    }
-	}
+    "data": {
+        "return_policy": "Your return policy will appear here",
+        "support_email": "support@example.com",
+        "shipping_minimum_price": "0",
+        "shipping_maximum_price": null,
+        "handling_fee_per_order": 0,
+        "handling_fee_per_item": 0,
+        "handling_fee_per_item_minimum_threshold": 0,
+        "cart_lock_time_seconds": 0,
+        "cart_require_billing_address": false,
+        "cart_require_phone_number": false,
+        "payment_preauth": false,
+        "payment_verification": false
+    }
 
 return_policy
 > <p> the string associated with the return policy for the account configured in the store settings
@@ -2043,15 +2038,10 @@ This endpoint is used to get information on how your store has been configured.
 
 ## Definition
 
-	{
-	    "metadata": {
-	        "http_code": 200
-	    },
-	    "data": {
-	        "payworks_merchant_identifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-	        "payworks_merchant_secret_key": "abcdefghijklmnopqrstuvwxyz123456"
-	    }
-	}
+    {
+        "payworks_merchant_identifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "payworks_merchant_secret_key": "abcdefghijklmnopqrstuvwxyz123456"
+    }
 
 payworks_merchant_identifier
 > <p> the merchant id needed to create charges using payworks credit/debit card reader
