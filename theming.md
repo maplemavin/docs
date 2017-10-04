@@ -3770,7 +3770,7 @@ Creates a link that, when clicked, will download the store item is possible
     checks to see if there are items in the cart
 
 ### module:StoreItemOptionList
-This module will load the various options/variations of a particular store item when on {page:StoreItemView}. 
+This module will load the various options/variations of a particular store item. 
 
 **Module Options**
 `storeItemId`
