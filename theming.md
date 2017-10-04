@@ -3769,6 +3769,55 @@ Creates a link that, when clicked, will download the store item is possible
 
     checks to see if there are items in the cart
 
+### module:StoreItemOptionList
+This module will load the various options/variations of a particular store item when on {page:StoreItemView}. 
+
+**Module Options**
+`storeItemId`
+
+    an ID for which store item to show
+
+    accepted values are any store item ID that belongs to the same account
+
+`minimum`
+
+    the minimum number of item options required for this module to iterate over each item option
+
+    accepted values are numbers
+
+    defaults to 1
+
+### block:StoreItemOptionView
+StoreItemOptionId
+
+:	the id of the given option
+
+StoreItemOptionName
+
+:	the name
+
+StoreItemOptionSku
+
+:	the sku
+
+StoreItemOptionUpc
+
+:	the upc
+
+StoreItemOptionAdditionalPrice
+
+:	any additional price, if any, for selecting the given option/variation of the store item
+
+StoreItemOptionWeight
+
+:	the weight in ounces
+
+### If Statements
+`if:StoreItemOptionCanBeSold`
+
+	check to see if the option can be sold because of various reasons, such as out of stock.
+
+
 ## Comments
 When on one of the following pages, using the appropriate content's module view will automatically pull in the correct data (i.e. `{module:BlogView}` will be the correct data automatically on `{page:BlogCommentView}`)
 
