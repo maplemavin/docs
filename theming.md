@@ -1408,14 +1408,6 @@ This module will list all of the links to various content sections that the acco
     
     defaults to false
     
-`storeCategoryNavigation`
-
-    whether or not to show the subnavigation for store categories as opposed to the global nav
-    
-    accepted values are true and false
-    
-    defaults to false
-    
 `photoAlbumCategoryNavigation`    
 
     whether or not to show the subnavigation for photo categories as opposed to the global nav
