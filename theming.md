@@ -1457,7 +1457,7 @@ This module will load the categories set up for a particular content type to lis
 
     an string for which content type to show
 
-    accepted values are "store" or "blog"
+    accepted values are {ContentType-Store} or {ContentType-Blog}
 
     defaults to "store"
 
