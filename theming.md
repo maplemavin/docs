@@ -1449,6 +1449,25 @@ Url
         
         defaults to none
 
+## Category Navigation
+    <div class="category-sidebar">
+        {module:CategoryNavigation}
+        <ul class="category-sidebar-list">
+            {block:CategoryNavigationItem}
+                <li class="category-sidebar-list-item {CategoryNavigationItemCSSClass}">
+                    <a href="{CategoryNavigationItemLink}">{CategoryNavigationItemName}</a>
+
+                    {if:CategoryNavigationItemHasChildren}
+                        <ul class="category-sidebar-list">
+                            {CategoryNavigationBlockRecursion}
+                        </ul>
+                    {/if:CategoryNavigationItemHasChildren}
+                </li>
+            {/block:CategoryNavigationItem}
+        </ul>
+        {/module:CategoryNavigation}
+    </div>
+
 ### module:CategoryNavigation
 This module will load the categories set up for a particular content type to list that content by category, including nested categories
 
