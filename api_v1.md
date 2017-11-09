@@ -1972,6 +1972,89 @@ This endpoint can be used to refund an entire order.
 `refund_reason_text`
 > <p> a reason / description for this refund
 
+# Store Settings
+
+## Definition
+
+    "data": {
+        "return_policy": "Your return policy will appear here",
+        "support_email": "support@example.com",
+        "shipping_minimum_price": "0",
+        "shipping_maximum_price": null,
+        "handling_fee_per_order": 0,
+        "handling_fee_per_item": 0,
+        "handling_fee_per_item_minimum_threshold": 0,
+        "cart_lock_time_seconds": 0,
+        "cart_require_billing_address": false,
+        "cart_require_phone_number": false,
+        "payment_preauth": false,
+        "payment_verification": false
+    }
+
+return_policy
+> <p> the string associated with the return policy for the account configured in the store settings
+
+support_email
+> <p> the email address configured in the store settings
+
+shipping_minimum_price
+> <p> the minimum price to charge for shipping
+
+shipping_maximum_price
+> <p> the maximum price to charge for shipping
+
+handling_fee_per_order
+> <p> an amount of handling to charge on to every order
+
+handling_fee_per_item
+> <p> an amount of handling to charge on to every item
+
+handling_fee_per_item_minimum_threshold
+> <p> the minimum number of items which must be in an order before the per item handling fee applies
+
+cart_lock_time_seconds
+> <p> when a new store item is created, by default it will be created such that when added to a cart it will remain locked in the cart for this many seconds
+
+cart_require_billing_address
+> <p> indicates that all orders should include the user's billing address
+
+cart_require_phone_number
+> <p> indicates that all orders should include the user's phone number
+
+payment_preauth
+> <p> indicates that all orders are created with an uncaptured credit card charge to allow time for assessing potential fraud before capturing the charge
+
+payment_verification
+> <p> indicates the store is going to try to automatically contact users for verification based on the risk associated with their order
+
+
+## Retrieve
+`[GET] /account/{accountId}/store/setting`
+
+This endpoint is used to get information on how your store has been configured.
+
+
+# Secure Store Settings
+
+## Definition
+
+    {
+        "payworks_merchant_identifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "payworks_merchant_secret_key": "abcdefghijklmnopqrstuvwxyz123456"
+    }
+
+payworks_merchant_identifier
+> <p> the merchant id needed to create charges using payworks credit/debit card reader
+
+payworks_merchant_secret_key
+> <p> the secret key needed to create charges using payworks credit/debit card reader
+
+
+## Retrieve
+`[GET] /account/{accountId}/store/setting/secure`
+
+This endpoint is used to get secure information about your store. It can only be accessed using an authentication token for an admin with store order creation access.
+
 # Video
 These endpoints revolve around the ability to upload and stream video through Fullscreen Direct. Video consists of both individual videos and those videos being organized into various playlists.
 
