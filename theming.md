@@ -1449,6 +1449,44 @@ Url
         
         defaults to none
 
+### module:CategoryNavigation
+This module will load the categories set up for a particular content type to list that content by category, including nested categories
+
+**Module Options**  
+`contentType`
+
+    an string for which content type to show
+
+    accepted values are "store" or "blog"
+
+    defaults to "store"
+
+### block:CategoryNavigationItem
+This block exposes data about categories and how to generate links for them
+
+CategoryNavigationItemName  
+:   the name of the category being linked to
+
+CategoryNavigationItemCSSClass  
+:   a CSS class to use for styling, will automatically append a class `active` if the current navigation item, will automatically append a class `has-active-child` if the navigation has children items
+
+CategoryNavigationItemSlug  
+:   a slug for this navigation item
+
+CategoryNavigationDepth  
+:   the depth of the current navigation item in a nested structure
+
+CategoryNavigationBlockRecursion  
+:   generates a `{block:CategoryNavigationItem}` to be used to recurse down through the nested categories
+
+CategoryNavigationItemLink  
+:   the link for the navigation item
+
+### If Statements
+`if:CategoryNavigationItemHasChildren`
+
+    check to see if the currently rendered item has children
+
 ## Fan Clubs
 
 ### module:FansiteAbout
