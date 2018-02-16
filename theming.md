@@ -3991,7 +3991,7 @@ CommentItemId
 ### page:ContestList
 `/contests` - This page should show a listing of contests
 
-### module:ContestView
+### module:ContestList
 This module loads the content for all contests
 **Module Options**
 `status`
