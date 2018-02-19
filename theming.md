@@ -3991,6 +3991,18 @@ CommentItemId
 ### page:ContestList
 `/contests` - This page should show a listing of contests
 
+### module:ContestList
+This module loads the content for all contests
+
+**Module Options**
+`status`
+
+	comma seperated string values to filter by contest status
+	
+	accepted values are any combination of: ongoing, ended, thresholdMet
+	
+	defaults to all of the above statuses
+
 ### module:ContestView
 This module loads the content for a single contest
 
